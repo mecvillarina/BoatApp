@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Boat - OTP</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/uicons-regular-rounded.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <header class="py_12 bg-white">
+        <div class="container">
+            <a href="index.html">
+                <img class="login_pgLogo" src="assets/img/logo.png" alt="">
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="otp_form" autocomplete="off">
+                <div class="text-center pt_50 px_40 mb_36">
+                    <img class="login_formIcon" src="assets/img/login/lock.svg" alt="">
+                    <h1 class="fs_20 c_primary mb_6">We’ve Sent You a OTP</h1>
+                    <p class="fs_14 c_gray">Please enter the one time passcode we’ve sent to <span class="fw-semibold c_blue">+19757886778</span> to login</p>
+                </div>
+                <div class="mb_36">
+                    <input id="otp" class="d-none" name="otp" type="text" value="">
+                    <div id="otp_error"></div>
+                </div>
+                <div class="px_12 mb_30">
+                    <button class="btn btn_primary fw-semibold w-100" onclick="redirectToHome()">Continue</button>
+                </div>
+                <p class="fs_14 c_darkGray text-center mb-0">Didn’t receive a code? <a class="fw-bold text-decoration-none" href="#">Resend</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- ................. scripts ................. -->
+    <script src="assets/js/jquery-3.7.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/additional-methods.min.js"></script>
+    <script src="assets/js/bootstrap-pincode-input.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+        function redirectToHome() {
+            console.log(userOTP);
+            if (userOTP == 98765)
+                window.location.href = "admin.html";
+            else
+                window.location.href = "home.html";
+
+
+        }
+    </script>
+</body>
+
+</html>
