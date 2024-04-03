@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BoatApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.2.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.2+0c3766bf7fe0b5c1628dd919048af32b1960568c")]
 [assembly: System.Reflection.AssemblyProductAttribute("BoatApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BoatApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.2.0")]

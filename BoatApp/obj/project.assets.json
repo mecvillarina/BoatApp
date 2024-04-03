@@ -32970,11 +32970,11 @@
   "project": {
     "version": "1.0.2",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sppis\\Projects\\D\\OS\\Fiverr\\Anil_Mobile_App\\src\\BoatApp\\BoatApp\\BoatApp.csproj",
+      "projectUniqueName": "C:\\Users\\sppis\\Projects\\D\\OS\\Fiverr\\Anil_Mobile_App\\src\\Boat-App\\BoatApp\\BoatApp.csproj",
       "projectName": "BoatApp",
-      "projectPath": "C:\\Users\\sppis\\Projects\\D\\OS\\Fiverr\\Anil_Mobile_App\\src\\BoatApp\\BoatApp\\BoatApp.csproj",
+      "projectPath": "C:\\Users\\sppis\\Projects\\D\\OS\\Fiverr\\Anil_Mobile_App\\src\\Boat-App\\BoatApp\\BoatApp.csproj",
       "packagesPath": "C:\\Users\\sppis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sppis\\Projects\\D\\OS\\Fiverr\\Anil_Mobile_App\\src\\BoatApp\\BoatApp\\obj\\",
+      "outputPath": "C:\\Users\\sppis\\Projects\\D\\OS\\Fiverr\\Anil_Mobile_App\\src\\Boat-App\\BoatApp\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

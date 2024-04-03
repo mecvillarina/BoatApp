@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "L3hc0CWWsQC15hIKVisTzGIvt/rQcyNMBEylaLfcBJY0OSOjpXNn3xtp2PZZT7WADsTnlMtj7aXJEAYmcSvLIw==",
+  "dgSpecHash": "LS27cBhp8PW2VSV1q9hgjqaovqFPCD9Jq3HJFVCu/jMvg0oGxpiwcriTWhx1fS2gz3XZD8k09QwMRZCZdiqh1A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sppis\\Projects\\D\\OS\\Fiverr\\Anil_Mobile_App\\src\\BoatApp\\BoatApp\\BoatApp.csproj",
+  "projectFilePath": "C:\\Users\\sppis\\Projects\\D\\OS\\Fiverr\\Anil_Mobile_App\\src\\Boat-App\\BoatApp\\BoatApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sppis\\.nuget\\packages\\googlegson\\2.10.1.4\\googlegson.2.10.1.4.nupkg.sha512",
     "C:\\Users\\sppis\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
