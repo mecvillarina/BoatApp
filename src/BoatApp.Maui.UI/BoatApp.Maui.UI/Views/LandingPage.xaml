@@ -10,5 +10,11 @@
         <material:ButtonView HorizontalOptions="Center">
             <Label Text="☢️ Hello, Uranium!" />
         </material:ButtonView>
+
+        <Button BackgroundColor="{StaticResource Primary}"
+                CornerRadius="20"
+                HorizontalOptions="Center"
+                Text="Test Button"
+                TextColor="{StaticResource White}" />
     </VerticalStackLayout>
 </ContentPage>
