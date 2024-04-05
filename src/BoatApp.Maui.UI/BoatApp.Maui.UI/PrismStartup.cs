@@ -27,7 +27,6 @@ internal static class PrismStartup
     private static void RegisterViews(this IContainerRegistry containerRegistry)
     {
         containerRegistry.RegisterForNavigation<SplashScreenPage, SplashScreenPageViewModel>();
-        containerRegistry.RegisterForNavigation<LandingPage, LandingPageViewModel>();
         
         //Auth
         containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();

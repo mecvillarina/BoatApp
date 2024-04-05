@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage x:Class="BoatApp.Maui.UI.Views.LoginOtpPage"
-             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <ContentPage.Content />
-</ContentPage>
+<local:PageBase x:Class="BoatApp.Maui.UI.Views.LoginOtpPage"
+                xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
+                xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
+                x:DataType="viewmodels:LoginOtpPageViewModel" />

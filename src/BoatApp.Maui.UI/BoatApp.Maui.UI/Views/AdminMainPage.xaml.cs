@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoatApp.Maui.UI.Views;
 
-public partial class AdminMainPage : ContentPage
+public partial class AdminMainPage : PageBase
 {
     public AdminMainPage()
     {
