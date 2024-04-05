@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<linker>
+  <assembly fullname="mscorlib">
+    <type fullname="System.Convert" preverse="All" />
+    <type fullname="System.String">
+      <method name="Compare"></method>
+      <method name="CompareTo"></method>
+      <method name="ToUpper"></method>
+      <method name="ToLower"></method>
+    </type>
+    <type fullname="System.Reflection.AssemblyInformationalVersionAttribute" preserve="all" />
+  </assembly>
+  <assembly fullname="System.Core" />
+  <assembly fullname="SQLitePCLRaw.core" />
+  <assembly fullname="SQLitePCLRaw.batteries_v2" />
+  <assembly fullname="SQLitePCLRaw.lib.e_sqlite3.ios" />
+</linker>

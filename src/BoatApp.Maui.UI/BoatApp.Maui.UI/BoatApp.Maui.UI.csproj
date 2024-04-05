@@ -1,0 +1,80 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+
+        <OutputType>Exe</OutputType>
+        <RootNamespace>BoatApp.Maui.UI</RootNamespace>
+        <UseMaui>true</UseMaui>
+        <SingleProject>true</SingleProject>
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <!-- Display name -->
+        <ApplicationTitle>BoatApp.Maui.UI</ApplicationTitle>
+
+        <!-- App Identifier -->
+        <ApplicationId>com.companyname.boatapp.maui.ui</ApplicationId>
+        <ApplicationIdGuid>6F6BEA32-91ED-4A8D-A0ED-1F334EE0DD28</ApplicationIdGuid>
+
+        <!-- Versions -->
+        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+        <ApplicationVersion>1</ApplicationVersion>
+
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- App Icon -->
+        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#52D681"/>
+
+        <!-- Splash Screen -->
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#52D681" BaseSize="128,128"/>
+
+        <!-- Images -->
+        <MauiImage Include="Resources\Images\*"/>
+        <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208"/>
+
+        <!-- Custom Fonts -->
+        <MauiFont Include="Resources\Fonts\*"/>
+
+        <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+        <PackageReference Include="Prism.DryIoc.Maui" Version="9.0.401-pre" />
+        <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+        <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.4" />
+        <PackageReference Include="SQLitePCLRaw.core" Version="2.1.4" />
+        <PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="2.1.4" />
+        <PackageReference Include="SQLitePCLRaw.provider.sqlcipher" Version="2.1.4" />
+        <PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.4" />
+        <PackageReference Include="System.Reflection.Emit" Version="4.7.0">
+            <ExcludeAssets>all</ExcludeAssets>
+            <IncludeAssets>none</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="UraniumUI.Material" Version="2.7.4" />
+        <PackageReference Include="UraniumUI.Icons.MaterialIcons" Version="2.7.4" />
+        <PackageReference Include="UraniumUI.Dialogs.Mopups" Version="2.7.4" />
+        <PackageReference Include="UraniumUI.Blurs" Version="2.7.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\BoatApp.Common\BoatApp.Common.csproj" />
+      <ProjectReference Include="..\..\BoatApp.Maui.Services\BoatApp.Maui.Services.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+        <LinkDescription Include="Platforms\Android\Linker.xml" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+        <LinkDescription Include="Platforms\iOS\Linker.xml" />
+    </ItemGroup>
+
+</Project>
