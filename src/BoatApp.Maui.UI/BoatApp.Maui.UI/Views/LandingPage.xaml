@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<ContentPage x:Class="BoatApp.Maui.UI.Views.LandingPage"
-             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-             xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui">
+<local:PageBase x:Class="BoatApp.Maui.UI.Views.LandingPage"
+                xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
+                xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+                xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui">
 
     <VerticalStackLayout>
         <material:ButtonView HorizontalOptions="Center">
@@ -17,4 +18,4 @@
                 Text="Test Button"
                 TextColor="{StaticResource White}" />
     </VerticalStackLayout>
-</ContentPage>
+</local:PageBase>

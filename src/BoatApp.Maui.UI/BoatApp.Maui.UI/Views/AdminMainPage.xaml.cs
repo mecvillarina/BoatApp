@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BoatApp.Maui.UI.Views;
 
-public partial class LandingPage : PageBase
+public partial class AdminMainPage : ContentPage
 {
-    public LandingPage()
+    public AdminMainPage()
     {
         InitializeComponent();
     }

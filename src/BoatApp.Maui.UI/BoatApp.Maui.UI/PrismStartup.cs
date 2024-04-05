@@ -13,7 +13,7 @@ internal static class PrismStartup
             .OnInitialized(OnInitialized)
             .CreateWindow(async (containerRegistry, navigationService) =>
             {
-                var page = nameof(LandingPage);
+                var page = nameof(SplashScreenPage);
                 var result = await navigationService.NavigateAsync($"{nameof(NavigationPage)}/{page}");
             });
     }
@@ -26,7 +26,16 @@ internal static class PrismStartup
 
     private static void RegisterViews(this IContainerRegistry containerRegistry)
     {
+        containerRegistry.RegisterForNavigation<SplashScreenPage, SplashScreenPageViewModel>();
         containerRegistry.RegisterForNavigation<LandingPage, LandingPageViewModel>();
+        
+        //Auth
+        containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+        containerRegistry.RegisterForNavigation<LoginOtpPage, LoginOtpPageViewModel>();
+        
+        //Main Pages
+        containerRegistry.RegisterForNavigation<AdminMainPage, AdminMainPageViewModel>();
+        containerRegistry.RegisterForNavigation<UserMainPage, UserMainPageViewModel>();
     }
 
     private static void RegisterServices(this IContainerRegistry containerRegistry)

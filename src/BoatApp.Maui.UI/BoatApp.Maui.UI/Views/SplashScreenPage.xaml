@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<local:PageBase x:Class="BoatApp.Maui.UI.Views.SplashScreenPage"
+                xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
+                xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
+                x:DataType="viewmodels:SplashScreenPageViewModel">
+    <Grid RowDefinitions="0.3*,0.7*">
+        <Image Grid.RowSpan="2"
+               Aspect="AspectFill"
+               Source="bg_splashscreen" />
+
+        <VerticalStackLayout Grid.Row="1"
+                             Spacing="20"
+                             VerticalOptions="Start">
+            <Image Source="logo_splashscreen"
+                   WidthRequest="136" />
+
+            <Label FontFamily="ProstoOneRegular"
+                   FontSize="28"
+                   HorizontalTextAlignment="Center"
+                   Text="Boat Moor Shuttle"
+                   TextColor="{StaticResource White}" />
+        </VerticalStackLayout>
+    </Grid>
+</local:PageBase>
