@@ -23,10 +23,15 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 
                 fonts.AddFont("ProstoOne-Regular.ttf", "ProstoOneRegular");
-                fonts.AddFont("SF-UI-Display-Regular.ttf", "SFUIDisplayRegular");
-                fonts.AddFont("SF-UI-Display-Bold.ttf", "SFUIDisplayBold");
-                fonts.AddFont("SF-UI-Display-Medium.ttf", "SFUIDisplayMedium");
-                fonts.AddFont("SF-UI-Display-Semibold.ttf", "SFUIDisplaySemibold");
+                // fonts.AddFont("SF-UI-Display-Regular.ttf", "SFUIDisplayRegular");
+                // fonts.AddFont("SF-UI-Display-Bold.ttf", "SFUIDisplayBold");
+                // fonts.AddFont("SF-UI-Display-Medium.ttf", "SFUIDisplayMedium");
+                // fonts.AddFont("SF-UI-Display-Semibold.ttf", "SFUIDisplaySemibold");
+                
+                fonts.AddFont("SF-UI-Display-Regular.otf", "SFUIDisplayRegular");
+                fonts.AddFont("SF-UI-Display-Bold.otf", "SFUIDisplayBold");
+                fonts.AddFont("SF-UI-Display-Medium.otf", "SFUIDisplayMedium");
+                fonts.AddFont("SF-UI-Display-Semibold.otf", "SFUIDisplaySemibold");
 
                 fonts.AddMaterialIconFonts();
             });
