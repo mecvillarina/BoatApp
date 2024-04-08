@@ -3,12 +3,78 @@
                 xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
+                xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
                 x:DataType="viewmodels:LoginPageViewModel">
 
-    <Grid>
-        <Label HorizontalOptions="Center"
-               Text="Login"
-               VerticalOptions="Center" />
+    <Grid Padding="20"
+          RowDefinitions="0.2*, 0.8*">
+        <Image HorizontalOptions="Start"
+               Source="logo_upper"
+               VerticalOptions="Start"
+               WidthRequest="88" />
+
+        <Grid Grid.Row="1"
+              RowDefinitions="160,*">
+            <Image HeightRequest="160"
+                   HorizontalOptions="Center"
+                   Source="logo_newnumber" />
+
+            <VerticalStackLayout Grid.Row="1">
+                <VerticalStackLayout Margin="0,60">
+                    <Label FontFamily="SFUIDisplayBold"
+                           FontSize="20"
+                           HorizontalTextAlignment="Center"
+                           Text="Enter New Phone number"
+                           TextColor="{StaticResource Primary}" />
+                    <Label Margin="40,0"
+                           FontFamily="SFUIDisplayRegular"
+                           FontSize="14"
+                           HorizontalTextAlignment="Center"
+                           Text="Please enter your country and phone number to verify. We will sent you the OTP "
+                           TextColor="{StaticResource Gray}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="40">
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="8"
+                          HeightRequest="52">
+
+                        <Border BackgroundColor="White"
+                                HeightRequest="48"
+                                Stroke="Transparent"
+                                StrokeShape="RoundRectangle 10"
+                                StrokeThickness="1"
+                                VerticalOptions="Center"
+                                WidthRequest="52">
+
+                            <Image HeightRequest="20"
+                                   Source="ic_usa_flag"
+                                   WidthRequest="32" />
+                        </Border>
+
+                        <material:TextField Grid.Column="1"
+                                            Margin="0,-5,0,0"
+                                            BorderColor="White"
+                                            CornerRadius="10"
+                                            InputBackgroundColor="White"
+                                            Keyboard="Numeric"
+                                            Text="{Binding PhoneNumber}"
+                                            VerticalOptions="Center" />
+
+                    </Grid>
+
+                    <Button BackgroundColor="{StaticResource Primary}"
+                            Command="{Binding ContinueCommand}"
+                            CornerRadius="10"
+                            FontFamily="SFUIDisplayMedium"
+                            Text="CONTINUE"
+                            TextColor="{StaticResource White}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+        </Grid>
+
+
     </Grid>
 </local:PageBase>

@@ -3,5 +3,134 @@
                 xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
+                xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
-                x:DataType="viewmodels:LoginOtpPageViewModel" />
+                x:DataType="viewmodels:LoginOtpPageViewModel">
+    <Grid Padding="20"
+          RowDefinitions="0.2*,0.8*">
+        <Image HorizontalOptions="Start"
+               Source="logo_upper"
+               VerticalOptions="Start"
+               WidthRequest="88" />
+
+        <Grid Grid.Row="1"
+              RowDefinitions="160,*">
+            <Image HeightRequest="160"
+                   HorizontalOptions="Center"
+                   Source="logo_otp" />
+
+            <VerticalStackLayout Grid.Row="1">
+                <VerticalStackLayout Margin="0,60,0,40">
+                    <Label FontFamily="SFUIDisplayBold"
+                           FontSize="20"
+                           HorizontalTextAlignment="Center"
+                           Text="We’ve Sent You a OTP"
+                           TextColor="{StaticResource Primary}" />
+                    <Label Margin="40,0"
+                           FontFamily="SFUIDisplayRegular"
+                           FontSize="14"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{StaticResource Gray}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontFamily="SFUIDisplayRegular"
+                                      FontSize="14"
+                                      Text="Please enter the one time passcode we’ve sent to"
+                                      TextColor="{StaticResource Gray}" />
+                                <Span FontFamily="SFUIDisplayMedium"
+                                      FontSize="14"
+                                      Text=" +19757886778 "
+                                      TextColor="{StaticResource Blue}" />
+                                <Span FontFamily="SFUIDisplayRegular"
+                                      FontSize="14"
+                                      Text="to login" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="40">
+                    <FlexLayout>
+                        <material:TextField Margin="2,0"
+                                            BorderColor="White"
+                                            CornerRadius="10"
+                                            FlexLayout.Grow="1"
+                                            HorizontalOptions="Fill"
+                                            InputBackgroundColor="White"
+                                            Keyboard="Numeric"
+                                            MaxLength="1" />
+
+                        <material:TextField Margin="2,0"
+                                            BorderColor="White"
+                                            CornerRadius="10"
+                                            FlexLayout.Grow="1"
+                                            HorizontalOptions="Fill"
+                                            InputBackgroundColor="White"
+                                            Keyboard="Numeric"
+                                            MaxLength="1" />
+
+                        <material:TextField Margin="2,0"
+                                            BorderColor="White"
+                                            CornerRadius="10"
+                                            FlexLayout.Grow="1"
+                                            HorizontalOptions="Fill"
+                                            InputBackgroundColor="White"
+                                            Keyboard="Numeric"
+                                            MaxLength="1" />
+
+                        <material:TextField Margin="2,0"
+                                            BorderColor="White"
+                                            CornerRadius="10"
+                                            FlexLayout.Grow="1"
+                                            HorizontalOptions="Fill"
+                                            InputBackgroundColor="White"
+                                            Keyboard="Numeric"
+                                            MaxLength="1" />
+
+                        <material:TextField Margin="2,0"
+                                            BorderColor="White"
+                                            CornerRadius="10"
+                                            FlexLayout.Grow="1"
+                                            HorizontalOptions="Fill"
+                                            InputBackgroundColor="White"
+                                            Keyboard="Numeric"
+                                            MaxLength="1" />
+                    </FlexLayout>
+
+                    <VerticalStackLayout Spacing="28">
+                        <Button BackgroundColor="{StaticResource Primary}"
+                                Command="{Binding LoginCommand}"
+                                CornerRadius="10"
+                                FontFamily="SFUIDisplayMedium"
+                                Text="LOGIN"
+                                TextColor="{StaticResource White}" />
+
+                        <Label Margin="40,0"
+                               FontFamily="SFUIDisplayRegular"
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"
+                               TextColor="{StaticResource Gray}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontFamily="SFUIDisplayRegular"
+                                          FontSize="14"
+                                          Text="Didn’t receive a code?"
+                                          TextColor="{StaticResource Gray}" />
+                                    <Span FontFamily="SFUIDisplayMedium"
+                                          FontSize="14"
+                                          Text=" Resend"
+                                          TextColor="{StaticResource Blue}">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ResendOtpCommand}" />
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</local:PageBase>
