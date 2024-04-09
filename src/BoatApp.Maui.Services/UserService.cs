@@ -58,4 +58,9 @@ public class UserService : IUserService
         var data = _preferences.Get<string>("profile", null, "user");
         return JsonSerializer.Deserialize<OwnerContract>(data);
     }
+
+    public string GetUserPhoneNumber()
+    {
+        return _preferences.Get<string>("phoneNumber", null, "user");
+    }
 }

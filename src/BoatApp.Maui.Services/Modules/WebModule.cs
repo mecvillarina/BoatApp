@@ -13,7 +13,8 @@ public class WebModule : IModule
 
     public void RegisterTypes(IContainerRegistry containerRegistry)
     {
-         containerRegistry.RegisterInstance(CreateRestService<IOwnerApi>(Server.ApiUrl));
+        containerRegistry.RegisterInstance(CreateRestService<IOwnerApi>(Server.ApiUrl));
+        containerRegistry.RegisterInstance(CreateRestService<IOwnerBoatApi>(Server.ApiUrl));
     }
 
     private T CreateRestService<T>(string apiAddress)

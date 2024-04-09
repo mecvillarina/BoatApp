@@ -24,6 +24,7 @@ public class ServicesModule : IModule
         containerRegistry.RegisterSingleton<IServiceMapper, Mappers.ServiceMapper>();
 
         containerRegistry.RegisterSingleton<IUserService, UserService>();
+        containerRegistry.RegisterSingleton<IOwnerBoatService, OwnerBoatService>();
         // containerRegistry.RegisterSingleton<IAuthService, AuthService>();
         //containerRegistry.RegisterSingleton<IGeneralApiService, GeneralApiService>();
         //containerRegistry.RegisterSingleton<IAuthService, AuthService>();

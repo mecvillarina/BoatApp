@@ -4,6 +4,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+                xmlns:models="clr-namespace:BoatApp.Maui.UI.Models"
                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
                 x:DataType="viewmodels:UserMainPageViewModel">
@@ -224,8 +225,10 @@
         <material:TabItem Title="Home">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
-                    <Grid RowDefinitions="0.2*,0.8*">
+                    <Grid BackgroundColor="{StaticResource Background}"
+                          RowDefinitions="0.2*,0.8*">
 
+                        <!--  Header  -->
                         <Grid>
                             <Border Margin="0"
                                     Padding="0"
@@ -279,6 +282,77 @@
 
                             </Grid>
                         </Grid>
+
+                        <Grid Grid.Row="1"
+                              Padding="20"
+                              RowDefinitions="Auto,*"
+                              RowSpacing="8">
+
+                            <Label FontFamily="SFUIDisplayMedium"
+                                   FontSize="16"
+                                   Text="My Boats" />
+
+                            <RefreshView Grid.Row="1">
+                                <CollectionView ItemsSource="{Binding Boats}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="8"
+                                                           Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="models:BoatItemModel">
+                                            <Border Padding="12"
+                                                    BackgroundColor="{StaticResource White}"
+                                                    HeightRequest="200"
+                                                    StrokeShape="RoundRectangle 10"
+                                                    StrokeThickness="0">
+                                                <Grid RowDefinitions="*,Auto"
+                                                      RowSpacing="8">
+                                                    <Image Aspect="AspectFill"
+                                                           Source="{Binding BoatImageUrl}" />
+
+                                                    <VerticalStackLayout Grid.Row="1">
+                                                        <Label FontFamily="SFUIDisplayMedium"
+                                                               FontSize="14"
+                                                               LineBreakMode="TailTruncation"
+                                                               Text="{Binding BoatName}" />
+
+                                                        <Grid ColumnDefinitions="*,*">
+                                                            <VerticalStackLayout>
+                                                                <Grid ColumnDefinitions="Auto,*"
+                                                                      ColumnSpacing="4">
+                                                                    <Image HeightRequest="10"
+                                                                           Source="ic_card_pin"
+                                                                           VerticalOptions="Center" />
+                                                                    <Label Grid.Column="1"
+                                                                           FontFamily="SFUIDisplayRegular"
+                                                                           FontSize="10"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           Text="{Binding ParkingLocationAddress}" />
+                                                                </Grid>
+
+                                                                <Grid ColumnDefinitions="Auto,*"
+                                                                      ColumnSpacing="4">
+                                                                    <Image HeightRequest="10"
+                                                                           Source="ic_card_boat"
+                                                                           VerticalOptions="Center" />
+                                                                    <Label Grid.Column="1"
+                                                                           FontFamily="SFUIDisplayRegular"
+                                                                           FontSize="10"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           Text="{Binding BoatName}" />
+                                                                </Grid>
+                                                            </VerticalStackLayout>
+                                                        </Grid>
+                                                    </VerticalStackLayout>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </RefreshView>
+                        </Grid>
+
                     </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>

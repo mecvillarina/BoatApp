@@ -9,4 +9,5 @@ public interface IUserService
     Task FetchAdminAsync();
     Task FetchUserByPhoneNumberAsync(string phoneNumber);
     OwnerContract GetUserProfile();
+    string GetUserPhoneNumber();
 }

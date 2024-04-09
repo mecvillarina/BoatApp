@@ -20,7 +20,7 @@ public class OwnerContract
     public OwnerAddressContract Address { get; set; }
 
     [JsonPropertyName("profile_pic")]
-    public Uri ProfilePic { get; set; }
+    public string ProfilePic { get; set; }
 
     [JsonPropertyName("member_since")]
     public string MemberSince { get; set; }
