@@ -3,6 +3,7 @@ using BoatApp.Common.Enums;
 using BoatApp.Common.Exceptions;
 using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.Services.Web.Api;
+using BoatApp.Models.Contracts;
 using BoatApp.Models.Contracts.Requests;
 
 namespace BoatApp.Maui.Services;
@@ -49,5 +50,12 @@ public class UserService : IUserService
         var data = response.Documents.First();
 
         _preferences.Set("profile", JsonSerializer.Serialize(data), "user");
+        _preferences.Set("phoneNumber", phoneNumber, "user");
+    }
+
+    public OwnerContract GetUserProfile()
+    {
+        var data = _preferences.Get<string>("profile", null, "user");
+        return JsonSerializer.Deserialize<OwnerContract>(data);
     }
 }
