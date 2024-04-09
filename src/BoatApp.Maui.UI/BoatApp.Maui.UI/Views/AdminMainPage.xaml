@@ -3,5 +3,254 @@
                 xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
+                xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
-                x:DataType="viewmodels:AdminMainPageViewModel" />
+                x:DataType="viewmodels:AdminMainPageViewModel">
+
+
+    <material:TabView BackgroundColor="{StaticResource White}"
+                      TabPlacement="Bottom">
+
+        <material:TabView.TabHeaderItemTemplate>
+            <DataTemplate x:DataType="material:TabItem">
+
+                <VerticalStackLayout Padding="0,8"
+                                     Spacing="4">
+                    <ImageButton Command="{Binding Command}"
+                                 HeightRequest="{OnIdiom Default=20,
+                                                         Tablet=32,
+                                                         Desktop=40}"
+                                 HorizontalOptions="Center"
+                                 WidthRequest="{OnIdiom Default=20,
+                                                        Tablet=32,
+                                                        Desktop=40}">
+
+                        <ImageButton.Triggers>
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Home" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="True" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="Source" Value="ic_selected_home" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Home" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="Source" Value="ic_default_home" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Boats" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="True" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="Source" Value="ic_selected_boats" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Boats" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="Source" Value="ic_default_boats" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Request" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="True" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="Source" Value="ic_selected_request" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Request" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="Source" Value="ic_default_request" />
+                            </MultiTrigger>
+
+
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Account" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="True" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="Source" Value="ic_selected_account" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="ImageButton">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Account" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="Source" Value="ic_default_account" />
+                            </MultiTrigger>
+
+
+                        </ImageButton.Triggers>
+                    </ImageButton>
+
+                    <Label FontFamily="SFUIDisplayRegular"
+                           FontSize="10"
+                           HorizontalOptions="Center"
+                           Text="{Binding Title}"
+                           TextColor="{StaticResource TabTextDefaultColor}">
+
+                        <Label.Triggers>
+                            <MultiTrigger TargetType="Label">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Home" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="True" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="Label">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Home" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="Label">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Boats" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="True" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="Label">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Boats" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="Label">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Request" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="True" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="Label">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Request" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="Label">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Account" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="True" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                            </MultiTrigger>
+
+                            <MultiTrigger TargetType="Label">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding Title}"
+                                                      Value="Account" />
+                                    <BindingCondition Binding="{Binding IsSelected}"
+                                                      Value="False" />
+                                </MultiTrigger.Conditions>
+
+                                <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
+                            </MultiTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </VerticalStackLayout>
+
+            </DataTemplate>
+        </material:TabView.TabHeaderItemTemplate>
+
+        <material:TabItem Title="Home">
+            <material:TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Label Text="Admin Home" />
+                </DataTemplate>
+            </material:TabItem.ContentTemplate>
+        </material:TabItem>
+
+        <material:TabItem Title="Boats">
+            <material:TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Label Text="Boats" />
+                </DataTemplate>
+            </material:TabItem.ContentTemplate>
+        </material:TabItem>
+
+        <material:TabItem Title="Request">
+            <material:TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Label Text="Request" />
+                </DataTemplate>
+            </material:TabItem.ContentTemplate>
+        </material:TabItem>
+
+        <material:TabItem Title="Account">
+            <material:TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Label Text="Account" />
+                </DataTemplate>
+            </material:TabItem.ContentTemplate>
+        </material:TabItem>
+    </material:TabView>
+
+</local:PageBase>

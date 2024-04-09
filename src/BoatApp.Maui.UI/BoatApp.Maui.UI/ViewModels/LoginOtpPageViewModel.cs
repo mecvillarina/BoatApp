@@ -20,13 +20,13 @@ public partial class LoginOtpPageViewModel : PageViewModelBase
     [RelayCommand]
     private async Task Login()
     { 
-        if (!_isAdmin)
+        if (_isAdmin)
         {
-            await NavigationService.NavigateAsync($"../{nameof(UserMainPage)}");
+            await NavigationService.NavigateAsync($"../{nameof(AdminMainPage)}");
         }
         else
         {
-            await NavigationService.NavigateAsync($"../{nameof(AdminMainPage)}");
+            await NavigationService.NavigateAsync($"../{nameof(UserMainPage)}");
         }
     }
     

@@ -8,11 +8,11 @@ namespace BoatApp.Maui.UI.ViewModels;
 
 public partial class LoginPageViewModel : PageViewModelBase
 {
-    private readonly IOwnerService _ownerService;
+    private readonly IUserService _userService;
     
-    public LoginPageViewModel(BasePageServices baseServices, IOwnerService ownerService) : base(baseServices)
+    public LoginPageViewModel(BasePageServices baseServices, IUserService userService) : base(baseServices)
     {
-        _ownerService = ownerService;
+        _userService = userService;
     }
 
     [ObservableProperty]
@@ -30,9 +30,13 @@ public partial class LoginPageViewModel : PageViewModelBase
             var phoneNumberOnly = PhoneNumber.Replace("+", "");
             var isAdmin =  phoneNumberOnly.All(x => x == '0') || phoneNumberOnly.All((x => x == '1'));
 
-            if (!isAdmin)
+            if (isAdmin)
             {
-                await _ownerService.FetchOwnerByPhoneNumberAsync(PhoneNumber);
+                await _userService.FetchAdminAsync();
+            }
+            else
+            {
+                await _userService.FetchUserByPhoneNumberAsync(PhoneNumber);
             }
             
             var parameters = new NavigationParameters()

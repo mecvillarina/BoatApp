@@ -23,7 +23,7 @@ public class ServicesModule : IModule
         containerRegistry.RegisterScoped<IMapper, ServiceMapper>();
         containerRegistry.RegisterSingleton<IServiceMapper, Mappers.ServiceMapper>();
 
-        containerRegistry.RegisterSingleton<IOwnerService, OwnerService>();
+        containerRegistry.RegisterSingleton<IUserService, UserService>();
         // containerRegistry.RegisterSingleton<IAuthService, AuthService>();
         //containerRegistry.RegisterSingleton<IGeneralApiService, GeneralApiService>();
         //containerRegistry.RegisterSingleton<IAuthService, AuthService>();

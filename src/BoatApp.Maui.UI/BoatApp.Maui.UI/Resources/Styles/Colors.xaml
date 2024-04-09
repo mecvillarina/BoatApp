@@ -89,6 +89,7 @@
     <Color x:Key="DarkGray">#545454</Color>
     <Color x:Key="Dark">#2C3031</Color>
     <Color x:Key="Blue">#095DFF</Color>
+    <Color x:Key="TabTextDefaultColor">#C5C5C5</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
