@@ -35,15 +35,15 @@
                             <FormattedString>
                                 <Span FontFamily="SFUIDisplayRegular"
                                       FontSize="14"
-                                      Text="Please enter the one time passcode we’ve sent to"
+                                      Text="Please enter the one time passcode we’ve sent to "
                                       TextColor="{StaticResource Gray}" />
                                 <Span FontFamily="SFUIDisplayMedium"
                                       FontSize="14"
-                                      Text=" +19757886778 "
+                                      Text="{Binding PhoneNumber}"
                                       TextColor="{StaticResource Blue}" />
                                 <Span FontFamily="SFUIDisplayRegular"
                                       FontSize="14"
-                                      Text="to login" />
+                                      Text=" to login" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

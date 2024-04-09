@@ -1,4 +1,5 @@
-﻿using BoatApp.Maui.UI.Services;
+﻿using BoatApp.Maui.Domain.Services;
+using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -7,18 +8,45 @@ namespace BoatApp.Maui.UI.ViewModels;
 
 public partial class LoginPageViewModel : PageViewModelBase
 {
-    public LoginPageViewModel(BasePageServices baseServices) : base(baseServices)
+    private readonly IOwnerService _ownerService;
+    
+    public LoginPageViewModel(BasePageServices baseServices, IOwnerService ownerService) : base(baseServices)
     {
+        _ownerService = ownerService;
     }
 
-    [ObservableProperty] private string _phoneNumber = "+1";
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(ContinueCommand))]
+    private string _phoneNumber = "+1";
 
-    [RelayCommand]
+    public bool CanExecuteContinue() => PhoneNumber.Length == 11 && PhoneNumber.StartsWith($"+") && PhoneNumber.Substring(1, PhoneNumber.Length - 1).All(x => char.IsNumber((x)));
+    
+    [RelayCommand(CanExecute = nameof(CanExecuteContinue))]
     private async Task Continue()
     {
-        //API Call
+        try
+        {
+            //API Call
+            var phoneNumberOnly = PhoneNumber.Replace("+", "");
+            var isAdmin =  phoneNumberOnly.All(x => x == '0') || phoneNumberOnly.All((x => x == '1'));
 
-        await NavigationService.NavigateAsync($"../{nameof(LoginOtpPage)}");
+            if (!isAdmin)
+            {
+                await _ownerService.FetchOwnerByPhoneNumberAsync(PhoneNumber);
+            }
+            
+            var parameters = new NavigationParameters()
+            {
+                { "PhoneNumber", PhoneNumber },
+                { "IsAdmin", isAdmin }
+            };
+        
+            var result = await NavigationService.NavigateAsync($"../{nameof(LoginOtpPage)}", parameters);
+        }
+        catch(Exception ex)
+        {
+            await PageDialogService.DisplayAlertAsync("Error", ex.Message, "Ok");
+        }
     }
     
 }

@@ -1,5 +1,6 @@
 ﻿using BoatApp.Domain.Logging;
 using BoatApp.Domain.Mappers;
+using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.Services.Logging;
 using Mapster;
 using MapsterMapper;
@@ -21,7 +22,8 @@ public class ServicesModule : IModule
         containerRegistry.RegisterInstance(TypeAdapterConfig.GlobalSettings);
         containerRegistry.RegisterScoped<IMapper, ServiceMapper>();
         containerRegistry.RegisterSingleton<IServiceMapper, Mappers.ServiceMapper>();
-        
+
+        containerRegistry.RegisterSingleton<IOwnerService, OwnerService>();
         // containerRegistry.RegisterSingleton<IAuthService, AuthService>();
         //containerRegistry.RegisterSingleton<IGeneralApiService, GeneralApiService>();
         //containerRegistry.RegisterSingleton<IAuthService, AuthService>();

@@ -1,4 +1,6 @@
-﻿using Refit;
+﻿using BoatApp.Common.Constants;
+using BoatApp.Maui.Services.Web.Api;
+using Refit;
 
 namespace BoatApp.Maui.Services.Modules;
 
@@ -11,7 +13,7 @@ public class WebModule : IModule
 
     public void RegisterTypes(IContainerRegistry containerRegistry)
     {
-        // containerRegistry.RegisterInstance(CreateRestService<IAuthApi>(Server.ApiUrl));
+         containerRegistry.RegisterInstance(CreateRestService<IOwnerApi>(Server.ApiUrl));
     }
 
     private T CreateRestService<T>(string apiAddress)
@@ -22,6 +24,8 @@ public class WebModule : IModule
             Timeout = TimeSpan.FromSeconds(30)
         };
 
+        httpClient.DefaultRequestHeaders.Clear();
+        httpClient.DefaultRequestHeaders.Add("api-key",Server.ApiKey);
         return RestService.For<T>(httpClient);
     }
 }
