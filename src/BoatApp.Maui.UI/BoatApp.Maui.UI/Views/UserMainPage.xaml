@@ -371,6 +371,8 @@
                                                             <Grid Grid.Column="1">
                                                                 <Button Padding="0"
                                                                         BackgroundColor="{StaticResource Primary}"
+                                                                        Command="{Binding RequestDropCommand, Source={RelativeSource AncestorType={x:Type viewmodels:UserMainPageViewModel}}}"
+                                                                        CommandParameter="{Binding .}"
                                                                         CornerRadius="10"
                                                                         FontFamily="SFUIDisplayRegular"
                                                                         FontSize="12"

@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Maui;
+﻿using BoatApp.Maui.UI.ViewModels;
+using BoatApp.Maui.UI.Views;
+using CommunityToolkit.Maui;
 using Mopups.Hosting;
 using InputKit.Shared.Controls;
 using UraniumUI;
@@ -37,6 +39,7 @@ public static class MauiProgram
             });
 
         builder.Services.AddMopupsDialogs();
+        
         return builder.Build();
     }
 }

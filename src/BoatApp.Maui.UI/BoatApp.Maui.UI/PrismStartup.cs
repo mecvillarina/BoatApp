@@ -1,4 +1,6 @@
+using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.Services.Modules;
+using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.ViewModels;
 using BoatApp.Maui.UI.Views;
 
@@ -35,11 +37,13 @@ internal static class PrismStartup
         //Main Pages
         containerRegistry.RegisterForNavigation<AdminMainPage, AdminMainPageViewModel>();
         containerRegistry.RegisterForNavigation<UserMainPage, UserMainPageViewModel>();
+        
+        
     }
 
     private static void RegisterServices(this IContainerRegistry containerRegistry)
     {
-
+        containerRegistry.RegisterSingleton<IPopupService, PopupService>();
     }
 
     private static void OnInitialized(IContainerProvider container)

@@ -1,8 +1,10 @@
 ﻿using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.UI.Models;
 using BoatApp.Maui.UI.Services;
+using BoatApp.Maui.UI.Views;
 using BoatApp.Models.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BoatApp.Maui.UI.ViewModels;
 
@@ -10,10 +12,12 @@ public partial class UserMainPageViewModel : PageViewModelBase
 {
     private readonly IUserService _userService;
     private readonly IOwnerBoatService _ownerBoatService;
-    public UserMainPageViewModel(BasePageServices baseServices, IUserService userService, IOwnerBoatService ownerBoatService) : base(baseServices)
+    private readonly IPopupService _popupService;
+    public UserMainPageViewModel(BasePageServices baseServices, IUserService userService, IOwnerBoatService ownerBoatService, IPopupService popupService) : base(baseServices)
     {
         _userService = userService;
         _ownerBoatService = ownerBoatService;
+        _popupService = popupService;
     }
 
     private OwnerContract _user;
@@ -22,6 +26,19 @@ public partial class UserMainPageViewModel : PageViewModelBase
     [ObservableProperty] private string _profilePictureUrl;
 
     [ObservableProperty] private List<BoatItemModel> _boats = [];
+
+    [RelayCommand]
+    private async Task RequestDrop()
+    {
+        try
+        {
+             await _popupService.ShowAsync(new DropRequestSubmittedPopup());
+        }
+        catch(Exception ex)
+        {
+            
+        }
+    }
     
     private void SetUserDetails()
     {
