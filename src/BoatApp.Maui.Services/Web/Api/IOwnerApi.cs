@@ -9,5 +9,5 @@ public interface IOwnerApi
     HttpClient Client { get; }
 
     [Post("/action/find")]
-    Task<OwnerRootContract> GetOwnerByPhoneAsync([Body(true)] GenericRequestContract<GetOwnerByPhoneRequestContract> contract);
+    Task<OwnerRootContract> GetOwnerByPhoneAsync([Body(true)] GetOwnerByPhoneRootRequestContract contract);
 }

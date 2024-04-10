@@ -2,7 +2,7 @@
 
 namespace BoatApp.Models.Contracts.Requests;
 
-public class GetOwnerByPhoneRequestContract : IFilterRequestContract
+public class GetOwnerByPhoneFilterRequestContract 
 {
     [JsonPropertyName("contact")]
     public string Contact { get; set; }

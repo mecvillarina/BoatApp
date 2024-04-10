@@ -28,15 +28,18 @@ public partial class UserMainPageViewModel : PageViewModelBase
     [ObservableProperty] private List<BoatItemModel> _boats = [];
 
     [RelayCommand]
-    private async Task RequestDrop()
+    private async Task RequestDrop(BoatItemModel model)
     {
         try
         {
-             await _popupService.ShowAsync(new DropRequestSubmittedPopup());
+            await _ownerBoatService.SubmitDropRequestAsync(model.Contract.BoatNumber, model.Contract.OwnerId);
+            await _ownerBoatService.UpdateBoatStatusAsync(model.Contract.BoatNumber);
+            await _popupService.ShowAsync(new DropRequestSubmittedPopup());
+            FetchBoats();
         }
         catch(Exception ex)
         {
-            
+            await PageDialogService.DisplayAlertAsync("Error", ex.Message, "Ok");
         }
     }
     

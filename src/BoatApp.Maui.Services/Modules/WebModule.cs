@@ -1,4 +1,5 @@
-﻿using BoatApp.Common.Constants;
+﻿using System.Net.Http.Headers;
+using BoatApp.Common.Constants;
 using BoatApp.Maui.Services.Web.Api;
 using Refit;
 
@@ -27,6 +28,7 @@ public class WebModule : IModule
 
         httpClient.DefaultRequestHeaders.Clear();
         httpClient.DefaultRequestHeaders.Add("api-key",Server.ApiKey);
+        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         return RestService.For<T>(httpClient);
     }
 }

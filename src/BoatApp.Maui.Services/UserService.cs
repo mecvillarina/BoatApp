@@ -34,12 +34,12 @@ public class UserService : IUserService
     
     public async Task FetchUserByPhoneNumberAsync(string phoneNumber)
     {
-        var response = await _ownerApi.GetOwnerByPhoneAsync(new GenericRequestContract<GetOwnerByPhoneRequestContract>()
+        var response = await _ownerApi.GetOwnerByPhoneAsync(new GetOwnerByPhoneRootRequestContract()
         {
             DataSource = "BoatCluster",
             Database = "BoatDB",
             Collection = "Owners",
-            Filter = new GetOwnerByPhoneRequestContract() { Contact = phoneNumber},
+            Filter = new GetOwnerByPhoneFilterRequestContract() { Contact = phoneNumber},
         });
 
         if (!response.Documents.Any())
