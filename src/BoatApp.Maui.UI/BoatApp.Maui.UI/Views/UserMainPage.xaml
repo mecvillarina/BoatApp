@@ -489,7 +489,38 @@
         <material:TabItem Title="Boats">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
-                    <Label Text="Boats" />
+                    <Grid BackgroundColor="{StaticResource Background}"
+                          RowDefinitions="0.15*,0.85*">
+
+                        <!--  Header  -->
+                        <Grid>
+                            <Border Margin="0"
+                                    Padding="0"
+                                    StrokeShape="RoundRectangle 0,0,10,10"
+                                    StrokeThickness="0">
+                                <Image Aspect="AspectFill"
+                                       Source="bg_splashscreen.jpg" />
+                            </Border>
+
+                            <Grid Padding="20">
+                                <Grid VerticalOptions="Start">
+
+                                    <Image HeightRequest="18"
+                                           HorizontalOptions="Start"
+                                           Source="ic_back"
+                                           VerticalOptions="Center" />
+
+                                    <Label FontFamily="SFUIDisplayBold"
+                                           FontSize="20"
+                                           HorizontalOptions="Center"
+                                           Text="My Boats"
+                                           TextColor="{StaticResource White}"
+                                           VerticalOptions="Center" />
+                                </Grid>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>
@@ -497,7 +528,38 @@
         <material:TabItem Title="Request">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
-                    <Label Text="Request" />
+                    <Grid BackgroundColor="{StaticResource Background}"
+                          RowDefinitions="0.15*,0.85*">
+
+                        <!--  Header  -->
+                        <Grid>
+                            <Border Margin="0"
+                                    Padding="0"
+                                    StrokeShape="RoundRectangle 0,0,10,10"
+                                    StrokeThickness="0">
+                                <Image Aspect="AspectFill"
+                                       Source="bg_splashscreen.jpg" />
+                            </Border>
+
+                            <Grid Padding="20">
+                                <Grid VerticalOptions="Start">
+
+                                    <Image HeightRequest="18"
+                                           HorizontalOptions="Start"
+                                           Source="ic_back"
+                                           VerticalOptions="Center" />
+
+                                    <Label FontFamily="SFUIDisplayBold"
+                                           FontSize="20"
+                                           HorizontalOptions="Center"
+                                           Text="Requests"
+                                           TextColor="{StaticResource White}"
+                                           VerticalOptions="Center" />
+                                </Grid>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>
@@ -505,7 +567,38 @@
         <material:TabItem Title="Account">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
-                    <Label Text="Account" />
+                    <Grid BackgroundColor="{StaticResource Background}"
+                          RowDefinitions="0.15*,0.85*">
+
+                        <!--  Header  -->
+                        <Grid>
+                            <Border Margin="0"
+                                    Padding="0"
+                                    StrokeShape="RoundRectangle 0,0,10,10"
+                                    StrokeThickness="0">
+                                <Image Aspect="AspectFill"
+                                       Source="bg_splashscreen.jpg" />
+                            </Border>
+
+                            <Grid Padding="20">
+                                <Grid VerticalOptions="Start">
+
+                                    <Image HeightRequest="18"
+                                           HorizontalOptions="Start"
+                                           Source="ic_back"
+                                           VerticalOptions="Center" />
+
+                                    <Label FontFamily="SFUIDisplayBold"
+                                           FontSize="20"
+                                           HorizontalOptions="Center"
+                                           Text="Account"
+                                           TextColor="{StaticResource White}"
+                                           VerticalOptions="Center" />
+                                </Grid>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>
