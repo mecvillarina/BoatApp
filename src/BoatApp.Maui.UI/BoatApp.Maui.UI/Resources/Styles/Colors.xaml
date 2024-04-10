@@ -4,6 +4,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Color x:Key="Primary">#05526F</Color>
+    <Color x:Key="PrimaryOpaque008">#1405526F</Color>
     <Color x:Key="OnPrimary">#FFFFFF</Color>
     <Color x:Key="PrimaryContainer">#baefcd</Color>
     <Color x:Key="OnPrimaryContainer">#176031</Color>
@@ -88,7 +89,13 @@
     <Color x:Key="Gray">#797979</Color>
     <Color x:Key="DarkGray">#545454</Color>
     <Color x:Key="Dark">#2C3031</Color>
-    <Color x:Key="Blue">#095DFF</Color>
+    <Color x:Key="Blue">#0088F7</Color>
+    <Color x:Key="BlueOpaque008">#140088F7</Color>
+    <Color x:Key="Green">#3CC80B</Color>
+    <Color x:Key="GreenOpaque008">#143CC80B</Color>
+    <Color x:Key="Orange">#FA720F</Color>
+    <Color x:Key="OrangeOpaque008">#14FA720F</Color>
+
     <Color x:Key="TabTextDefaultColor">#C5C5C5</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>

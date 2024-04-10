@@ -2,6 +2,7 @@
 <local:PageBase x:Class="BoatApp.Maui.UI.Views.UserMainPage"
                 xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:enums="clr-namespace:BoatApp.Common.Enums;assembly=BoatApp.Common"
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
                 xmlns:models="clr-namespace:BoatApp.Maui.UI.Models"
@@ -290,7 +291,8 @@
 
                             <Label FontFamily="SFUIDisplayMedium"
                                    FontSize="16"
-                                   Text="My Boats" />
+                                   Text="My Boats"
+                                   TextColor="{StaticResource Dark}" />
 
                             <RefreshView Grid.Row="1">
                                 <CollectionView ItemsSource="{Binding Boats}">
@@ -315,7 +317,8 @@
                                                         <Label FontFamily="SFUIDisplayMedium"
                                                                FontSize="14"
                                                                LineBreakMode="TailTruncation"
-                                                               Text="{Binding BoatName}" />
+                                                               Text="{Binding BoatName}"
+                                                               TextColor="{StaticResource Dark}" />
 
                                                         <Grid ColumnDefinitions="*,*">
                                                             <VerticalStackLayout>
@@ -326,9 +329,10 @@
                                                                            VerticalOptions="Center" />
                                                                     <Label Grid.Column="1"
                                                                            FontFamily="SFUIDisplayRegular"
-                                                                           FontSize="10"
+                                                                           FontSize="12"
                                                                            LineBreakMode="TailTruncation"
-                                                                           Text="{Binding ParkingLocationAddress}" />
+                                                                           Text="{Binding ParkingLocationAddress}"
+                                                                           TextColor="{StaticResource Dark}" />
                                                                 </Grid>
 
                                                                 <Grid ColumnDefinitions="Auto,*"
@@ -338,11 +342,133 @@
                                                                            VerticalOptions="Center" />
                                                                     <Label Grid.Column="1"
                                                                            FontFamily="SFUIDisplayRegular"
-                                                                           FontSize="10"
+                                                                           FontSize="12"
                                                                            LineBreakMode="TailTruncation"
-                                                                           Text="{Binding BoatName}" />
+                                                                           Text="{Binding ParkingLocationDock}"
+                                                                           TextColor="{StaticResource Dark}">
+                                                                        <Label.FormattedText>
+                                                                            <FormattedString>
+                                                                                <Span FontFamily="SFUIDisplayRegular"
+                                                                                      FontSize="12"
+                                                                                      Text="{Binding ParkingLocationDock}"
+                                                                                      TextColor="{StaticResource Dark}" />
+
+                                                                                <Span FontFamily="SFUIDisplayRegular"
+                                                                                      FontSize="12"
+                                                                                      Text=", "
+                                                                                      TextColor="{StaticResource Dark}" />
+
+                                                                                <Span FontFamily="SFUIDisplayRegular"
+                                                                                      FontSize="12"
+                                                                                      Text="{Binding ParkingLocationZone}"
+                                                                                      TextColor="{StaticResource Dark}" />
+                                                                            </FormattedString>
+                                                                        </Label.FormattedText>
+                                                                    </Label>
                                                                 </Grid>
                                                             </VerticalStackLayout>
+
+                                                            <Grid Grid.Column="1">
+                                                                <Button Padding="0"
+                                                                        BackgroundColor="{StaticResource Primary}"
+                                                                        CornerRadius="10"
+                                                                        FontFamily="SFUIDisplayRegular"
+                                                                        FontSize="12"
+                                                                        HeightRequest="30"
+                                                                        IsVisible="False"
+                                                                        Text="↗ Request Drop"
+                                                                        TextColor="{StaticResource White}"
+                                                                        VerticalOptions="Center">
+                                                                    <Button.Triggers>
+                                                                        <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                     TargetType="Button"
+                                                                                     Value="{x:Static enums:BoatRequestStatus.RequestDrop}">
+                                                                            <Setter Property="IsVisible" Value="True" />
+                                                                        </DataTrigger>
+                                                                    </Button.Triggers>
+                                                                </Button>
+
+                                                                <Button Padding="0"
+                                                                        BackgroundColor="{StaticResource BlueOpaque008}"
+                                                                        BorderColor="{StaticResource Blue}"
+                                                                        BorderWidth="1"
+                                                                        FontFamily="SFUIDisplayRegular"
+                                                                        FontSize="12"
+                                                                        HeightRequest="30"
+                                                                        IsVisible="False"
+                                                                        Text="Drop Request Submitted"
+                                                                        TextColor="{StaticResource Blue}"
+                                                                        VerticalOptions="Center">
+                                                                    <Button.Triggers>
+                                                                        <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                     TargetType="Button"
+                                                                                     Value="{x:Static enums:BoatRequestStatus.DropRequestSubmitted}">
+                                                                            <Setter Property="IsVisible" Value="True" />
+                                                                        </DataTrigger>
+                                                                    </Button.Triggers>
+                                                                </Button>
+
+                                                                <Button Padding="0"
+                                                                        BackgroundColor="{StaticResource GreenOpaque008}"
+                                                                        BorderColor="{StaticResource Green}"
+                                                                        BorderWidth="1"
+                                                                        FontFamily="SFUIDisplayRegular"
+                                                                        FontSize="12"
+                                                                        HeightRequest="30"
+                                                                        IsVisible="False"
+                                                                        Text="Drop Confirmed"
+                                                                        TextColor="{StaticResource Green}"
+                                                                        VerticalOptions="Center">
+                                                                    <Button.Triggers>
+                                                                        <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                     TargetType="Button"
+                                                                                     Value="{x:Static enums:BoatRequestStatus.DropConfirmed}">
+                                                                            <Setter Property="IsVisible" Value="True" />
+                                                                        </DataTrigger>
+                                                                    </Button.Triggers>
+                                                                </Button>
+
+                                                                <Button Padding="0"
+                                                                        BackgroundColor="{StaticResource OrangeOpaque008}"
+                                                                        BorderColor="{StaticResource Orange}"
+                                                                        BorderWidth="1"
+                                                                        FontFamily="SFUIDisplayRegular"
+                                                                        FontSize="12"
+                                                                        HeightRequest="30"
+                                                                        IsVisible="False"
+                                                                        Text="In Transit (Drop)"
+                                                                        TextColor="{StaticResource Orange}"
+                                                                        VerticalOptions="Center">
+                                                                    <Button.Triggers>
+                                                                        <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                     TargetType="Button"
+                                                                                     Value="{x:Static enums:BoatRequestStatus.InTransitDrop}">
+                                                                            <Setter Property="IsVisible" Value="True" />
+                                                                        </DataTrigger>
+                                                                    </Button.Triggers>
+                                                                </Button>
+
+                                                                <Button Padding="0"
+                                                                        BackgroundColor="{StaticResource PrimaryOpaque008}"
+                                                                        BorderColor="{StaticResource Primary}"
+                                                                        BorderWidth="1"
+                                                                        FontFamily="SFUIDisplayRegular"
+                                                                        FontSize="12"
+                                                                        HeightRequest="30"
+                                                                        IsVisible="False"
+                                                                        Text="Drop-off Completed"
+                                                                        TextColor="{StaticResource Primary}"
+                                                                        VerticalOptions="Center">
+                                                                    <Button.Triggers>
+                                                                        <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                     TargetType="Button"
+                                                                                     Value="{x:Static enums:BoatRequestStatus.DropOffCompleted}">
+                                                                            <Setter Property="IsVisible" Value="True" />
+                                                                        </DataTrigger>
+                                                                    </Button.Triggers>
+                                                                </Button>
+
+                                                            </Grid>
                                                         </Grid>
                                                     </VerticalStackLayout>
                                                 </Grid>
