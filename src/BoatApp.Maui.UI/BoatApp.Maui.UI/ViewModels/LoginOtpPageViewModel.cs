@@ -17,24 +17,15 @@ public partial class LoginOtpPageViewModel : PageViewModelBase
         _userService = userService;
     }
 
-    [ObservableProperty] private string _phoneNumber = "+1234567890";
+    [ObservableProperty] private string _phoneNumber;
 
     private OwnerContract _user;
-    private bool _isAdmin;
     
     [RelayCommand]
     private async Task Login()
     { 
-        if (_isAdmin)
-        {
-            _userService.SaveAdminProfile();
-            await NavigationService.NavigateAsync($"../{nameof(AdminMainPage)}");
-        }
-        else
-        {
-            _userService.SaveUserProfile(_user);
-            await NavigationService.NavigateAsync($"../{nameof(UserMainPage)}");
-        }
+        _userService.SaveUserProfile(_user);
+        await NavigationService.NavigateAsync($"../{nameof(UserMainPage)}");
     }
     
     [RelayCommand]
@@ -47,9 +38,7 @@ public partial class LoginOtpPageViewModel : PageViewModelBase
     {
         base.OnNavigatedTo(parameters);
 
-        PhoneNumber = parameters.GetValue<string>("PhoneNumber");
         _user = parameters.GetValue<OwnerContract>("User");
-
-        _isAdmin = _user == null;
+        PhoneNumber = _user.Contact;
     }
 }
