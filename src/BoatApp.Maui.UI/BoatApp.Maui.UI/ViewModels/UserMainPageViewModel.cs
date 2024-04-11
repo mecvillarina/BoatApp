@@ -42,6 +42,13 @@ public partial class UserMainPageViewModel : PageViewModelBase
             await PageDialogService.DisplayAlertAsync("Error", ex.Message, "Ok");
         }
     }
+
+    [RelayCommand]
+    private async Task Logout()
+    {
+        _userService.ClearData();
+        await NavigationService.NavigateAsync($"../{nameof(SplashScreenPage)}");
+    }
     
     private void SetUserDetails()
     {

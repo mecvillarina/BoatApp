@@ -63,4 +63,10 @@ public class UserService : IUserService
     {
         return _preferences.Get<string>("phoneNumber", null, "user");
     }
+
+    public void ClearData()
+    {
+        _preferences.Clear("user");
+        _preferences.Clear("admin");
+    }
 }

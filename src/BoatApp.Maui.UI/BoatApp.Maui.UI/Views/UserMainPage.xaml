@@ -598,6 +598,16 @@
 
                             </Grid>
                         </Grid>
+
+
+                        <Grid Grid.Row="1"
+                              Padding="20"
+                              RowDefinitions="Auto,*"
+                              RowSpacing="8">
+
+                            <Button Command="{Binding LogoutCommand}"
+                                    Text="Logout" />
+                        </Grid>
                     </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>

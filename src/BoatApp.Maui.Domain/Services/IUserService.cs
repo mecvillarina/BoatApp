@@ -10,4 +10,5 @@ public interface IUserService
     Task FetchUserByPhoneNumberAsync(string phoneNumber);
     OwnerContract GetUserProfile();
     string GetUserPhoneNumber();
+    void ClearData();
 }
