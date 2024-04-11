@@ -12,7 +12,7 @@ public partial class LoginOtpPageViewModel : PageViewModelBase
 {
     private readonly IUserService _userService;
     
-    public LoginOtpPageViewModel(BasePageServices baseServices, IUserService userService) : base(baseServices)
+    public LoginOtpPageViewModel(BaseServices baseServices, IUserService userService) : base(baseServices)
     {
         _userService = userService;
     }

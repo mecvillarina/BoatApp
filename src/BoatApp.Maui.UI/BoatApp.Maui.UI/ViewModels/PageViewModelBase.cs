@@ -6,9 +6,9 @@ namespace BoatApp.Maui.UI.ViewModels;
 
 public partial class PageViewModelBase : ObservableObject, IPageLifecycleAware, IInitialize, INavigationAware, IDestructible
 {
-    private readonly BasePageServices _baseServices;
+    private readonly BaseServices _baseServices;
 
-    protected PageViewModelBase(BasePageServices baseServices)
+    protected PageViewModelBase(BaseServices baseServices)
     {
         _baseServices = baseServices;
     }

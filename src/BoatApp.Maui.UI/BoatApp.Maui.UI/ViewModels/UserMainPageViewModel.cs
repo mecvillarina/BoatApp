@@ -13,7 +13,7 @@ public partial class UserMainPageViewModel : PageViewModelBase
     private readonly IUserService _userService;
     private readonly IOwnerBoatService _ownerBoatService;
     private readonly IPopupService _popupService;
-    public UserMainPageViewModel(BasePageServices baseServices, IUserService userService, IOwnerBoatService ownerBoatService, IPopupService popupService) : base(baseServices)
+    public UserMainPageViewModel(BaseServices baseServices, IUserService userService, IOwnerBoatService ownerBoatService, IPopupService popupService) : base(baseServices)
     {
         _userService = userService;
         _ownerBoatService = ownerBoatService;

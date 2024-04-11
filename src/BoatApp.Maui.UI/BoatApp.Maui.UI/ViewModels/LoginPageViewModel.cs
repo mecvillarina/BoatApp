@@ -11,7 +11,7 @@ public partial class LoginPageViewModel : PageViewModelBase
 {
     private readonly IUserService _userService;
     
-    public LoginPageViewModel(BasePageServices baseServices, IUserService userService) : base(baseServices)
+    public LoginPageViewModel(BaseServices baseServices, IUserService userService) : base(baseServices)
     {
         _userService = userService;
     }

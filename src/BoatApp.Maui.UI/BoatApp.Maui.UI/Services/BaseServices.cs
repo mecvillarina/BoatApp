@@ -1,8 +1,8 @@
 ﻿namespace BoatApp.Maui.UI.Services;
 
-public class BasePageServices
+public class BaseServices
 {
-    public BasePageServices(INavigationService navigationService,
+    public BaseServices(INavigationService navigationService,
         IPageDialogService pageDialogService,
         IEventAggregator eventAggregator,
         IConnectivity connectivity,

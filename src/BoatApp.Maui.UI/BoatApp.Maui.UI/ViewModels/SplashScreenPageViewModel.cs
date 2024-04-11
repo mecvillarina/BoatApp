@@ -8,7 +8,7 @@ namespace BoatApp.Maui.UI.ViewModels;
 public class SplashScreenPageViewModel : PageViewModelBase
 {
     private readonly IUserService _userService;
-    public SplashScreenPageViewModel(BasePageServices baseServices, IUserService userService) : base(baseServices)
+    public SplashScreenPageViewModel(BaseServices baseServices, IUserService userService) : base(baseServices)
     {
         _userService = userService;
     }
