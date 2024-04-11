@@ -27,12 +27,18 @@ public class UserService : IUserService
         return admin != null ? UserType.Admin : (user != null ? UserType.User : null);
     }
 
-    public async Task FetchAdminAsync()
+    public void SaveAdminProfile()
     {
         _preferences.Set("profile", "su", "admin");
     }
     
-    public async Task FetchUserByPhoneNumberAsync(string phoneNumber)
+    public void SaveUserProfile(OwnerContract data)
+    {
+        _preferences.Set("profile", JsonSerializer.Serialize(data), "user");
+        _preferences.Set("phoneNumber", data.Contact, "user");
+    }
+    
+    public async Task<OwnerContract> FetchUserByPhoneNumberAsync(string phoneNumber)
     {
         var response = await _ownerApi.GetOwnerByPhoneAsync(new GetOwnerByPhoneRootRequestContract()
         {
@@ -49,8 +55,8 @@ public class UserService : IUserService
 
         var data = response.Documents.First();
 
-        _preferences.Set("profile", JsonSerializer.Serialize(data), "user");
-        _preferences.Set("phoneNumber", phoneNumber, "user");
+        return data;
+        
     }
 
     public OwnerContract GetUserProfile()

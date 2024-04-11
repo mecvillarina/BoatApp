@@ -2,8 +2,11 @@
 <local:PageBase x:Class="BoatApp.Maui.UI.Views.AdminMainPage"
                 xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:enums="clr-namespace:BoatApp.Common.Enums;assembly=BoatApp.Common"
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+                xmlns:models="clr-namespace:BoatApp.Maui.UI.Models"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
                 x:DataType="viewmodels:AdminMainPageViewModel">
 
@@ -223,7 +226,309 @@
         <material:TabItem Title="Home">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
-                    <Label Text="Admin Home" />
+                    <Grid BackgroundColor="{StaticResource Background}"
+                          RowDefinitions="0.25*,0.75*">
+
+                        <!--  Header  -->
+                        <Grid>
+                            <Border Margin="0"
+                                    Padding="0"
+                                    StrokeShape="RoundRectangle 0,0,10,10"
+                                    StrokeThickness="0">
+                                <Image Aspect="AspectFill"
+                                       Source="bg_splashscreen.jpg" />
+                            </Border>
+
+                            <Grid Padding="20">
+                                <Grid VerticalOptions="Start">
+
+                                    <HorizontalStackLayout Spacing="12">
+                                        <Image HeightRequest="18"
+                                               HorizontalOptions="Start"
+                                               Source="logo_admin_dashboard"
+                                               VerticalOptions="Center" />
+
+                                        <Label FontFamily="SFUIDisplayMedium"
+                                               FontSize="16"
+                                               Text="Admin Dashboard"
+                                               TextColor="{StaticResource White}"
+                                               VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+
+
+                                    <Image HeightRequest="26"
+                                           HorizontalOptions="End"
+                                           Source="ic_bell"
+                                           VerticalOptions="End" />
+                                </Grid>
+
+                                <VerticalStackLayout Spacing="0"
+                                                     VerticalOptions="End">
+                                    <Label FontFamily="SFUIDisplayBold"
+                                           FontSize="20"
+                                           Text="Search Your Boat"
+                                           TextColor="{StaticResource White}"
+                                           VerticalOptions="Center" />
+
+                                    <material:TextField Margin="0"
+                                                        BorderColor="{StaticResource White}"
+                                                        CornerRadius="10"
+                                                        InputBackgroundColor="#CCFFFFFF"
+                                                        Keyboard="Numeric"
+                                                        VerticalOptions="Center" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="1"
+                              Padding="20"
+                              RowDefinitions="Auto,Auto,*"
+                              RowSpacing="8">
+
+                            <Label FontFamily="SFUIDisplayMedium"
+                                   FontSize="16"
+                                   Text="Dashboard"
+                                   TextColor="{StaticResource Dark}" />
+
+                            <Grid Grid.Row="1"
+                                  ColumnDefinitions="*,*"
+                                  ColumnSpacing="8">
+
+                                <Border Padding="12,8"
+                                        BackgroundColor="{StaticResource White}"
+                                        StrokeShape="RoundRectangle 10"
+                                        StrokeThickness="0">
+
+                                    <VerticalStackLayout>
+                                        <HorizontalStackLayout Spacing="4">
+                                            <Image HeightRequest="30"
+                                                   Source="ic_schedule_dropoff"
+                                                   WidthRequest="30" />
+
+                                            <Label FontFamily="SFUIDisplayRegular"
+                                                   FontSize="12"
+                                                   Text="Schedule Drop Off"
+                                                   TextColor="{StaticResource Dark}"
+                                                   VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+
+                                        <Label FontFamily="SFUIDisplayBold"
+                                               FontSize="32"
+                                               HorizontalOptions="Center"
+                                               Text="08"
+                                               TextColor="{StaticResource Dark}"
+                                               VerticalOptions="Center" />
+
+                                        <HorizontalStackLayout HorizontalOptions="End"
+                                                               Spacing="4">
+
+                                            <Label FontFamily="SFUIDisplayRegular"
+                                                   FontSize="12"
+                                                   Text="Manage"
+                                                   TextColor="{StaticResource Blue}"
+                                                   VerticalOptions="Center" />
+
+                                            <Image HeightRequest="6"
+                                                   Source="ic_arrow_northeast_blue"
+                                                   VerticalOptions="Center"
+                                                   WidthRequest="6" />
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+
+                                <Border Grid.Column="1"
+                                        Padding="12,8"
+                                        BackgroundColor="{StaticResource White}"
+                                        StrokeShape="RoundRectangle 10"
+                                        StrokeThickness="0">
+
+                                    <VerticalStackLayout>
+                                        <HorizontalStackLayout Spacing="4">
+                                            <Image HeightRequest="30"
+                                                   Source="ic_schedule_pickup"
+                                                   WidthRequest="30" />
+
+                                            <Label FontFamily="SFUIDisplayRegular"
+                                                   FontSize="12"
+                                                   Text="Schedule Pickup"
+                                                   TextColor="{StaticResource Dark}"
+                                                   VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+
+                                        <Label FontFamily="SFUIDisplayBold"
+                                               FontSize="32"
+                                               HorizontalOptions="Center"
+                                               Text="03"
+                                               TextColor="{StaticResource Dark}"
+                                               VerticalOptions="Center" />
+
+                                        <HorizontalStackLayout HorizontalOptions="End"
+                                                               Spacing="4">
+
+                                            <Label FontFamily="SFUIDisplayRegular"
+                                                   FontSize="12"
+                                                   Text="Manage"
+                                                   TextColor="{StaticResource Blue}"
+                                                   VerticalOptions="Center" />
+
+                                            <Image HeightRequest="6"
+                                                   Source="ic_arrow_northeast_blue"
+                                                   VerticalOptions="Center"
+                                                   WidthRequest="6" />
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                                <!-- <Border StrokeShape="RoundRectangle 10" Stroke="Transparent" BackgroundColor="{StaticResource White}"></Border> -->
+
+                                <!-- <Border StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource White}" Grid.Column="1"></Border> -->
+                            </Grid>
+
+                            <RefreshView Grid.Row="2">
+                                <CollectionView ItemsSource="{Binding RecentRequests}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="8"
+                                                           Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Padding="12"
+                                                    BackgroundColor="{StaticResource White}"
+                                                    HeightRequest="180"
+                                                    StrokeShape="RoundRectangle 10"
+                                                    StrokeThickness="0">
+                                                <Grid RowDefinitions="*,Auto, Auto"
+                                                      RowSpacing="8">
+
+                                                    <Grid ColumnDefinitions="*,2*"
+                                                          ColumnSpacing="8">
+
+                                                        <Grid>
+                                                            <Border StrokeShape="RoundRectangle 6"
+                                                                    StrokeThickness="0">
+
+                                                                <Image Aspect="AspectFill"
+                                                                       Source="bg_splashscreen.jpg" />
+                                                            </Border>
+                                                        </Grid>
+                                                        <Grid Grid.Column="1">
+
+                                                            <VerticalStackLayout>
+
+                                                                <Grid ColumnDefinitions="*,Auto">
+                                                                    <Label FontFamily="SFUIDisplayMedium"
+                                                                           FontSize="14"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           Text="The Wind Ranger"
+                                                                           TextColor="{StaticResource Dark}"
+                                                                           VerticalTextAlignment="Center" />
+
+                                                                    <Border Grid.Column="1"
+                                                                            Padding="8,4"
+                                                                            BackgroundColor="{StaticResource Orange}"
+                                                                            StrokeShape="RoundRectangle 20"
+                                                                            StrokeThickness="0">
+                                                                        <Label FontFamily="SFUIDisplayMedium"
+                                                                               FontSize="10"
+                                                                               Text=" A - Dock , Zone Area 2"
+                                                                               TextColor="{StaticResource White}" />
+
+                                                                    </Border>
+                                                                </Grid>
+
+
+                                                                <Label FontFamily="SFUIDisplayRegular"
+                                                                       FontSize="12"
+                                                                       LineBreakMode="TailTruncation"
+                                                                       Text="Owner : John Nelson"
+                                                                       TextColor="{StaticResource Primary}" />
+
+                                                            </VerticalStackLayout>
+
+
+
+
+                                                            <VerticalStackLayout VerticalOptions="End">
+                                                                <Grid ColumnDefinitions="10,*"
+                                                                      ColumnSpacing="8"
+                                                                      RowDefinitions="Auto,Auto,Auto"
+                                                                      RowSpacing="4">
+                                                                    <Image HorizontalOptions="Center"
+                                                                           Source="ic_card_pin"
+                                                                           VerticalOptions="Center" />
+
+                                                                    <Image Grid.Row="1"
+                                                                           HorizontalOptions="Center"
+                                                                           Source="ic_card_date"
+                                                                           VerticalOptions="Center" />
+
+                                                                    <Image Grid.Row="2"
+                                                                           HorizontalOptions="Center"
+                                                                           Source="ic_card_time"
+                                                                           VerticalOptions="Center" />
+                                                                    <Label Grid.Column="1"
+                                                                           FontFamily="SFUIDisplayRegular"
+                                                                           FontSize="12"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           Text="Pickup Point : Shuttle Club point 1"
+                                                                           TextColor="{StaticResource Dark}"
+                                                                           VerticalTextAlignment="Center" />
+
+                                                                    <Label Grid.Row="1"
+                                                                           Grid.Column="1"
+                                                                           FontFamily="SFUIDisplayRegular"
+                                                                           FontSize="12"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           Text="Date : Saturday, July 10, 2024"
+                                                                           TextColor="{StaticResource Dark}"
+                                                                           VerticalTextAlignment="Center" />
+
+                                                                    <Label Grid.Row="2"
+                                                                           Grid.Column="1"
+                                                                           FontFamily="SFUIDisplayRegular"
+                                                                           FontSize="12"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           Text="Time : 12.00 PM "
+                                                                           TextColor="{StaticResource Dark}"
+                                                                           VerticalTextAlignment="Center" />
+                                                                </Grid>
+                                                            </VerticalStackLayout>
+                                                        </Grid>
+                                                    </Grid>
+                                                    <BoxView Grid.Row="1"
+                                                             HeightRequest="1"
+                                                             Color="#2B2C3031" />
+
+                                                    <Grid Grid.Row="2"
+                                                          ColumnDefinitions="*,Auto,*">
+                                                        <Label FontFamily="SFUIDisplayMedium"
+                                                               FontSize="16"
+                                                               HorizontalTextAlignment="Center"
+                                                               LineBreakMode="TailTruncation"
+                                                               Text="DECLINE"
+                                                               TextColor="{StaticResource DisableColor}" />
+
+                                                        <BoxView Grid.Column="1"
+                                                                 WidthRequest="1"
+                                                                 Color="#2B2C3031" />
+
+                                                        <Label Grid.Column="2"
+                                                               FontFamily="SFUIDisplayMedium"
+                                                               FontSize="16"
+                                                               HorizontalTextAlignment="Center"
+                                                               LineBreakMode="TailTruncation"
+                                                               Text="ACCEPT DROP OFF"
+                                                               TextColor="{StaticResource Dark}" />
+
+                                                    </Grid>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </RefreshView>
+                        </Grid>
+                    </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>
@@ -247,7 +552,48 @@
         <material:TabItem Title="Account">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
-                    <Label Text="Account" />
+                    <Grid BackgroundColor="{StaticResource Background}"
+                          RowDefinitions="0.15*,0.85*">
+
+                        <!--  Header  -->
+                        <Grid>
+                            <Border Margin="0"
+                                    Padding="0"
+                                    StrokeShape="RoundRectangle 0,0,10,10"
+                                    StrokeThickness="0">
+                                <Image Aspect="AspectFill"
+                                       Source="bg_splashscreen.jpg" />
+                            </Border>
+
+                            <Grid Padding="20">
+                                <Grid VerticalOptions="Start">
+
+                                    <Image HeightRequest="18"
+                                           HorizontalOptions="Start"
+                                           Source="ic_back"
+                                           VerticalOptions="Center" />
+
+                                    <Label FontFamily="SFUIDisplayBold"
+                                           FontSize="20"
+                                           HorizontalOptions="Center"
+                                           Text="Account"
+                                           TextColor="{StaticResource White}"
+                                           VerticalOptions="Center" />
+                                </Grid>
+
+                            </Grid>
+                        </Grid>
+
+
+                        <Grid Grid.Row="1"
+                              Padding="20"
+                              RowDefinitions="Auto,*"
+                              RowSpacing="8">
+
+                            <Button Command="{Binding LogoutCommand}"
+                                    Text="Logout" />
+                        </Grid>
+                    </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>
