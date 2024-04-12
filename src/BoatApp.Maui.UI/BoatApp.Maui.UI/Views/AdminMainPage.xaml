@@ -277,7 +277,16 @@
                                                             CornerRadius="10"
                                                             InputBackgroundColor="#CCFFFFFF"
                                                             Keyboard="Numeric"
-                                                            VerticalOptions="Center" />
+                                                            VerticalOptions="Center">
+                                            <material:TextField.Attachments>
+                                                <Image Margin="8,0,16,0"
+                                                       HeightRequest="20"
+                                                       HorizontalOptions="Center"
+                                                       Source="ic_search"
+                                                       VerticalOptions="Center"
+                                                       WidthRequest="20" />
+                                            </material:TextField.Attachments>
+                                        </material:TextField>
                                     </VerticalStackLayout>
                                 </Grid>
                             </Grid>
@@ -543,7 +552,110 @@
         <material:TabItem Title="Boats">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
-                    <Label Text="Boats" />
+                    <Grid BackgroundColor="{StaticResource Background}"
+                          RowDefinitions="0.15*,0.85*">
+
+                        <!--  Header  -->
+                        <Grid>
+                            <Border Margin="0"
+                                    Padding="0"
+                                    StrokeShape="RoundRectangle 0,0,10,10"
+                                    StrokeThickness="0">
+                                <Image Aspect="AspectFill"
+                                       Source="bg_splashscreen.jpg" />
+                            </Border>
+
+                            <Grid Padding="20">
+                                <Grid VerticalOptions="Start">
+
+                                    <Image HeightRequest="18"
+                                           HorizontalOptions="Start"
+                                           Source="ic_back"
+                                           VerticalOptions="Center" />
+
+                                    <Label FontFamily="SFUIDisplayBold"
+                                           FontSize="20"
+                                           HorizontalOptions="Center"
+                                           Text="Boat Owners List"
+                                           TextColor="{StaticResource White}"
+                                           VerticalOptions="Center" />
+                                </Grid>
+
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Row="1"
+                              Padding="20"
+                              RowDefinitions="Auto,*"
+                              RowSpacing="8">
+
+                            <material:TextField Margin="0"
+                                                BorderColor="{StaticResource White}"
+                                                CornerRadius="10"
+                                                Icon="ic_search"
+                                                InputBackgroundColor="#CCFFFFFF"
+                                                Keyboard="Numeric"
+                                                VerticalOptions="Center" />
+
+                            <RefreshView Grid.Row="1">
+                                <CollectionView ItemsSource="{Binding BoatOwnerList}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="8"
+                                                           Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Padding="12"
+                                                    BackgroundColor="{StaticResource White}"
+                                                    HeightRequest="120"
+                                                    StrokeShape="RoundRectangle 10"
+                                                    StrokeThickness="0">
+                                                <Grid ColumnDefinitions="80,*"
+                                                      ColumnSpacing="8">
+
+                                                    <toolkit:AvatarView Padding="0"
+                                                                        BackgroundColor="{StaticResource Background}"
+                                                                        BorderWidth="0"
+                                                                        CornerRadius="40"
+                                                                        HeightRequest="80"
+                                                                        ImageSource="ic_usa_flag"
+                                                                        WidthRequest="80" />
+
+                                                    <Grid Grid.Column="1">
+
+                                                        <VerticalStackLayout Spacing="4"
+                                                                             VerticalOptions="Center">
+                                                            <Grid ColumnDefinitions="*,Auto">
+                                                                <Label FontFamily="SFUIDisplayMedium"
+                                                                       FontSize="14"
+                                                                       LineBreakMode="TailTruncation"
+                                                                       Text="John Doe"
+                                                                       TextColor="{StaticResource Dark}"
+                                                                       VerticalTextAlignment="Center" />
+                                                            </Grid>
+
+                                                            <Label FontFamily="SFUIDisplayRegular"
+                                                                   FontSize="12"
+                                                                   LineBreakMode="TailTruncation"
+                                                                   Text="johndoe@gmail.com"
+                                                                   TextColor="{StaticResource Gray}" />
+                                                            <Label FontFamily="SFUIDisplayMedium"
+                                                                   FontSize="12"
+                                                                   LineBreakMode="TailTruncation"
+                                                                   Text="3 listed Boats"
+                                                                   TextColor="{StaticResource Primary}" />
+                                                        </VerticalStackLayout>
+                                                    </Grid>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </RefreshView>
+                        </Grid>
+
+                    </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>
@@ -551,7 +663,38 @@
         <material:TabItem Title="Request">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
-                    <Label Text="Request" />
+                    <Grid BackgroundColor="{StaticResource Background}"
+                          RowDefinitions="0.15*,0.85*">
+
+                        <!--  Header  -->
+                        <Grid>
+                            <Border Margin="0"
+                                    Padding="0"
+                                    StrokeShape="RoundRectangle 0,0,10,10"
+                                    StrokeThickness="0">
+                                <Image Aspect="AspectFill"
+                                       Source="bg_splashscreen.jpg" />
+                            </Border>
+
+                            <Grid Padding="20">
+                                <Grid VerticalOptions="Start">
+
+                                    <Image HeightRequest="18"
+                                           HorizontalOptions="Start"
+                                           Source="ic_back"
+                                           VerticalOptions="Center" />
+
+                                    <Label FontFamily="SFUIDisplayBold"
+                                           FontSize="20"
+                                           HorizontalOptions="Center"
+                                           Text="Requests"
+                                           TextColor="{StaticResource White}"
+                                           VerticalOptions="Center" />
+                                </Grid>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>

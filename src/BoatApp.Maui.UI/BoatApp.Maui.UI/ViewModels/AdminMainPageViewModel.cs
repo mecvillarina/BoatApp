@@ -18,6 +18,8 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     }
 
     [ObservableProperty] private List<string> _recentRequests = new List<string>() { "1", "2", "3", "4", "5"};
+    [ObservableProperty] private List<string> _boatOwnerList = new List<string>() { "1", "2", "3", "4", "5" };
+    
     [ObservableProperty] private bool _isBoatDropOffRegionVisible = false;
 
     [RelayCommand]
