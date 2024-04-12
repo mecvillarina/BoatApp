@@ -18,14 +18,19 @@ public partial class LoginOtpPageViewModel : PageViewModelBase
     }
 
     [ObservableProperty] private string _phoneNumber;
+    [ObservableProperty] private bool _isLoggingIn;
 
     private OwnerContract _user;
     
     [RelayCommand]
     private async Task Login()
     { 
+        IsLoggingIn = true;
+
         _userService.SaveUserProfile(_user);
         await NavigationService.NavigateAsync($"../{nameof(UserMainPage)}");
+        
+        IsLoggingIn = false;
     }
     
     [RelayCommand]

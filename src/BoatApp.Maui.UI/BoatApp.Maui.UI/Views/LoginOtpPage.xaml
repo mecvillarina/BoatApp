@@ -98,12 +98,34 @@
                     </FlexLayout>
 
                     <VerticalStackLayout Spacing="28">
-                        <Button BackgroundColor="{StaticResource Primary}"
-                                Command="{Binding LoginCommand}"
-                                CornerRadius="10"
-                                FontFamily="SFUIDisplayMedium"
-                                Text="LOGIN"
-                                TextColor="{StaticResource White}" />
+
+                        <material:ButtonView BackgroundColor="{StaticResource Primary}"
+                                             StrokeShape="RoundRectangle 10"
+                                             TappedCommand="{Binding LoginCommand}">
+                            <Grid>
+                                <Label FontFamily="SFUIDisplayMedium"
+                                       FontSize="16"
+                                       HorizontalTextAlignment="Center"
+                                       Text="LOGIN"
+                                       TextColor="{StaticResource White}"
+                                       VerticalTextAlignment="Center">
+
+                                    <Label.Triggers>
+                                        <DataTrigger Binding="{Binding IsLoggingIn}"
+                                                     TargetType="Label"
+                                                     Value="True">
+                                            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+
+                                <ActivityIndicator HeightRequest="24"
+                                                   IsRunning="True"
+                                                   IsVisible="{Binding IsLoggingIn}"
+                                                   Color="{StaticResource White}" />
+                            </Grid>
+
+                        </material:ButtonView>
 
                         <Label Margin="40,0"
                                FontFamily="SFUIDisplayRegular"

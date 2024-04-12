@@ -20,6 +20,8 @@ public partial class LoginPageViewModel : PageViewModelBase
     [NotifyCanExecuteChangedFor(nameof(ContinueCommand))]
     private string _phoneNumber = "+1";
 
+    [ObservableProperty] private bool _isLoggingIn;
+    
     public bool CanExecuteContinue() => PhoneNumber.Length == 11 && PhoneNumber.StartsWith($"+1") && PhoneNumber.Substring(2, 9).All(x => char.IsNumber((x)));
     
     [RelayCommand(CanExecute = nameof(CanExecuteContinue))]
@@ -27,31 +29,35 @@ public partial class LoginPageViewModel : PageViewModelBase
     {
         try
         {
-            //API Call
+            IsLoggingIn = true;
             var phoneNumberOnly = PhoneNumber.Replace("+1", "");
-            var isAdmin =  phoneNumberOnly.All(x => x == '0') || phoneNumberOnly.All((x => x == '1'));
+            var isAdmin = phoneNumberOnly.All(x => x == '0') || phoneNumberOnly.All((x => x == '1'));
 
-            if(!isAdmin)
+            if (!isAdmin)
             {
-               var user = await _userService.FetchUserByPhoneNumberAsync(PhoneNumber);
-               
-               var parameters = new NavigationParameters()
-               {
-                   { "User", user },
-               };
-        
-               var result = await NavigationService.NavigateAsync($"../{nameof(LoginOtpPage)}", parameters);
+                var user = await _userService.FetchUserByPhoneNumberAsync(PhoneNumber);
+
+                var parameters = new NavigationParameters()
+                {
+                    { "User", user },
+                };
+
+                var result = await NavigationService.NavigateAsync($"../{nameof(LoginOtpPage)}", parameters);
             }
             else
             {
                 _userService.SaveAdminProfile();
                 await NavigationService.NavigateAsync($"../{nameof(AdminMainPage)}");
             }
-           
+
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             await PageDialogService.DisplayAlertAsync("Error", ex.Message, "Ok");
+        }
+        finally
+        {
+            IsLoggingIn = false;
         }
     }
     

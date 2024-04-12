@@ -294,7 +294,9 @@
                                    Text="My Boats"
                                    TextColor="{StaticResource Dark}" />
 
-                            <RefreshView Grid.Row="1">
+                            <RefreshView Grid.Row="1"
+                                         Command="{Binding FetchMyBoatsCommand}"
+                                         IsRefreshing="{Binding IsMyBoatsRefreshing}">
                                 <CollectionView ItemsSource="{Binding Boats}">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout ItemSpacing="8"

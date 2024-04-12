@@ -24,9 +24,14 @@ public partial class UserMainPageViewModel : PageViewModelBase
     [ObservableProperty] private string _welcomeNameDisplay;
     [ObservableProperty] private string _memberSinceDisplay;
     [ObservableProperty] private string _profilePictureUrl;
-
+    [ObservableProperty] private bool _isMyBoatsRefreshing;
     [ObservableProperty] private List<BoatItemModel> _boats = [];
 
+    [RelayCommand]
+    private async Task FetchMyBoats()
+    {
+        FetchBoats();
+    }
     [RelayCommand]
     private async Task RequestDrop(BoatItemModel model)
     {
@@ -82,6 +87,7 @@ public partial class UserMainPageViewModel : PageViewModelBase
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 Boats = boats.Select(x => new BoatItemModel(x)).ToList();
+                IsMyBoatsRefreshing = false;
             });
         });
     }
@@ -96,6 +102,6 @@ public partial class UserMainPageViewModel : PageViewModelBase
     {
         base.OnNavigatedTo(parameters);
         FetchUserDetails();
-        FetchBoats();
+        IsMyBoatsRefreshing = true;
     }
 }
