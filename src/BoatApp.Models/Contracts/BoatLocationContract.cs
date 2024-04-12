@@ -2,7 +2,7 @@
 
 namespace BoatApp.Models.Contracts;
 
-public class BoatParkingLocation
+public class BoatLocationContract
 {
     [JsonPropertyName("dock")]
     public string Dock { get; set; }

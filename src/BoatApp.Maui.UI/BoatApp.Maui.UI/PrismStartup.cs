@@ -37,6 +37,8 @@ internal static class PrismStartup
         //Main Pages
         containerRegistry.RegisterForNavigation<AdminMainPage, AdminMainPageViewModel>();
         containerRegistry.RegisterForNavigation<UserMainPage, UserMainPageViewModel>();
+
+        containerRegistry.RegisterForRegionNavigation<AdminBoatDropOffView, AdminBoatDropOffViewModel>();
     }
 
     private static void RegisterServices(this IContainerRegistry containerRegistry)

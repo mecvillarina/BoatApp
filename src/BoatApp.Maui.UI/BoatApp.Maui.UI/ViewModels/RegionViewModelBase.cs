@@ -1,5 +1,6 @@
 ﻿using BoatApp.Maui.UI.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Prism.Common;
 
 namespace BoatApp.Maui.UI.ViewModels;
@@ -14,7 +15,7 @@ public partial class RegionViewModelBase : ObservableObject, IRegionAware, IDest
     {
         _baseServices = baseServices;
     }
-    
+
     public IRegionManager RegionManager => _baseServices.RegionManager;
 
     protected IPageDialogService PageDialogService => _baseServices.PageDialogService;
@@ -29,7 +30,8 @@ public partial class RegionViewModelBase : ObservableObject, IRegionAware, IDest
     public virtual void OnNavigatedFrom(NavigationContext navigationContext)
     {
     }
-    
+
+
     protected virtual void Destroy()
     {
     }
@@ -39,5 +41,12 @@ public partial class RegionViewModelBase : ObservableObject, IRegionAware, IDest
         Destroy();
     }
 
-
+    [RelayCommand]
+    private void NavigateBack()
+    {
+        if (Journal is { CanGoBack: true })
+        {
+            Journal?.GoBack();
+        }
+    }
 }

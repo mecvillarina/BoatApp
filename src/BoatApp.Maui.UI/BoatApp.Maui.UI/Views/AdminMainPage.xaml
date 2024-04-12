@@ -534,8 +534,7 @@
                         </Grid>
 
                         <ContentView prism:RegionManager.RegionName="BoatDropOffRegion"
-                                     BackgroundColor="Red"
-                                     IsVisible="{Binding IsBoatDropOffRegion}" />
+                                     IsVisible="{Binding IsBoatDropOffRegionVisible}" />
                     </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>

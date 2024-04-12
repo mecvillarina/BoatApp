@@ -16,6 +16,7 @@ public class WebModule : IModule
     {
         containerRegistry.RegisterInstance(CreateRestService<IOwnerApi>(Server.ApiUrl));
         containerRegistry.RegisterInstance(CreateRestService<IOwnerBoatApi>(Server.ApiUrl));
+        containerRegistry.RegisterInstance(CreateRestService<IAdminBoatRequestApi>(Server.ApiUrl));
     }
 
     private T CreateRestService<T>(string apiAddress)

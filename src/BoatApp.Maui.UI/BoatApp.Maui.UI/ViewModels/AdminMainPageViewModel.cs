@@ -18,12 +18,12 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     }
 
     [ObservableProperty] private List<string> _recentRequests = new List<string>() { "1", "2", "3", "4", "5"};
-    [ObservableProperty] private bool _isBoatDropOffRegion = false;
+    [ObservableProperty] private bool _isBoatDropOffRegionVisible = false;
 
     [RelayCommand]
     private void ManageDropOff()
     {
-        IsBoatDropOffRegion = true;
+        IsBoatDropOffRegionVisible = true;
     }
     
     [RelayCommand]
@@ -33,4 +33,9 @@ public partial class AdminMainPageViewModel : PageViewModelBase
         await NavigationService.NavigateAsync($"../{nameof(SplashScreenPage)}");
     }
 
+    protected override void Initialize(INavigationParameters parameters)
+    {
+        base.Initialize(parameters);
+        _regionManager.RequestNavigate("BoatDropOffRegion", nameof(AdminBoatDropOffView));
+    }
 }
