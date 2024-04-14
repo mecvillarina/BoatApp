@@ -11,5 +11,12 @@ public partial class AdminBoatDropOffView : ContentView
     public AdminBoatDropOffView()
     {
         InitializeComponent();
+        
+        var mainDisplayInfo = DeviceDisplay.Current.MainDisplayInfo;
+        var width = (mainDisplayInfo.Width / mainDisplayInfo.Density);
+        var height = (mainDisplayInfo.Height / mainDisplayInfo.Density);
+
+        HeightRequest = height;
+        WidthRequest = width;
     }
 }

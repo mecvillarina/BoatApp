@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace BoatApp.Maui.UI.Views;
 
-public partial class AdminMainPage : PageBase
+public partial class BoatOwnerDetailsView : ContentView
 {
-    public AdminMainPage()
+    public BoatOwnerDetailsView()
     {
         InitializeComponent();
     }
-    
-    
 }

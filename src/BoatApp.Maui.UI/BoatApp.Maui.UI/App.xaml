@@ -12,6 +12,8 @@
                                     Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary x:Name="appStyles"
                                     Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary x:Name="appConverters"
+                                    Source="Resources/Styles/Converters.xaml" />
                 <material:StyleResource ColorsOverride="{x:Reference appColors}" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

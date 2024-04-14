@@ -12,7 +12,8 @@
                 x:DataType="viewmodels:AdminMainPageViewModel">
 
 
-    <material:TabView BackgroundColor="{StaticResource White}"
+    <material:TabView x:Name="MainTabView"
+                      BackgroundColor="{StaticResource White}"
                       TabPlacement="Bottom">
 
         <material:TabView.TabHeaderItemTemplate>
@@ -224,6 +225,7 @@
             </DataTemplate>
         </material:TabView.TabHeaderItemTemplate>
 
+        <!--  Home  -->
         <material:TabItem Title="Home">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
@@ -334,7 +336,7 @@
                                                                    Spacing="4">
 
                                                 <HorizontalStackLayout.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding ManageDropOffCommand}" />
+                                                    <TapGestureRecognizer Command="{Binding HomeTabManageDropOffCommand}" />
                                                 </HorizontalStackLayout.GestureRecognizers>
 
                                                 <Label FontFamily="SFUIDisplayRegular"
@@ -457,9 +459,6 @@
 
                                                                 </VerticalStackLayout>
 
-
-
-
                                                                 <VerticalStackLayout VerticalOptions="End">
                                                                     <Grid ColumnDefinitions="10,*"
                                                                           ColumnSpacing="8"
@@ -543,15 +542,18 @@
                         </Grid>
 
                         <ContentView prism:RegionManager.RegionName="BoatDropOffRegion"
+                                     Background="Red"
                                      IsVisible="{Binding IsBoatDropOffRegionVisible}" />
                     </Grid>
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>
 
+        <!--  Boats  -->
         <material:TabItem Title="Boats">
             <material:TabItem.ContentTemplate>
                 <DataTemplate>
+
                     <Grid BackgroundColor="{StaticResource Background}"
                           RowDefinitions="0.15*,0.85*">
 
@@ -571,7 +573,12 @@
                                     <Image HeightRequest="18"
                                            HorizontalOptions="Start"
                                            Source="ic_back"
-                                           VerticalOptions="Center" />
+                                           VerticalOptions="Center">
+
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BoatsTabNavigateBackCommand}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
 
                                     <Label FontFamily="SFUIDisplayBold"
                                            FontSize="20"
@@ -586,6 +593,7 @@
 
                         <Grid Grid.Row="1"
                               Padding="20"
+                              IsVisible="{Binding IsBoatOwnerDetailsRegionVisible, Converter={StaticResource InvertedBoolConverter}}"
                               RowDefinitions="Auto,*"
                               RowSpacing="8">
 
@@ -605,12 +613,18 @@
                                     </CollectionView.ItemsLayout>
 
                                     <CollectionView.ItemTemplate>
-                                        <DataTemplate>
+                                        <DataTemplate x:DataType="models:BoatOwnerItemModel">
                                             <Border Padding="12"
                                                     BackgroundColor="{StaticResource White}"
                                                     HeightRequest="120"
                                                     StrokeShape="RoundRectangle 10"
                                                     StrokeThickness="0">
+
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BoatsTabViewBoatDetailsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:AdminMainPageViewModel}}}"
+                                                                          CommandParameter="{Binding .}" />
+                                                </Border.GestureRecognizers>
+
                                                 <Grid ColumnDefinitions="80,*"
                                                       ColumnSpacing="8">
 
@@ -618,9 +632,9 @@
                                                                         BackgroundColor="{StaticResource Background}"
                                                                         BorderWidth="0"
                                                                         CornerRadius="40"
-                                                                        HeightRequest="80"
-                                                                        ImageSource="ic_usa_flag"
-                                                                        WidthRequest="80" />
+                                                                        HeightRequest="75"
+                                                                        ImageSource="{Binding ProfilePictureUrl}"
+                                                                        WidthRequest="75" />
 
                                                     <Grid Grid.Column="1">
 
@@ -630,7 +644,7 @@
                                                                 <Label FontFamily="SFUIDisplayMedium"
                                                                        FontSize="14"
                                                                        LineBreakMode="TailTruncation"
-                                                                       Text="John Doe"
+                                                                       Text="{Binding Name}"
                                                                        TextColor="{StaticResource Dark}"
                                                                        VerticalTextAlignment="Center" />
                                                             </Grid>
@@ -638,12 +652,12 @@
                                                             <Label FontFamily="SFUIDisplayRegular"
                                                                    FontSize="12"
                                                                    LineBreakMode="TailTruncation"
-                                                                   Text="johndoe@gmail.com"
+                                                                   Text="{Binding Email}"
                                                                    TextColor="{StaticResource Gray}" />
                                                             <Label FontFamily="SFUIDisplayMedium"
                                                                    FontSize="12"
                                                                    LineBreakMode="TailTruncation"
-                                                                   Text="3 listed Boats"
+                                                                   Text="{Binding BoatsDisplay}"
                                                                    TextColor="{StaticResource Primary}" />
                                                         </VerticalStackLayout>
                                                     </Grid>
@@ -655,7 +669,60 @@
                             </RefreshView>
                         </Grid>
 
+                        <Grid Grid.Row="1"
+                              Padding="20"
+                              IsVisible="{Binding IsBoatOwnerDetailsRegionVisible}"
+                              RowDefinitions="Auto,Auto,*"
+                              RowSpacing="8">
+
+                            <Border Padding="12"
+                                    BackgroundColor="{StaticResource White}"
+                                    HeightRequest="120"
+                                    StrokeShape="RoundRectangle 10"
+                                    StrokeThickness="0">
+
+                                <Grid ColumnDefinitions="80,*"
+                                      ColumnSpacing="8">
+
+                                    <toolkit:AvatarView Padding="0"
+                                                        BackgroundColor="{StaticResource Background}"
+                                                        BorderWidth="0"
+                                                        CornerRadius="40"
+                                                        HeightRequest="75"
+                                                        ImageSource="{Binding CurrentBoatOwner.ProfilePictureUrl}"
+                                                        WidthRequest="75" />
+
+                                    <Grid Grid.Column="1">
+
+                                        <VerticalStackLayout Spacing="4"
+                                                             VerticalOptions="Center">
+                                            <Grid ColumnDefinitions="*,Auto">
+                                                <Label FontFamily="SFUIDisplayMedium"
+                                                       FontSize="14"
+                                                       LineBreakMode="TailTruncation"
+                                                       Text="{Binding CurrentBoatOwner.Name}"
+                                                       TextColor="{StaticResource Dark}"
+                                                       VerticalTextAlignment="Center" />
+                                            </Grid>
+
+                                            <Label FontFamily="SFUIDisplayRegular"
+                                                   FontSize="12"
+                                                   LineBreakMode="TailTruncation"
+                                                   Text="{Binding CurrentBoatOwner.Email}"
+                                                   TextColor="{StaticResource Gray}" />
+
+                                            <Label FontFamily="SFUIDisplayRegular"
+                                                   FontSize="12"
+                                                   LineBreakMode="TailTruncation"
+                                                   Text="{Binding CurrentBoatOwner.PhoneNumber}"
+                                                   TextColor="{StaticResource Gray}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
                     </Grid>
+
                 </DataTemplate>
             </material:TabItem.ContentTemplate>
         </material:TabItem>

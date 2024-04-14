@@ -1,4 +1,5 @@
 ﻿using BoatApp.Maui.Domain.Services;
+using BoatApp.Maui.UI.Models;
 using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -18,26 +19,64 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     }
 
     [ObservableProperty] private List<string> _recentRequests = new List<string>() { "1", "2", "3", "4", "5"};
-    [ObservableProperty] private List<string> _boatOwnerList = new List<string>() { "1", "2", "3", "4", "5" };
+    [ObservableProperty] private List<BoatOwnerItemModel> _boatOwnerList = new List<BoatOwnerItemModel>()
+    {
+        new BoatOwnerItemModel() { Name = "John Doe", Email = "johndoe@gmail.com", PhoneNumber = "+12-859-7080", ProfilePictureUrl = "https://www.svgrepo.com/download/382103/male-avatar-boy-face-man-user-2.svg", Boats = new() { "", "", "" } },
+        new BoatOwnerItemModel() { Name = "Olivia Jones", Email = "olivia@gmail.com", PhoneNumber = "+12-859-7080", ProfilePictureUrl = "https://www.svgrepo.com/download/382103/male-avatar-boy-face-man-user-2.svg", Boats = new() { "", "", "", "", "" } },
+        new BoatOwnerItemModel() { Name = "Nelson Smith", Email = "nelson@gmail.com", PhoneNumber = "+12-859-7080", ProfilePictureUrl = "https://www.svgrepo.com/download/382103/male-avatar-boy-face-man-user-2.svg", Boats = new() { "", "", "", "", "" } },
+        new BoatOwnerItemModel() { Name = "Stefan William", Email = "stefan@gmail.com", PhoneNumber = "+12-859-7080", ProfilePictureUrl = "https://www.svgrepo.com/download/382103/male-avatar-boy-face-man-user-2.svg", Boats = new() { "", "", "", "", "" } },
+        new BoatOwnerItemModel() { Name = "Andrew Medal", Email = "andrew@gmail.com", PhoneNumber = "+12-859-7080", ProfilePictureUrl = "https://www.svgrepo.com/download/382103/male-avatar-boy-face-man-user-2.svg", Boats = new() { "", "", "", "", "" } },
+    };
+
+    [ObservableProperty] private BoatOwnerItemModel _currentBoatOwner;
     
     [ObservableProperty] private bool _isBoatDropOffRegionVisible = false;
+    [ObservableProperty] private bool _isBoatOwnerDetailsRegionVisible = false;
 
     [RelayCommand]
-    private void ManageDropOff()
+    private void HomeTabManageDropOff()
     {
         IsBoatDropOffRegionVisible = true;
     }
+    
+    [RelayCommand]
+    private void HomeTabNavigateBack()
+    {
+        if (IsBoatDropOffRegionVisible)
+        {
+            IsBoatDropOffRegionVisible = false;
+        }
+        else
+        {
+            // IsBoatDropOffRegionVisible = true;
+        }
+    }
+    
+    [RelayCommand]
+    private void BoatsTabViewBoatDetails(BoatOwnerItemModel model)
+    {
+        IsBoatOwnerDetailsRegionVisible = true;
+        CurrentBoatOwner = model;
+    }
+    
+    [RelayCommand]
+    private void BoatsTabNavigateBack()
+    {
+        if (IsBoatOwnerDetailsRegionVisible)
+        {
+            IsBoatOwnerDetailsRegionVisible = false;
+        }
+        else
+        {
+            // IsBoatOwnerDetailsRegionVisible = true;
+        }
+    }
+    
     
     [RelayCommand]
     private async Task Logout()
     {
         _userService.ClearData();
         await NavigationService.NavigateAsync($"../{nameof(SplashScreenPage)}");
-    }
-
-    protected override void Initialize(INavigationParameters parameters)
-    {
-        base.Initialize(parameters);
-        _regionManager.RequestNavigate("BoatDropOffRegion", nameof(AdminBoatDropOffView));
     }
 }

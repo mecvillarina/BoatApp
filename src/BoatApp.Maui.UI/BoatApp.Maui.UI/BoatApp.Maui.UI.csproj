@@ -77,4 +77,10 @@
         <LinkDescription Include="Platforms\iOS\Linker.xml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <MauiXaml Update="Resources\Styles\Converters.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
 </Project>
