@@ -22,6 +22,7 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     [ObservableProperty] private List<string> _recentRequests = new List<string>() { "1", "2", "3", "4", "5"};
     [ObservableProperty] private bool _isBoatDropOffRegionVisible = false;
     [ObservableProperty] private List<string> _boatDropOffZones = new() { "Zone Area 1", "Zone Area 2" };
+    [ObservableProperty] private List<string> _boatDropOffRequests = new() { "Zone Area 1", "Zone Area 2" };
 
     #endregion
     
