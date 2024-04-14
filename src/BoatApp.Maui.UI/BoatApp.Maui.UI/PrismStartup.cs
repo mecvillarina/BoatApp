@@ -3,7 +3,6 @@ using BoatApp.Maui.Services.Modules;
 using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.ViewModels;
 using BoatApp.Maui.UI.Views;
-using BoatOwnerDetailsView = BoatApp.Maui.UI.Views.BoatOwnerDetailsView;
 
 namespace BoatApp.Maui.UI;
 
@@ -38,9 +37,6 @@ internal static class PrismStartup
         //Main Pages
         containerRegistry.RegisterForNavigation<AdminMainPage, AdminMainPageViewModel>();
         containerRegistry.RegisterForNavigation<UserMainPage, UserMainPageViewModel>();
-
-        containerRegistry.RegisterForRegionNavigation<AdminBoatDropOffView, AdminBoatDropOffViewModel>();
-        containerRegistry.RegisterForRegionNavigation<BoatOwnerDetailsView, BoatOwnerDetailsViewModel>();
     }
 
     private static void RegisterServices(this IContainerRegistry containerRegistry)

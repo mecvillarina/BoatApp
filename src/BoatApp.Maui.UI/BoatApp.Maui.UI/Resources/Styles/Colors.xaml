@@ -95,6 +95,7 @@
     <Color x:Key="GreenOpaque008">#143CC80B</Color>
     <Color x:Key="Orange">#FA720F</Color>
     <Color x:Key="OrangeOpaque008">#14FA720F</Color>
+    <Color x:Key="Red">#FE0606</Color>
 
     <Color x:Key="TabTextDefaultColor">#C5C5C5</Color>
     <Color x:Key="DisableColor">#C5C5C5</Color>
