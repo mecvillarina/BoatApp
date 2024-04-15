@@ -637,12 +637,14 @@
                                         <Label FontFamily="SFUIDisplayRegular"
                                                FontSize="14"
                                                HorizontalOptions="End"
-                                               Text="03 Drop Off"
+                                               Text="{Binding BoatDropOffListDisplay}"
                                                TextColor="{StaticResource Red}"
                                                VerticalTextAlignment="Center" />
                                     </Grid>
 
-                                    <RefreshView Grid.Row="1">
+                                    <RefreshView Grid.Row="1"
+                                                 Command="{Binding RefreshBoatDropOffDataCommand}"
+                                                 IsRefreshing="{Binding IsBoatDropOffRegionRefreshing}">
                                         <CollectionView ItemsSource="{Binding BoatDropOffRequests}">
                                             <CollectionView.ItemsLayout>
                                                 <LinearItemsLayout ItemSpacing="8"
@@ -650,7 +652,7 @@
                                             </CollectionView.ItemsLayout>
 
                                             <CollectionView.ItemTemplate>
-                                                <DataTemplate>
+                                                <DataTemplate x:DataType="models:BoatRequestItemModel">
                                                     <Border Padding="12"
                                                             BackgroundColor="{StaticResource White}"
                                                             HeightRequest="180"
@@ -667,7 +669,7 @@
                                                                             StrokeThickness="0">
 
                                                                         <Image Aspect="AspectFill"
-                                                                               Source="bg_splashscreen.jpg" />
+                                                                               Source="{Binding BoatImageUrl}" />
                                                                     </Border>
                                                                 </Grid>
                                                                 <Grid Grid.Column="1">
@@ -678,7 +680,7 @@
                                                                             <Label FontFamily="SFUIDisplayMedium"
                                                                                    FontSize="14"
                                                                                    LineBreakMode="TailTruncation"
-                                                                                   Text="The Wind Ranger"
+                                                                                   Text="{Binding BoatName}"
                                                                                    TextColor="{StaticResource Dark}"
                                                                                    VerticalTextAlignment="Center" />
 
@@ -699,7 +701,7 @@
                                                                         <Label FontFamily="SFUIDisplayRegular"
                                                                                FontSize="12"
                                                                                LineBreakMode="TailTruncation"
-                                                                               Text="Owner : John Nelson"
+                                                                               Text="{Binding BoatOwner}"
                                                                                TextColor="{StaticResource Primary}" />
 
                                                                     </VerticalStackLayout>
@@ -726,7 +728,7 @@
                                                                                    FontFamily="SFUIDisplayRegular"
                                                                                    FontSize="12"
                                                                                    LineBreakMode="TailTruncation"
-                                                                                   Text="Pickup Point : Shuttle Club point 1"
+                                                                                   Text="{Binding PickupPoint}"
                                                                                    TextColor="{StaticResource Dark}"
                                                                                    VerticalTextAlignment="Center" />
 
@@ -735,7 +737,7 @@
                                                                                    FontFamily="SFUIDisplayRegular"
                                                                                    FontSize="12"
                                                                                    LineBreakMode="TailTruncation"
-                                                                                   Text="Date : Saturday, July 10, 2024"
+                                                                                   Text="{Binding PickupDate}"
                                                                                    TextColor="{StaticResource Dark}"
                                                                                    VerticalTextAlignment="Center" />
 
@@ -744,7 +746,7 @@
                                                                                    FontFamily="SFUIDisplayRegular"
                                                                                    FontSize="12"
                                                                                    LineBreakMode="TailTruncation"
-                                                                                   Text="Time : 12.00 PM "
+                                                                                   Text="{Binding PickupTime}"
                                                                                    TextColor="{StaticResource Dark}"
                                                                                    VerticalTextAlignment="Center" />
                                                                         </Grid>
@@ -763,13 +765,130 @@
                                                                     FontFamily="SFUIDisplayRegular"
                                                                     FontSize="12"
                                                                     HeightRequest="30"
+                                                                    IsVisible="False"
                                                                     Text="Drop Confirmed"
                                                                     TextColor="{StaticResource Green}"
-                                                                    VerticalOptions="Center" />
+                                                                    VerticalOptions="Center">
+
+                                                                <Button.Triggers>
+                                                                    <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                 TargetType="Button"
+                                                                                 Value="{x:Static enums:BoatRequestStatus.DropConfirmed}">
+                                                                        <Setter Property="IsVisible" Value="True" />
+                                                                    </DataTrigger>
+                                                                </Button.Triggers>
+                                                            </Button>
+
+                                                            <Button Grid.Row="2"
+                                                                    Padding="0"
+                                                                    BackgroundColor="{StaticResource OrangeOpaque008}"
+                                                                    BorderColor="{StaticResource Orange}"
+                                                                    BorderWidth="1"
+                                                                    FontFamily="SFUIDisplayRegular"
+                                                                    FontSize="12"
+                                                                    HeightRequest="30"
+                                                                    IsVisible="False"
+                                                                    Text="In Transit (Drop)"
+                                                                    TextColor="{StaticResource Orange}"
+                                                                    VerticalOptions="Center">
+
+                                                                <Button.Triggers>
+                                                                    <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                 TargetType="Button"
+                                                                                 Value="{x:Static enums:BoatRequestStatus.InTransitDrop}">
+                                                                        <Setter Property="IsVisible" Value="True" />
+                                                                    </DataTrigger>
+                                                                </Button.Triggers>
+                                                            </Button>
+
+                                                            <Button Grid.Row="2"
+                                                                    Padding="0"
+                                                                    BackgroundColor="{StaticResource BlueOpaque008}"
+                                                                    BorderColor="{StaticResource Blue}"
+                                                                    BorderWidth="1"
+                                                                    FontFamily="SFUIDisplayRegular"
+                                                                    FontSize="12"
+                                                                    HeightRequest="30"
+                                                                    IsVisible="False"
+                                                                    Text="Drop Off Complete"
+                                                                    TextColor="{StaticResource Blue}"
+                                                                    VerticalOptions="Center">
+
+                                                                <Button.Triggers>
+                                                                    <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                 TargetType="Button"
+                                                                                 Value="{x:Static enums:BoatRequestStatus.DropOffCompleted}">
+                                                                        <Setter Property="IsVisible" Value="True" />
+                                                                    </DataTrigger>
+                                                                </Button.Triggers>
+                                                            </Button>
                                                         </Grid>
                                                     </Border>
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
+
+                                            <CollectionView.Footer>
+                                                <VerticalStackLayout VerticalOptions="Start">
+                                                    <material:ButtonView BackgroundColor="{StaticResource Primary}"
+                                                                         IsVisible="{Binding IsBoatDropOffMarkAsTransitButtonVisible}"
+                                                                         StrokeShape="RoundRectangle 10"
+                                                                         TappedCommand="{Binding MarkAsTransitCommand}">
+                                                        <Grid>
+                                                            <Label FontFamily="SFUIDisplaySemibold"
+                                                                   FontSize="16"
+                                                                   HorizontalTextAlignment="Center"
+                                                                   Text="MARK AS IN TRANSIT"
+                                                                   TextColor="{StaticResource White}"
+                                                                   VerticalTextAlignment="Center">
+
+                                                                <Label.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsSendingData}"
+                                                                                 TargetType="Label"
+                                                                                 Value="True">
+                                                                        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                                                    </DataTrigger>
+                                                                </Label.Triggers>
+                                                            </Label>
+
+                                                            <ActivityIndicator HeightRequest="24"
+                                                                               IsRunning="True"
+                                                                               IsVisible="{Binding IsSendingData}"
+                                                                               Color="{StaticResource White}" />
+                                                        </Grid>
+
+                                                    </material:ButtonView>
+
+                                                    <material:ButtonView BackgroundColor="{StaticResource Primary}"
+                                                                         IsVisible="{Binding IsBoatDropOffMarkAsCompleteButtonVisible}"
+                                                                         StrokeShape="RoundRectangle 10"
+                                                                         TappedCommand="{Binding MarkAsCompleteCommand}">
+                                                        <Grid>
+                                                            <Label FontFamily="SFUIDisplaySemibold"
+                                                                   FontSize="16"
+                                                                   HorizontalTextAlignment="Center"
+                                                                   Text="MARK AS COMPLETE"
+                                                                   TextColor="{StaticResource White}"
+                                                                   VerticalTextAlignment="Center">
+
+                                                                <Label.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsSendingData}"
+                                                                                 TargetType="Label"
+                                                                                 Value="True">
+                                                                        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                                                    </DataTrigger>
+                                                                </Label.Triggers>
+                                                            </Label>
+
+                                                            <ActivityIndicator HeightRequest="24"
+                                                                               IsRunning="True"
+                                                                               IsVisible="{Binding IsSendingData}"
+                                                                               Color="{StaticResource White}" />
+                                                        </Grid>
+
+                                                    </material:ButtonView>
+                                                </VerticalStackLayout>
+
+                                            </CollectionView.Footer>
                                         </CollectionView>
                                     </RefreshView>
                                 </Grid>

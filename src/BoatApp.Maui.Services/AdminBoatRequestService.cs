@@ -1,5 +1,6 @@
 ﻿using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.Services.Web.Api;
+using BoatApp.Models.Contracts;
 using BoatApp.Models.Contracts.Requests;
 
 namespace BoatApp.Maui.Services;
@@ -15,17 +16,17 @@ public class AdminBoatRequestService : IAdminBoatRequestService
 
     public async Task<int> GetScheduleDropRequestsCountAsync()
     {
-        var data = await _adminBoatRequestApi.GetScheduleDropRequestsAsync(new GetScheduleRequestRootRequestContract()
+        var data = await _adminBoatRequestApi.GetScheduleDropRequestsAsync(new GetDropRequestRootRequestContract()
         {
             DataSource = "BoatCluster",
             Database = "BoatDB",
             Collection = "Requests",
-            Filter = new GetScheduleRequestFilterRequestContract()
+            Filter = new GetDropRequestFilterRequestContract()
             {
-                And = new List<GetScheduleRequestAndOperatorRequestContract>()
+                And = new List<GetDropRequestAndOperatorRequestContract>()
                 {
-                    new GetScheduleRequestAndOperatorRequestContract() { Status = "drop_request_submitted" },
-                    new GetScheduleRequestAndOperatorRequestContract() { RequestType = "drop_off"}
+                    new GetDropRequestAndOperatorRequestContract() { Status = "drop_request_submitted" },
+                    new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
                 }
             }
         });
@@ -35,17 +36,17 @@ public class AdminBoatRequestService : IAdminBoatRequestService
 
     public async Task<int> GetSchedulePickupRequestsCountAsync()
     {
-        var data = await _adminBoatRequestApi.GetSchedulePickupRequestsAsync(new GetScheduleRequestRootRequestContract()
+        var data = await _adminBoatRequestApi.GetSchedulePickupRequestsAsync(new GetDropRequestRootRequestContract()
         {
             DataSource = "BoatCluster",
             Database = "BoatDB",
             Collection = "Requests",
-            Filter = new GetScheduleRequestFilterRequestContract()
+            Filter = new GetDropRequestFilterRequestContract()
             {
-                And = new List<GetScheduleRequestAndOperatorRequestContract>()
+                And = new List<GetDropRequestAndOperatorRequestContract>()
                 {
-                    new GetScheduleRequestAndOperatorRequestContract() { Status = "pickup_request_submitted" },
-                    new GetScheduleRequestAndOperatorRequestContract() { RequestType = "pickup"}
+                    new GetDropRequestAndOperatorRequestContract() { Status = "pickup_request_submitted" },
+                    new GetDropRequestAndOperatorRequestContract() { RequestType = "pickup"}
                 }
             }
         });
@@ -53,7 +54,66 @@ public class AdminBoatRequestService : IAdminBoatRequestService
         return data.Documents.Count;
     }
     
-
+    public async Task<List<BoatRequestContract>> GetAllConfirmedDropRequestsAsync()
+    {
+        var data = await _adminBoatRequestApi.GetAllConfirmedDropRequestsAsync(new GetDropRequestRootRequestContract()
+        {
+            DataSource = "BoatCluster",
+            Database = "BoatDB",
+            Collection = "Requests",
+            Filter = new GetDropRequestFilterRequestContract()
+            {
+                And = new List<GetDropRequestAndOperatorRequestContract>()
+                {
+                    new GetDropRequestAndOperatorRequestContract() { Status = "drop_confirmed" },
+                    new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
+                }
+            }
+        });
+        
+        return data.Documents;
+    }
+    
+    public async Task<List<BoatRequestContract>> GetAllInTransitDropRequestsAsync()
+    {
+        var data = await _adminBoatRequestApi.GetAllInTransitDropRequestsAsync(new GetDropRequestRootRequestContract()
+        {
+            DataSource = "BoatCluster",
+            Database = "BoatDB",
+            Collection = "Requests",
+            Filter = new GetDropRequestFilterRequestContract()
+            {
+                And = new List<GetDropRequestAndOperatorRequestContract>()
+                {
+                    new GetDropRequestAndOperatorRequestContract() { Status = "in_transit_drop" },
+                    new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
+                }
+            }
+        });
+        
+        return data.Documents;
+    }
+    
+    public async Task<List<BoatRequestContract>> GetAllDropCompletedRequestsAsync()
+    {
+        var data = await _adminBoatRequestApi.GetAllDropCompletedRequestsAsync(new GetDropRequestRootRequestContract()
+        {
+            DataSource = "BoatCluster",
+            Database = "BoatDB",
+            Collection = "Requests",
+            Filter = new GetDropRequestFilterRequestContract()
+            {
+                And = new List<GetDropRequestAndOperatorRequestContract>()
+                {
+                    new GetDropRequestAndOperatorRequestContract() { Status = "dropoff_completed" },
+                    new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
+                }
+            }
+        });
+        
+        return data.Documents;
+    }
+    
     public async Task ConfirmDropRequestAsync(string boatNumber)
     {
        await  _adminBoatRequestApi.ConfirmDropRequestAsync(new ConfirmDropRootRequestContract()

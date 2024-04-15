@@ -2,7 +2,7 @@
 
 namespace BoatApp.Models.Contracts.Requests;
 
-public class GetScheduleRequestAndOperatorRequestContract
+public class GetDropRequestAndOperatorRequestContract
 {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("status")]

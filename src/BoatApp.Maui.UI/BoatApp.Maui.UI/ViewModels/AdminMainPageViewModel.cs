@@ -27,8 +27,18 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     [ObservableProperty] private List<string> _recentRequests = new List<string>() { "1", "2", "3", "4", "5"};
     [ObservableProperty] private bool _isBoatDropOffRegionVisible = false;
     [ObservableProperty] private List<string> _boatDropOffZones = new() { "Zone Area 1", "Zone Area 2" };
-    [ObservableProperty] private List<string> _boatDropOffRequests = new() { "Zone Area 1", "Zone Area 2" };
+    [ObservableProperty] private bool _isBoatDropOffRegionRefreshing;
+    [ObservableProperty] private bool _isBoatDropOffMarkAsTransitButtonVisible;
+    [ObservableProperty] private bool _isBoatDropOffMarkAsCompleteButtonVisible;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(BoatDropOffListDisplay))]
+    private List<BoatRequestItemModel> _boatDropOffRequests = new ();
+
+    [ObservableProperty] private bool _isSendingData;
+
+    public string BoatDropOffListDisplay => $"{BoatDropOffRequests.Count} Drop Off";
+    
     #endregion
     
     #region Boat Tab Data
@@ -52,15 +62,24 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     {
         FetchHomeTabData();
     }
+    
+    [RelayCommand]
+    private void RefreshBoatDropOffData()
+    {
+        FetchBoatDropOffData();
+    }
     [RelayCommand]
     private void HomeTabManageDropOff()
     {
         IsBoatDropOffRegionVisible = true;
+        IsBoatDropOffRegionRefreshing = true;
     }
     
     [RelayCommand]
     private void HomeTabNavigateBack()
     {
+        if (IsSendingData) return;
+        
         if (IsBoatDropOffRegionVisible)
         {
             IsBoatDropOffRegionVisible = false;
@@ -70,7 +89,55 @@ public partial class AdminMainPageViewModel : PageViewModelBase
             // IsBoatDropOffRegionVisible = true;
         }
     }
-    
+
+    [RelayCommand]
+    private void MarkAsTransit()
+    {
+        Task.Run(() =>
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    IsSendingData = true;
+                    await _adminBoatRequestService.MarkAsTransitAsync();
+                    IsBoatDropOffRegionRefreshing = true;
+                }
+                catch
+                {
+                }
+                finally
+                {
+                    IsSendingData = false;
+                }
+            });
+        });
+    }
+
+    [RelayCommand]
+    private void MarkAsComplete()
+    {
+        Task.Run(() =>
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    IsSendingData = true;
+                    await _adminBoatRequestService.MarkAsCompleteAsync();
+                    IsBoatDropOffRegionRefreshing = true;
+                }
+                catch
+                {
+                }
+                finally
+                {
+                    IsSendingData = false;
+                }
+            });
+        });
+    }
+
     private void FetchHomeTabData()
     {
         Task.Run(async () =>
@@ -98,6 +165,56 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                 });
             }
            
+        });
+    }
+    
+    private void FetchBoatDropOffData()
+    {
+        Task.Run(() =>
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                IsBoatDropOffMarkAsTransitButtonVisible = false;
+                IsBoatDropOffMarkAsCompleteButtonVisible = false;
+                BoatDropOffRequests = new();
+                try
+                {
+                    var dropConfirmedRequests = await _adminBoatRequestService.GetAllConfirmedDropRequestsAsync();
+
+                    if (dropConfirmedRequests.Any())
+                    {
+                        BoatDropOffRequests = dropConfirmedRequests.Select(x => new BoatRequestItemModel(x)).ToList();
+                        IsBoatDropOffMarkAsTransitButtonVisible = true;
+                    }
+                    else
+                    {
+                        var inTransitRequests = await _adminBoatRequestService.GetAllInTransitDropRequestsAsync();
+
+                        if (inTransitRequests.Any())
+                        {
+                            BoatDropOffRequests = inTransitRequests.Select(x => new BoatRequestItemModel(x)).ToList();
+                            IsBoatDropOffMarkAsCompleteButtonVisible = true;
+                        }
+                        else
+                        {
+                            var dropCompletedRequests = await _adminBoatRequestService.GetAllDropCompletedRequestsAsync();
+                            BoatDropOffRequests = dropCompletedRequests.Select(x => new BoatRequestItemModel(x)).ToList();
+                        }
+                    }
+               
+                }
+                catch
+                {
+                    // ignored
+                }
+                finally
+                {
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        IsBoatDropOffRegionRefreshing = false;
+                    });
+                }
+            });
         });
     }
     #endregion
@@ -133,7 +250,7 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     protected override void OnNavigatedTo(INavigationParameters parameters)
     {
         base.OnNavigatedTo(parameters);
-        
-        FetchHomeTabData();
+
+        IsHomeTabRefreshing = true;
     }
 }

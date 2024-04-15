@@ -2,7 +2,7 @@
 
 namespace BoatApp.Models.Contracts.Requests;
 
-public class GetScheduleRequestRootRequestContract
+public class GetDropRequestRootRequestContract
 {
     [JsonPropertyName("dataSource")]
     public string DataSource { get; set; }
@@ -14,5 +14,5 @@ public class GetScheduleRequestRootRequestContract
     public string Collection { get; set; }
     
     [JsonPropertyName("filter")]
-    public GetScheduleRequestFilterRequestContract Filter { get; set; }
+    public GetDropRequestFilterRequestContract Filter { get; set; }
 }
