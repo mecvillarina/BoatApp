@@ -11,10 +11,10 @@ public interface IAdminBoatRequestApi
     
     
     [Post("/action/find")]
-    Task<GenericListRootContract<object>> GetScheduleDropRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
+    Task<GenericListRootContract<BoatRequestContract>> GetScheduleDropRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
     
     [Post("/action/find")]
-    Task<GenericListRootContract<object>> GetSchedulePickupRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
+    Task<GenericListRootContract<BoatRequestContract>> GetSchedulePickupRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
 
     [Post("/action/find")]
     Task<GenericListRootContract<BoatRequestContract>> GetAllConfirmedDropRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);

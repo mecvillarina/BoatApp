@@ -41,7 +41,7 @@ public partial class UserMainPageViewModel : PageViewModelBase
             await _ownerBoatService.SubmitDropRequestAsync(model.Contract.BoatNumber, model.Contract.OwnerId);
             await _ownerBoatService.UpdateBoatStatusAsync(model.Contract.BoatNumber);
             await _popupService.ShowAsync(new DropRequestSubmittedPopup());
-            FetchBoats();
+            IsMyBoatsRefreshing = true;
         }
         catch(Exception ex)
         {

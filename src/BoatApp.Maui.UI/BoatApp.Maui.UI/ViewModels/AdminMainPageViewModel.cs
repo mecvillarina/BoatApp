@@ -2,6 +2,7 @@
 using BoatApp.Maui.UI.Models;
 using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.Views;
+using BoatApp.Models.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -11,11 +12,12 @@ public partial class AdminMainPageViewModel : PageViewModelBase
 {
     private readonly IUserService _userService;
     private readonly IAdminBoatRequestService _adminBoatRequestService;
-    
-    public AdminMainPageViewModel(BaseServices baseServices, IUserService userService, IAdminBoatRequestService adminBoatRequestService) : base(baseServices)
+    private readonly IPopupService _popupService;
+    public AdminMainPageViewModel(BaseServices baseServices, IUserService userService, IAdminBoatRequestService adminBoatRequestService, IPopupService popupService) : base(baseServices)
     {
         _userService = userService;
         _adminBoatRequestService = adminBoatRequestService;
+        _popupService = popupService;
     }
 
     #region Home Tab Data
@@ -23,8 +25,8 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     [ObservableProperty] private int _scheduleDropRequestCount;
     [ObservableProperty] private int _schedulePickupRequestCount;
     [ObservableProperty] private bool _isHomeTabRefreshing;
-    
-    [ObservableProperty] private List<string> _recentRequests = new List<string>() { "1", "2", "3", "4", "5"};
+
+    [ObservableProperty] private List<BoatRequestItemModel> _recentRequests = new();
     [ObservableProperty] private bool _isBoatDropOffRegionVisible = false;
     [ObservableProperty] private List<string> _boatDropOffZones = new() { "Zone Area 1", "Zone Area 2" };
     [ObservableProperty] private bool _isBoatDropOffRegionRefreshing;
@@ -67,6 +69,31 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     private void RefreshBoatDropOffData()
     {
         FetchBoatDropOffData();
+    }
+
+    [RelayCommand]
+    private void AcceptDropOff(BoatRequestItemModel model)
+    {
+        Task.Run(() =>
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    IsSendingData = true;
+                    await _adminBoatRequestService.ConfirmDropRequestAsync(model.Contract.BoatNumber);
+                    await _popupService.ShowAsync(new DropRequestConfirmedPopup());
+                    IsHomeTabRefreshing = true;
+                }
+                catch(Exception ex)
+                {
+                }
+                finally
+                {
+                    IsSendingData = false;
+                }
+            });
+        });
     }
     [RelayCommand]
     private void HomeTabManageDropOff()
@@ -140,31 +167,28 @@ public partial class AdminMainPageViewModel : PageViewModelBase
 
     private void FetchHomeTabData()
     {
-        Task.Run(async () =>
+        Task.Run(() =>
         {
-            try
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                var dropOffCount = await _adminBoatRequestService.GetScheduleDropRequestsCountAsync();
-                var pickupCount = await _adminBoatRequestService.GetSchedulePickupRequestsCountAsync();
-
-                MainThread.BeginInvokeOnMainThread(() =>
+                try
                 {
-                    ScheduleDropRequestCount = dropOffCount;
-                    SchedulePickupRequestCount = pickupCount;
-                });
-            }
-            catch
-            {
-                // ignored
-            }
-            finally
-            {
-                MainThread.BeginInvokeOnMainThread(() =>
+                    var dropOffRequests = await _adminBoatRequestService.GetScheduleDropRequestsAsync();
+                    var pickupRequests = await _adminBoatRequestService.GetSchedulePickupRequestsAsync();
+
+                    ScheduleDropRequestCount = dropOffRequests.Count;
+                    SchedulePickupRequestCount = pickupRequests.Count;
+                    RecentRequests = dropOffRequests.Select(x => new BoatRequestItemModel(x)).ToList();
+                }
+                catch
+                {
+
+                }
+                finally
                 {
                     IsHomeTabRefreshing = false;
-                });
-            }
-           
+                }
+            });
         });
     }
     

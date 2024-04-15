@@ -16,6 +16,6 @@ public class ConfirmDropRootRequestContract
     [JsonPropertyName("filter")]
     public ConfirmDropFilterRequestContract Filter { get; set; }
     
-    [JsonPropertyName("filter")]
+    [JsonPropertyName("update")]
     public ConfirmDropUpdateRequestContract Update { get; set; }
 }

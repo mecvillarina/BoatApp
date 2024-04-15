@@ -418,7 +418,7 @@
                                             </CollectionView.ItemsLayout>
 
                                             <CollectionView.ItemTemplate>
-                                                <DataTemplate>
+                                                <DataTemplate x:DataType="models:BoatRequestItemModel">
                                                     <Border Padding="12"
                                                             BackgroundColor="{StaticResource White}"
                                                             HeightRequest="180"
@@ -435,7 +435,7 @@
                                                                             StrokeThickness="0">
 
                                                                         <Image Aspect="AspectFill"
-                                                                               Source="bg_splashscreen.jpg" />
+                                                                               Source="{Binding BoatImageUrl}" />
                                                                     </Border>
                                                                 </Grid>
                                                                 <Grid Grid.Column="1">
@@ -446,7 +446,7 @@
                                                                             <Label FontFamily="SFUIDisplayMedium"
                                                                                    FontSize="14"
                                                                                    LineBreakMode="TailTruncation"
-                                                                                   Text="The Wind Ranger"
+                                                                                   Text="{Binding BoatName}"
                                                                                    TextColor="{StaticResource Dark}"
                                                                                    VerticalTextAlignment="Center" />
 
@@ -467,7 +467,7 @@
                                                                         <Label FontFamily="SFUIDisplayRegular"
                                                                                FontSize="12"
                                                                                LineBreakMode="TailTruncation"
-                                                                               Text="Owner : John Nelson"
+                                                                               Text="{Binding BoatOwner}"
                                                                                TextColor="{StaticResource Primary}" />
 
                                                                     </VerticalStackLayout>
@@ -494,7 +494,7 @@
                                                                                    FontFamily="SFUIDisplayRegular"
                                                                                    FontSize="12"
                                                                                    LineBreakMode="TailTruncation"
-                                                                                   Text="Pickup Point : Shuttle Club point 1"
+                                                                                   Text="{Binding PickupPoint}"
                                                                                    TextColor="{StaticResource Dark}"
                                                                                    VerticalTextAlignment="Center" />
 
@@ -503,7 +503,7 @@
                                                                                    FontFamily="SFUIDisplayRegular"
                                                                                    FontSize="12"
                                                                                    LineBreakMode="TailTruncation"
-                                                                                   Text="Date : Saturday, July 10, 2024"
+                                                                                   Text="{Binding PickupDate}"
                                                                                    TextColor="{StaticResource Dark}"
                                                                                    VerticalTextAlignment="Center" />
 
@@ -512,7 +512,7 @@
                                                                                    FontFamily="SFUIDisplayRegular"
                                                                                    FontSize="12"
                                                                                    LineBreakMode="TailTruncation"
-                                                                                   Text="Time : 12.00 PM "
+                                                                                   Text="{Binding PickupTime}"
                                                                                    TextColor="{StaticResource Dark}"
                                                                                    VerticalTextAlignment="Center" />
                                                                         </Grid>
@@ -540,9 +540,23 @@
                                                                        FontFamily="SFUIDisplayMedium"
                                                                        FontSize="16"
                                                                        HorizontalTextAlignment="Center"
+                                                                       IsVisible="False"
                                                                        LineBreakMode="TailTruncation"
                                                                        Text="ACCEPT DROP OFF"
-                                                                       TextColor="{StaticResource Dark}" />
+                                                                       TextColor="{StaticResource Dark}">
+
+                                                                    <Label.GestureRecognizers>
+                                                                        <TapGestureRecognizer Command="{Binding AcceptDropOffCommand, Source={RelativeSource AncestorType={x:Type viewmodels:AdminMainPageViewModel}}}"
+                                                                                              CommandParameter="{Binding .}" />
+                                                                    </Label.GestureRecognizers>
+                                                                    <Label.Triggers>
+                                                                        <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                     TargetType="Label"
+                                                                                     Value="{x:Static enums:BoatRequestStatus.DropRequestSubmitted}">
+                                                                            <Setter Property="IsVisible" Value="True" />
+                                                                        </DataTrigger>
+                                                                    </Label.Triggers>
+                                                                </Label>
 
                                                             </Grid>
                                                         </Grid>

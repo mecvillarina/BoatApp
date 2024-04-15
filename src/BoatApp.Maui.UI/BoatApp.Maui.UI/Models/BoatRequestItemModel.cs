@@ -28,6 +28,7 @@ public partial class BoatRequestItemModel : ObservableObject
 
     public BoatRequestItemModel(BoatRequestContract contract)
     {
+        Contract = contract;
         BoatName = "The Winder Ranger";
         BoatOwner = "Owner : John Nelson ";
         BoatImageUrl = "https://boatshuttle.blob.core.windows.net/images/Crusing.jpg?sp=r&st=2024-03-27T16:36:11Z&se=2024-10-01T00:36:11Z&spr=https&sv=2022-11-02&sr=b&sig=5Z0LI1pvljKOud3wk7OO7KZFexykTDE754siCb%2F2i90%3D";

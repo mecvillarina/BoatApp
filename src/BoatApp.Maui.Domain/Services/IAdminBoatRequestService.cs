@@ -4,8 +4,8 @@ namespace BoatApp.Maui.Domain.Services;
 
 public interface IAdminBoatRequestService
 {
-    Task<int> GetScheduleDropRequestsCountAsync();
-    Task<int> GetSchedulePickupRequestsCountAsync();
+    Task<List<BoatRequestContract>> GetScheduleDropRequestsAsync();
+    Task<List<BoatRequestContract>> GetSchedulePickupRequestsAsync();
 
     Task<List<BoatRequestContract>> GetAllConfirmedDropRequestsAsync();
     Task<List<BoatRequestContract>> GetAllInTransitDropRequestsAsync();

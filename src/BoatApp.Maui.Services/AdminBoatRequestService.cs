@@ -14,7 +14,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
         _adminBoatRequestApi = adminBoatRequestApi;
     }
 
-    public async Task<int> GetScheduleDropRequestsCountAsync()
+    public async Task<List<BoatRequestContract>> GetScheduleDropRequestsAsync()
     {
         var data = await _adminBoatRequestApi.GetScheduleDropRequestsAsync(new GetDropRequestRootRequestContract()
         {
@@ -31,10 +31,10 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             }
         });
 
-        return data.Documents.Count;
+        return data.Documents;
     }
 
-    public async Task<int> GetSchedulePickupRequestsCountAsync()
+    public async Task<List<BoatRequestContract>> GetSchedulePickupRequestsAsync()
     {
         var data = await _adminBoatRequestApi.GetSchedulePickupRequestsAsync(new GetDropRequestRootRequestContract()
         {
@@ -51,7 +51,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             }
         });
         
-        return data.Documents.Count;
+        return data.Documents;
     }
     
     public async Task<List<BoatRequestContract>> GetAllConfirmedDropRequestsAsync()

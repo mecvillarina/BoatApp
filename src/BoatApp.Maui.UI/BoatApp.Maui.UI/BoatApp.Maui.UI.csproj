@@ -81,6 +81,16 @@
       <MauiXaml Update="Resources\Styles\Converters.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
+      <MauiXaml Update="Views\DropRequestConfirmedPopup.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\DropRequestConfirmedPopup.xaml.cs">
+        <DependentUpon>DropRequestConfirmedPopup.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
 </Project>
