@@ -2,8 +2,8 @@
 
 namespace BoatApp.Models.Contracts.Requests;
 
-public  class UpdateBoatStatusUpdateRequestContract
+public class ConfirmDropUpdateRequestContract
 {
     [JsonPropertyName("$set")]
-    public UpdateBoatStatusUpdateSetRequestContract Set { get; set; }
+    public ConfirmDropUpdateSetRequestContract Set { get; set; }
 }

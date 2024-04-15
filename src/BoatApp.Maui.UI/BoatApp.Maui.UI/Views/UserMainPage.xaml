@@ -295,7 +295,7 @@
                                    TextColor="{StaticResource Dark}" />
 
                             <RefreshView Grid.Row="1"
-                                         Command="{Binding FetchMyBoatsCommand}"
+                                         Command="{Binding RefreshMyBoatsDataCommand}"
                                          IsRefreshing="{Binding IsMyBoatsRefreshing}">
                                 <CollectionView ItemsSource="{Binding Boats}">
                                     <CollectionView.ItemsLayout>

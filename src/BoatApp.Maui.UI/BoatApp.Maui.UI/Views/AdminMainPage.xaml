@@ -329,7 +329,7 @@
                                             <Label FontFamily="SFUIDisplayBold"
                                                    FontSize="32"
                                                    HorizontalOptions="Center"
-                                                   Text="08"
+                                                   Text="{Binding ScheduleDropRequestCount}"
                                                    TextColor="{StaticResource Dark}"
                                                    VerticalOptions="Center" />
 
@@ -376,7 +376,7 @@
                                             <Label FontFamily="SFUIDisplayBold"
                                                    FontSize="32"
                                                    HorizontalOptions="Center"
-                                                   Text="03"
+                                                   Text="{Binding SchedulePickupRequestCount}"
                                                    TextColor="{StaticResource Dark}"
                                                    VerticalOptions="Center" />
 
@@ -408,7 +408,9 @@
                                            Text="Recent Requests"
                                            TextColor="{StaticResource Dark}" />
 
-                                    <RefreshView Grid.Row="1">
+                                    <RefreshView Grid.Row="1"
+                                                 Command="{Binding RefreshHomeTabDataCommand}"
+                                                 IsRefreshing="{Binding IsHomeTabRefreshing}">
                                         <CollectionView ItemsSource="{Binding RecentRequests}">
                                             <CollectionView.ItemsLayout>
                                                 <LinearItemsLayout ItemSpacing="8"

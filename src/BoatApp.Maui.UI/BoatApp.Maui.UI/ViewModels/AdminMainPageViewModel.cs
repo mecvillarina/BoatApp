@@ -10,15 +10,20 @@ namespace BoatApp.Maui.UI.ViewModels;
 public partial class AdminMainPageViewModel : PageViewModelBase
 {
     private readonly IUserService _userService;
-    private readonly IRegionManager _regionManager;
+    private readonly IAdminBoatRequestService _adminBoatRequestService;
     
-    public AdminMainPageViewModel(BaseServices baseServices, IUserService userService, IRegionManager regionManager) : base(baseServices)
+    public AdminMainPageViewModel(BaseServices baseServices, IUserService userService, IAdminBoatRequestService adminBoatRequestService) : base(baseServices)
     {
         _userService = userService;
-        _regionManager = regionManager;
+        _adminBoatRequestService = adminBoatRequestService;
     }
 
     #region Home Tab Data
+
+    [ObservableProperty] private int _scheduleDropRequestCount;
+    [ObservableProperty] private int _schedulePickupRequestCount;
+    [ObservableProperty] private bool _isHomeTabRefreshing;
+    
     [ObservableProperty] private List<string> _recentRequests = new List<string>() { "1", "2", "3", "4", "5"};
     [ObservableProperty] private bool _isBoatDropOffRegionVisible = false;
     [ObservableProperty] private List<string> _boatDropOffZones = new() { "Zone Area 1", "Zone Area 2" };
@@ -40,6 +45,13 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     [ObservableProperty] private bool _isBoatOwnerDetailsRegionVisible = false;
     #endregion
 
+    #region Home Tab Methods
+
+    [RelayCommand]
+    private void RefreshHomeTabData()
+    {
+        FetchHomeTabData();
+    }
     [RelayCommand]
     private void HomeTabManageDropOff()
     {
@@ -58,6 +70,38 @@ public partial class AdminMainPageViewModel : PageViewModelBase
             // IsBoatDropOffRegionVisible = true;
         }
     }
+    
+    private void FetchHomeTabData()
+    {
+        Task.Run(async () =>
+        {
+            try
+            {
+                var dropOffCount = await _adminBoatRequestService.GetScheduleDropRequestsCountAsync();
+                var pickupCount = await _adminBoatRequestService.GetSchedulePickupRequestsCountAsync();
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    ScheduleDropRequestCount = dropOffCount;
+                    SchedulePickupRequestCount = pickupCount;
+                });
+            }
+            catch
+            {
+                // ignored
+            }
+            finally
+            {
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    IsHomeTabRefreshing = false;
+                });
+            }
+           
+        });
+    }
+    #endregion
+    
     
     [RelayCommand]
     private void BoatsTabViewBoatDetails(BoatOwnerItemModel model)
@@ -79,11 +123,17 @@ public partial class AdminMainPageViewModel : PageViewModelBase
         }
     }
     
-    
     [RelayCommand]
     private async Task Logout()
     {
         _userService.ClearData();
         await NavigationService.NavigateAsync($"../{nameof(SplashScreenPage)}");
+    }
+
+    protected override void OnNavigatedTo(INavigationParameters parameters)
+    {
+        base.OnNavigatedTo(parameters);
+        
+        FetchHomeTabData();
     }
 }

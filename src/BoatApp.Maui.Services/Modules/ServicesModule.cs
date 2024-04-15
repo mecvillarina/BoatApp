@@ -25,6 +25,7 @@ public class ServicesModule : IModule
 
         containerRegistry.RegisterSingleton<IUserService, UserService>();
         containerRegistry.RegisterSingleton<IOwnerBoatService, OwnerBoatService>();
+        containerRegistry.RegisterSingleton<IAdminBoatRequestService, AdminBoatRequestService>();
         // containerRegistry.RegisterSingleton<IAuthService, AuthService>();
         //containerRegistry.RegisterSingleton<IGeneralApiService, GeneralApiService>();
         //containerRegistry.RegisterSingleton<IAuthService, AuthService>();

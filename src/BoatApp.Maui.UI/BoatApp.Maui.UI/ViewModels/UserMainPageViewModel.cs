@@ -28,10 +28,11 @@ public partial class UserMainPageViewModel : PageViewModelBase
     [ObservableProperty] private List<BoatItemModel> _boats = [];
 
     [RelayCommand]
-    private async Task FetchMyBoats()
+    private void RefreshMyBoatsData()
     {
         FetchBoats();
     }
+    
     [RelayCommand]
     private async Task RequestDrop(BoatItemModel model)
     {
@@ -81,14 +82,28 @@ public partial class UserMainPageViewModel : PageViewModelBase
     {
         Task.Run(async () =>
         {
-            var phoneNumber = _userService.GetUserPhoneNumber();
-            var boats = await _ownerBoatService.FetchBoatsByPhoneNumberAsync(phoneNumber);
-            
-            MainThread.BeginInvokeOnMainThread(async () =>
+            try
             {
-                Boats = boats.Select(x => new BoatItemModel(x)).ToList();
-                IsMyBoatsRefreshing = false;
-            });
+                var phoneNumber = _userService.GetUserPhoneNumber();
+                var boats = await _ownerBoatService.FetchBoatsByPhoneNumberAsync(phoneNumber);
+            
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    Boats = boats.Select(x => new BoatItemModel(x)).ToList();
+                });
+            }
+            catch
+            {
+                // ignored
+            }
+            finally
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    IsMyBoatsRefreshing = false;
+                });
+            }
+            
         });
     }
 

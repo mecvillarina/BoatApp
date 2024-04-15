@@ -60,7 +60,7 @@ public class OwnerBoatService : IOwnerBoatService
             Database = "BoatDB",
             Collection = "Boats",
             Filter = new UpdateBoatStatusFilterRequestContract() { BoatNumber = boatNumber },
-            Update = new UpdateBoatStatusUpdateRequestContract() { UpdateBoatStatusUpdateSetRequestContract = new UpdateBoatStatusUpdateSetRequestContract() { RequestStatus = "drop_request_submitted"}}
+            Update = new UpdateBoatStatusUpdateRequestContract() { Set = new UpdateBoatStatusUpdateSetRequestContract() { RequestStatus = "drop_request_submitted"}}
         });
     }
 }
