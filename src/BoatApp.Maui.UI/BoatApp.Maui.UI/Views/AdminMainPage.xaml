@@ -955,7 +955,10 @@
                                                 Keyboard="Numeric"
                                                 VerticalOptions="Center" />
 
-                            <RefreshView Grid.Row="1">
+                            <RefreshView Grid.Row="1"
+                                         Command="{Binding RefreshBoatTabDataCommand}"
+                                         IsRefreshing="{Binding IsBoatTabRefreshing}">
+
                                 <CollectionView ItemsSource="{Binding BoatOwnerList}">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout ItemSpacing="8"

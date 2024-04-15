@@ -50,7 +50,7 @@ public partial class AdminMainPageViewModel : PageViewModelBase
         new BoatOwnerItemModel() { Name = "Stefan William", Email = "stefan@gmail.com", PhoneNumber = "+12-859-7080", ProfilePictureUrl = "https://www.svgrepo.com/download/382103/male-avatar-boy-face-man-user-2.svg", Boats = new() { "", "", "", "", "" } },
         new BoatOwnerItemModel() { Name = "Andrew Medal", Email = "andrew@gmail.com", PhoneNumber = "+12-859-7080", ProfilePictureUrl = "https://www.svgrepo.com/download/382103/male-avatar-boy-face-man-user-2.svg", Boats = new() { "", "", "", "", "" } },
     };
-
+    [ObservableProperty] private bool _isBoatTabRefreshing;
     [ObservableProperty] private BoatOwnerItemModel _currentBoatOwner;
     [ObservableProperty] private bool _isBoatOwnerDetailsRegionVisible = false;
     #endregion
@@ -219,14 +219,20 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     }
     #endregion
     
-    
+    #region Boat Tab Methods
+    [RelayCommand]
+    private void RefreshBoatTabData()
+    {
+        FetchBoatTabData();
+    }
+
     [RelayCommand]
     private void BoatsTabViewBoatDetails(BoatOwnerItemModel model)
     {
         IsBoatOwnerDetailsRegionVisible = true;
         CurrentBoatOwner = model;
     }
-    
+
     [RelayCommand]
     private void BoatsTabNavigateBack()
     {
@@ -239,6 +245,30 @@ public partial class AdminMainPageViewModel : PageViewModelBase
             // IsBoatOwnerDetailsRegionVisible = true;
         }
     }
+
+    private void FetchBoatTabData()
+    {
+        Task.Run(async () =>
+        {
+            try
+            {
+                
+            }
+            catch
+            {
+                // ignored
+            }
+            finally
+            {
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    IsBoatTabRefreshing = false;
+                });
+            }
+           
+        });
+    }
+    #endregion
     
     [RelayCommand]
     private async Task Logout()
