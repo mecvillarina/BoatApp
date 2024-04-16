@@ -95,8 +95,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\BoatApp.Common\BoatApp.Common.csproj" />
-      <ProjectReference Include="..\..\BoatApp.Maui.Services\BoatApp.Maui.Services.csproj" />
+      <ProjectReference Include="..\BoatApp.Common\BoatApp.Common.csproj" />
+      <ProjectReference Include="..\BoatApp.Maui.Services\BoatApp.Maui.Services.csproj" />
     </ItemGroup>
 
     <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
