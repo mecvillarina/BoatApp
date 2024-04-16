@@ -1,4 +1,5 @@
-﻿using BoatApp.Maui.Domain.Services;
+﻿using BoatApp.Common.Constants;
+using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.UI.Models;
 using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.Views;
@@ -13,11 +14,14 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     private readonly IUserService _userService;
     private readonly IAdminBoatRequestService _adminBoatRequestService;
     private readonly IPopupService _popupService;
-    public AdminMainPageViewModel(BaseServices baseServices, IUserService userService, IAdminBoatRequestService adminBoatRequestService, IPopupService popupService) : base(baseServices)
+    private readonly IBoatService _boatService;
+    
+    public AdminMainPageViewModel(BaseServices baseServices, IUserService userService, IAdminBoatRequestService adminBoatRequestService, IPopupService popupService, IBoatService boatService) : base(baseServices)
     {
         _userService = userService;
         _adminBoatRequestService = adminBoatRequestService;
         _popupService = popupService;
+        _boatService = boatService;
     }
 
     #region Home Tab Data
@@ -82,6 +86,8 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                 {
                     IsSendingData = true;
                     await _adminBoatRequestService.ConfirmDropRequestAsync(model.Contract.BoatNumber);
+                    await _boatService.UpdateBoatStatusAsync(model.Contract.BoatNumber,
+                        BoatRequestStatusConstants.DropConfirmed);
                     await _popupService.ShowAsync(new DropRequestConfirmedPopup());
                     IsHomeTabRefreshing = true;
                 }
@@ -110,6 +116,7 @@ public partial class AdminMainPageViewModel : PageViewModelBase
         if (IsBoatDropOffRegionVisible)
         {
             IsBoatDropOffRegionVisible = false;
+            IsHomeTabRefreshing = true;
         }
         else
         {
@@ -128,6 +135,12 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                 {
                     IsSendingData = true;
                     await _adminBoatRequestService.MarkAsTransitAsync();
+
+                    foreach (var request in BoatDropOffRequests)
+                    {
+                        await _boatService.UpdateBoatStatusAsync(request.Contract.BoatNumber,
+                            BoatRequestStatusConstants.InTransitDrop);
+                    }
                     IsBoatDropOffRegionRefreshing = true;
                 }
                 catch
@@ -152,6 +165,13 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                 {
                     IsSendingData = true;
                     await _adminBoatRequestService.MarkAsCompleteAsync();
+                    
+                    foreach (var request in BoatDropOffRequests)
+                    {
+                        await _boatService.UpdateBoatStatusAsync(request.Contract.BoatNumber,
+                            BoatRequestStatusConstants.DropOffCompleted);
+                    }
+                    
                     IsBoatDropOffRegionRefreshing = true;
                 }
                 catch
@@ -173,12 +193,14 @@ public partial class AdminMainPageViewModel : PageViewModelBase
             {
                 try
                 {
-                    var dropOffRequests = await _adminBoatRequestService.GetScheduleDropRequestsAsync();
-                    var pickupRequests = await _adminBoatRequestService.GetSchedulePickupRequestsAsync();
+                    var confirmDropOffRequests = await _adminBoatRequestService.GetScheduleDropRequestsAsync();
+                    var confirmPickupRequests = await _adminBoatRequestService.GetSchedulePickupRequestsAsync();
 
-                    ScheduleDropRequestCount = dropOffRequests.Count;
-                    SchedulePickupRequestCount = pickupRequests.Count;
-                    RecentRequests = dropOffRequests.Select(x => new BoatRequestItemModel(x)).ToList();
+                    ScheduleDropRequestCount = confirmDropOffRequests.Count;
+                    SchedulePickupRequestCount = confirmPickupRequests.Count;
+
+                    var dropOffSubmittedRequests = await _adminBoatRequestService.GetAllRequestDropSubmittedRequestsAsync();
+                    RecentRequests = dropOffSubmittedRequests.Select(x => new BoatRequestItemModel(x)).ToList();
                 }
                 catch
                 {

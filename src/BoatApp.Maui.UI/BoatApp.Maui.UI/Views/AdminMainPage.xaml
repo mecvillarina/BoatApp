@@ -932,10 +932,11 @@
                             </Border>
 
                             <Grid Padding="20">
-                                <Grid VerticalOptions="Start">
+                                <Grid VerticalOptions="Center">
 
                                     <Image HeightRequest="18"
                                            HorizontalOptions="Start"
+                                           IsVisible="{Binding IsBoatOwnerDetailsRegionVisible}"
                                            Source="ic_back"
                                            VerticalOptions="Center">
 
@@ -1111,12 +1112,12 @@
                             </Border>
 
                             <Grid Padding="20">
-                                <Grid VerticalOptions="Start">
+                                <Grid VerticalOptions="Center">
 
-                                    <Image HeightRequest="18"
-                                           HorizontalOptions="Start"
-                                           Source="ic_back"
-                                           VerticalOptions="Center" />
+                                    <!--  <Image HeightRequest="18"  -->
+                                    <!--  HorizontalOptions="Start"  -->
+                                    <!--  Source="ic_back"  -->
+                                    <!--  VerticalOptions="Center" />  -->
 
                                     <Label FontFamily="SFUIDisplayBold"
                                            FontSize="20"
@@ -1150,12 +1151,12 @@
                             </Border>
 
                             <Grid Padding="20">
-                                <Grid VerticalOptions="Start">
+                                <Grid VerticalOptions="Center">
 
-                                    <Image HeightRequest="18"
-                                           HorizontalOptions="Start"
-                                           Source="ic_back"
-                                           VerticalOptions="Center" />
+                                    <!--  <Image HeightRequest="18"  -->
+                                    <!--  HorizontalOptions="Start"  -->
+                                    <!--  Source="ic_back"  -->
+                                    <!--  VerticalOptions="Center" />  -->
 
                                     <Label FontFamily="SFUIDisplayBold"
                                            FontSize="20"

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using BoatApp.Common.Constants;
 using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.Services.Web.Api;
 using BoatApp.Models.Contracts;
@@ -6,18 +7,18 @@ using BoatApp.Models.Contracts.Requests;
 
 namespace BoatApp.Maui.Services;
 
-public class OwnerBoatService : IOwnerBoatService
+public class BoatService : IBoatService
 {
-    private readonly IOwnerBoatApi _ownerBoatApi;
+    private readonly IOwnerBoatApi _boatApi;
     
-    public OwnerBoatService(IOwnerBoatApi ownerBoatApi)
+    public BoatService(IOwnerBoatApi boatApi)
     {
-        _ownerBoatApi = ownerBoatApi;
+        _boatApi = boatApi;
     }
 
     public async Task<List<BoatContract>> FetchBoatsByPhoneNumberAsync(string phoneNumber)
     {
-        var response = await _ownerBoatApi.GetBoatsByPhoneNumberAsync(new GetBoatsByPhoneRootRequestContract()
+        var response = await _boatApi.GetBoatsByPhoneNumberAsync(new GetBoatsByPhoneRootRequestContract()
         {
             DataSource = "BoatCluster",
             Database = "BoatDB",
@@ -28,7 +29,7 @@ public class OwnerBoatService : IOwnerBoatService
         return response.Documents;
     }
     
-    public async Task SubmitDropRequestAsync(string boatNumber, string ownerId)
+    public async Task SubmitDropRequestAsync(string boatNumber, string ownerId, string ownerName, string boatImageUrl, string pickupPoint, string pickupDate)
     {
         var contract = new SubmitDropRequestRootRequestContract()
         {
@@ -38,9 +39,13 @@ public class OwnerBoatService : IOwnerBoatService
             Document = new SubmitDropRequestDocumentRequestContract()
             {
                 RequestType = "drop_off",
-                OwnerId = ownerId,
                 BoatNumber = boatNumber,
-                Status = "drop_request_submitted",
+                OwnerId = ownerId,
+                OwnerName = ownerName,
+                BoatImageUrl = boatImageUrl,
+                PickupPoint = pickupPoint,
+                PickupDate = pickupDate,
+                Status = BoatRequestStatusConstants.DropRequestSubmitted,
                 Origin = new SubmitDropRequestLocationRequestContract()
                     { Dock = "ClubDock", Zone = "ClubZone", Latitude = 37.7749, Longitude = -122.4194 },
                 Destination = new SubmitDropRequestLocationRequestContract()
@@ -49,18 +54,18 @@ public class OwnerBoatService : IOwnerBoatService
         };
 
         var json = JsonSerializer.Serialize(contract);
-        await _ownerBoatApi.SubmitDropRequestAsync(contract);
+        await _boatApi.SubmitDropRequestAsync(contract);
     }
     
-    public async Task UpdateBoatStatusAsync(string boatNumber)
+    public async Task UpdateBoatStatusAsync(string boatNumber, string status)
     {
-        await _ownerBoatApi.UpdateBoatStatusAsync(new UpdateBoatStatusRootRequestContract()
+        await _boatApi.UpdateBoatStatusAsync(new UpdateBoatStatusRootRequestContract()
         {
             DataSource = "BoatCluster",
             Database = "BoatDB",
             Collection = "Boats",
             Filter = new UpdateBoatStatusFilterRequestContract() { BoatNumber = boatNumber },
-            Update = new UpdateBoatStatusUpdateRequestContract() { Set = new UpdateBoatStatusUpdateSetRequestContract() { RequestStatus = "drop_request_submitted"}}
+            Update = new UpdateBoatStatusUpdateRequestContract() { Set = new UpdateBoatStatusUpdateSetRequestContract() { RequestStatus = status}}
         });
     }
 }

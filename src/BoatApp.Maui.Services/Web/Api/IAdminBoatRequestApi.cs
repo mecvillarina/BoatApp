@@ -17,14 +17,8 @@ public interface IAdminBoatRequestApi
     Task<GenericListRootContract<BoatRequestContract>> GetSchedulePickupRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
 
     [Post("/action/find")]
-    Task<GenericListRootContract<BoatRequestContract>> GetAllConfirmedDropRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
+    Task<GenericListRootContract<BoatRequestContract>> GetAllDropRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
     
-    [Post("/action/find")]
-    Task<GenericListRootContract<BoatRequestContract>> GetAllInTransitDropRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
-
-    [Post("/action/find")]
-    Task<GenericListRootContract<BoatRequestContract>> GetAllDropCompletedRequestsAsync([Body(true)] GetDropRequestRootRequestContract contract);
-
     [Post("/action/updateOne")]
     Task ConfirmDropRequestAsync([Body(true)] ConfirmDropRootRequestContract contract);
 

@@ -1,4 +1,7 @@
-﻿using BoatApp.Maui.Domain.Services;
+﻿using BoatApp.Common.Constants;
+using BoatApp.Common.Enums;
+using BoatApp.Common.Extensions;
+using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.UI.Models;
 using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.Views;
@@ -11,12 +14,12 @@ namespace BoatApp.Maui.UI.ViewModels;
 public partial class UserMainPageViewModel : PageViewModelBase
 {
     private readonly IUserService _userService;
-    private readonly IOwnerBoatService _ownerBoatService;
+    private readonly IBoatService _boatService;
     private readonly IPopupService _popupService;
-    public UserMainPageViewModel(BaseServices baseServices, IUserService userService, IOwnerBoatService ownerBoatService, IPopupService popupService) : base(baseServices)
+    public UserMainPageViewModel(BaseServices baseServices, IUserService userService, IBoatService boatService, IPopupService popupService) : base(baseServices)
     {
         _userService = userService;
-        _ownerBoatService = ownerBoatService;
+        _boatService = boatService;
         _popupService = popupService;
     }
 
@@ -38,8 +41,9 @@ public partial class UserMainPageViewModel : PageViewModelBase
     {
         try
         {
-            await _ownerBoatService.SubmitDropRequestAsync(model.Contract.BoatNumber, model.Contract.OwnerId);
-            await _ownerBoatService.UpdateBoatStatusAsync(model.Contract.BoatNumber);
+            var date = DateTime.Now.ToString("MM/dd/yyyy");
+            await _boatService.SubmitDropRequestAsync(model.Contract.BoatNumber, model.Contract.OwnerId, model.Contract.BoatName, model.Contract.ImageUrl, "Shuttle Club Point 1", date);
+            await _boatService.UpdateBoatStatusAsync(model.Contract.BoatNumber, BoatRequestStatusConstants.DropRequestSubmitted);
             await _popupService.ShowAsync(new DropRequestSubmittedPopup());
             IsMyBoatsRefreshing = true;
         }
@@ -85,7 +89,7 @@ public partial class UserMainPageViewModel : PageViewModelBase
             try
             {
                 var phoneNumber = _userService.GetUserPhoneNumber();
-                var boats = await _ownerBoatService.FetchBoatsByPhoneNumberAsync(phoneNumber);
+                var boats = await _boatService.FetchBoatsByPhoneNumberAsync(phoneNumber);
             
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {

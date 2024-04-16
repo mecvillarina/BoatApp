@@ -1,4 +1,5 @@
-﻿using BoatApp.Maui.Domain.Services;
+﻿using BoatApp.Common.Constants;
+using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.Services.Web.Api;
 using BoatApp.Models.Contracts;
 using BoatApp.Models.Contracts.Requests;
@@ -25,7 +26,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             {
                 And = new List<GetDropRequestAndOperatorRequestContract>()
                 {
-                    new GetDropRequestAndOperatorRequestContract() { Status = "drop_request_submitted" },
+                    new GetDropRequestAndOperatorRequestContract() { Status = BoatRequestStatusConstants.DropConfirmed },
                     new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
                 }
             }
@@ -45,8 +46,28 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             {
                 And = new List<GetDropRequestAndOperatorRequestContract>()
                 {
-                    new GetDropRequestAndOperatorRequestContract() { Status = "pickup_request_submitted" },
+                    new GetDropRequestAndOperatorRequestContract() { Status = BoatRequestStatusConstants.PickupConfirmed },
                     new GetDropRequestAndOperatorRequestContract() { RequestType = "pickup"}
+                }
+            }
+        });
+        
+        return data.Documents;
+    }
+
+    public async Task<List<BoatRequestContract>> GetAllRequestDropSubmittedRequestsAsync()
+    {
+        var data = await _adminBoatRequestApi.GetAllDropRequestsAsync(new GetDropRequestRootRequestContract()
+        {
+            DataSource = "BoatCluster",
+            Database = "BoatDB",
+            Collection = "Requests",
+            Filter = new GetDropRequestFilterRequestContract()
+            {
+                And = new List<GetDropRequestAndOperatorRequestContract>()
+                {
+                    new GetDropRequestAndOperatorRequestContract() { Status = BoatRequestStatusConstants.DropRequestSubmitted },
+                    new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
                 }
             }
         });
@@ -56,7 +77,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
     
     public async Task<List<BoatRequestContract>> GetAllConfirmedDropRequestsAsync()
     {
-        var data = await _adminBoatRequestApi.GetAllConfirmedDropRequestsAsync(new GetDropRequestRootRequestContract()
+        var data = await _adminBoatRequestApi.GetAllDropRequestsAsync(new GetDropRequestRootRequestContract()
         {
             DataSource = "BoatCluster",
             Database = "BoatDB",
@@ -65,7 +86,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             {
                 And = new List<GetDropRequestAndOperatorRequestContract>()
                 {
-                    new GetDropRequestAndOperatorRequestContract() { Status = "drop_confirmed" },
+                    new GetDropRequestAndOperatorRequestContract() { Status = BoatRequestStatusConstants.DropConfirmed },
                     new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
                 }
             }
@@ -76,7 +97,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
     
     public async Task<List<BoatRequestContract>> GetAllInTransitDropRequestsAsync()
     {
-        var data = await _adminBoatRequestApi.GetAllInTransitDropRequestsAsync(new GetDropRequestRootRequestContract()
+        var data = await _adminBoatRequestApi.GetAllDropRequestsAsync(new GetDropRequestRootRequestContract()
         {
             DataSource = "BoatCluster",
             Database = "BoatDB",
@@ -85,7 +106,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             {
                 And = new List<GetDropRequestAndOperatorRequestContract>()
                 {
-                    new GetDropRequestAndOperatorRequestContract() { Status = "in_transit_drop" },
+                    new GetDropRequestAndOperatorRequestContract() { Status = BoatRequestStatusConstants.InTransitDrop },
                     new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
                 }
             }
@@ -96,7 +117,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
     
     public async Task<List<BoatRequestContract>> GetAllDropCompletedRequestsAsync()
     {
-        var data = await _adminBoatRequestApi.GetAllDropCompletedRequestsAsync(new GetDropRequestRootRequestContract()
+        var data = await _adminBoatRequestApi.GetAllDropRequestsAsync(new GetDropRequestRootRequestContract()
         {
             DataSource = "BoatCluster",
             Database = "BoatDB",
@@ -105,7 +126,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             {
                 And = new List<GetDropRequestAndOperatorRequestContract>()
                 {
-                    new GetDropRequestAndOperatorRequestContract() { Status = "dropoff_completed" },
+                    new GetDropRequestAndOperatorRequestContract() { Status = BoatRequestStatusConstants.DropOffCompleted },
                     new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
                 }
             }
@@ -121,10 +142,10 @@ public class AdminBoatRequestService : IAdminBoatRequestService
              DataSource = "BoatCluster",
              Database = "BoatDB",
              Collection ="Requests",
-             Filter = new ConfirmDropFilterRequestContract(){ BoatNumber =boatNumber},
+             Filter = new ConfirmDropFilterRequestContract(){ BoatNumber = boatNumber},
              Update = new ConfirmDropUpdateRequestContract() { Set = new ConfirmDropUpdateSetRequestContract()
              {
-                 Status = "drop_confirmed"
+                 Status = BoatRequestStatusConstants.DropConfirmed
              }}
         });
     }
@@ -136,8 +157,8 @@ public class AdminBoatRequestService : IAdminBoatRequestService
                 DataSource = "BoatCluster",
                 Database = "BoatDB",
                 Collection = "Requests",
-                Filter = new MarkAsFilterRequestContract() { Status = "drop_confirmed" },
-                Update = new MarkAsUpdateRequestContract() { Set = new MarkAsUpdateSetRequestContract() { Status = "in_transit_drop"}}
+                Filter = new MarkAsFilterRequestContract() { Status = BoatRequestStatusConstants.DropConfirmed },
+                Update = new MarkAsUpdateRequestContract() { Set = new MarkAsUpdateSetRequestContract() { Status = BoatRequestStatusConstants.InTransitDrop }}
         });
     }
     
@@ -148,8 +169,8 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             DataSource = "BoatCluster",
             Database = "BoatDB",
             Collection = "Requests",
-            Filter = new MarkAsFilterRequestContract() { Status = "in_transit_drop" },
-            Update = new MarkAsUpdateRequestContract() { Set = new MarkAsUpdateSetRequestContract() { Status = "dropoff_completed"}}
+            Filter = new MarkAsFilterRequestContract() { Status = BoatRequestStatusConstants.InTransitDrop },
+            Update = new MarkAsUpdateRequestContract() { Set = new MarkAsUpdateSetRequestContract() { Status = BoatRequestStatusConstants.DropOffCompleted }}
         });
     }
 }
