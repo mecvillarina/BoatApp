@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoatApp.Maui.Services", "Bo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoatApp.Models", "BoatApp.Models\BoatApp.Models.csproj", "{138E65AD-7979-4587-8873-0A0952012C03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoatApp.Maui.UI", "BoatApp.Maui.UI\BoatApp.Maui.UI\BoatApp.Maui.UI.csproj", "{0C4929E1-FA2C-4380-8557-FD0B9F6BCF95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoatApp.Maui.UI", "BoatApp.Maui.UI\BoatApp.Maui.UI.csproj", "{0C4929E1-FA2C-4380-8557-FD0B9F6BCF95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.0 Common", "1.0 Common", "{6C7266A1-18C9-4C95-A4F6-073DB7B3A354}"
 EndProject
