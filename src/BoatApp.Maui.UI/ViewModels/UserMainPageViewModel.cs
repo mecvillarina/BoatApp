@@ -5,6 +5,7 @@ using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.UI.Models;
 using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.Views;
+using BoatApp.Models;
 using BoatApp.Models.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -42,7 +43,19 @@ public partial class UserMainPageViewModel : PageViewModelBase
         try
         {
             var date = DateTime.Now.ToString("MM/dd/yyyy");
-            await _boatService.SubmitDropRequestAsync(model.Contract.BoatNumber, model.Contract.OwnerId, model.Contract.BoatName, model.Contract.ImageUrl, "Shuttle Club Point 1", date);
+            // await _boatService.SubmitDropRequestAsync(model.Contract.BoatNumber, model.Contract.OwnerId, model.Contract.BoatName, model.Contract.ImageUrl, "Shuttle Club Point 1", date);
+            await _boatService.SubmitDropRequestAsync(new SubmitDropRequestParameter()
+            {
+                BoatName = model.Contract.BoatName,
+                BoatNumber = model.Contract.BoatNumber,
+                BoatImageUrl = model.Contract.ImageUrl,
+                
+                OwnerId = model.Contract.OwnerId,
+                OwnerName = _user.Name,
+                
+                PickupPoint = "Shuttle Club Point 1",
+                PickupDate = date
+            });
             await _boatService.UpdateBoatStatusAsync(model.Contract.BoatNumber, BoatRequestStatusConstants.DropRequestSubmitted);
             await _popupService.ShowAsync(new DropRequestSubmittedPopup());
             IsMyBoatsRefreshing = true;

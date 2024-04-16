@@ -10,6 +10,9 @@ public class SubmitDropRequestDocumentRequestContract
     [JsonPropertyName("boat_number")]
     public string BoatNumber { get; set; }
 
+    [JsonPropertyName("boat_name")]
+    public string BoatName { get; set; }
+    
     [JsonPropertyName("image_url")]
     public string BoatImageUrl { get; set; }
 

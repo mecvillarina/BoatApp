@@ -2,6 +2,7 @@
 using BoatApp.Common.Constants;
 using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.Services.Web.Api;
+using BoatApp.Models;
 using BoatApp.Models.Contracts;
 using BoatApp.Models.Contracts.Requests;
 
@@ -29,7 +30,7 @@ public class BoatService : IBoatService
         return response.Documents;
     }
     
-    public async Task SubmitDropRequestAsync(string boatNumber, string ownerId, string ownerName, string boatImageUrl, string pickupPoint, string pickupDate)
+    public async Task SubmitDropRequestAsync(SubmitDropRequestParameter parameter)
     {
         var contract = new SubmitDropRequestRootRequestContract()
         {
@@ -39,12 +40,13 @@ public class BoatService : IBoatService
             Document = new SubmitDropRequestDocumentRequestContract()
             {
                 RequestType = "drop_off",
-                BoatNumber = boatNumber,
-                OwnerId = ownerId,
-                OwnerName = ownerName,
-                BoatImageUrl = boatImageUrl,
-                PickupPoint = pickupPoint,
-                PickupDate = pickupDate,
+                BoatName = parameter.BoatName,
+                BoatNumber = parameter.BoatNumber,
+                BoatImageUrl = parameter.BoatImageUrl,
+                OwnerId = parameter.OwnerId,
+                OwnerName = parameter.OwnerName,
+                PickupPoint = parameter.PickupPoint,
+                PickupDate = parameter.PickupDate,
                 Status = BoatRequestStatusConstants.DropRequestSubmitted,
                 Origin = new SubmitDropRequestLocationRequestContract()
                     { Dock = "ClubDock", Zone = "ClubZone", Latitude = 37.7749, Longitude = -122.4194 },
