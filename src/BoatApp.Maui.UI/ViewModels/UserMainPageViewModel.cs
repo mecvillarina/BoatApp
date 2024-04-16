@@ -28,7 +28,7 @@ public partial class UserMainPageViewModel : PageViewModelBase
     [ObservableProperty] private string _memberSinceDisplay;
     [ObservableProperty] private string _profilePictureUrl;
     [ObservableProperty] private bool _isMyBoatsRefreshing;
-    [ObservableProperty] private List<BoatItemModel> _boats = [];
+    [ObservableProperty] private List<BoatItemModel> _boats = new();
 
     [RelayCommand]
     private void RefreshMyBoatsData()
