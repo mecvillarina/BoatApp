@@ -4,6 +4,7 @@ using BoatApp.Models.Contracts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using DryIoc;
 using Prism.Common;
+using System.Globalization;
 
 namespace BoatApp.Maui.UI.Models;
 
@@ -37,7 +38,7 @@ public partial class BoatRequestItemModel : ObservableObject
         ParkingLocationZone = contract.Origin.Zone;
         
         PickupPoint = $"Pickup Point : {contract.PickupPoint} ";
-        PickupDate = $"Date : {DateTime.Parse(contract.PickupDate): dddd, MMMM dd, yyyy}";
+        PickupDate = $"Date : {DateTime.ParseExact(contract.PickupDate, "MM/dd/yyyy", CultureInfo.InvariantCulture): dddd, MMMM dd, yyyy}";
         PickupTime = "Time : 12.00 PM ";
 
         RequestStatus = EnumExtensions.GetBoatRequestStatus(contract.Status);

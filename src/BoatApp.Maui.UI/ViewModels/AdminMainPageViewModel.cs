@@ -202,7 +202,7 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                     var dropOffSubmittedRequests = await _adminBoatRequestService.GetAllRequestDropSubmittedRequestsAsync();
                     RecentRequests = dropOffSubmittedRequests.Select(x => new BoatRequestItemModel(x)).ToList();
                 }
-                catch
+                catch(Exception ex)
                 {
 
                 }
