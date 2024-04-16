@@ -53,13 +53,15 @@
                                    WidthRequest="32" />
                         </Border>
 
-                        <material:TextField Grid.Column="1"
+                        <material:TextField Title=" "
+                                            Grid.Column="1"
                                             Margin="0,-5,0,0"
                                             BorderColor="White"
                                             CornerRadius="10"
                                             InputBackgroundColor="White"
                                             Keyboard="Numeric"
                                             Text="{Binding PhoneNumber}"
+                                            TitleColor="Transparent"
                                             VerticalOptions="Center" />
 
                     </Grid>

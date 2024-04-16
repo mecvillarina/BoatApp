@@ -380,7 +380,7 @@
                                                                         FontSize="12"
                                                                         HeightRequest="30"
                                                                         IsVisible="False"
-                                                                        Text="↗ Request Drop"
+                                                                        Text="Request Drop"
                                                                         TextColor="{StaticResource White}"
                                                                         VerticalOptions="Center">
                                                                     <Button.Triggers>
@@ -396,6 +396,7 @@
                                                                         BackgroundColor="{StaticResource BlueOpaque008}"
                                                                         BorderColor="{StaticResource Blue}"
                                                                         BorderWidth="1"
+                                                                        CornerRadius="15"
                                                                         FontFamily="SFUIDisplayRegular"
                                                                         FontSize="12"
                                                                         HeightRequest="30"
@@ -416,6 +417,7 @@
                                                                         BackgroundColor="{StaticResource GreenOpaque008}"
                                                                         BorderColor="{StaticResource Green}"
                                                                         BorderWidth="1"
+                                                                        CornerRadius="15"
                                                                         FontFamily="SFUIDisplayRegular"
                                                                         FontSize="12"
                                                                         HeightRequest="30"
@@ -436,6 +438,7 @@
                                                                         BackgroundColor="{StaticResource OrangeOpaque008}"
                                                                         BorderColor="{StaticResource Orange}"
                                                                         BorderWidth="1"
+                                                                        CornerRadius="15"
                                                                         FontFamily="SFUIDisplayRegular"
                                                                         FontSize="12"
                                                                         HeightRequest="30"
@@ -456,6 +459,7 @@
                                                                         BackgroundColor="{StaticResource PrimaryOpaque008}"
                                                                         BorderColor="{StaticResource Primary}"
                                                                         BorderWidth="1"
+                                                                        CornerRadius="15"
                                                                         FontFamily="SFUIDisplayRegular"
                                                                         FontSize="12"
                                                                         HeightRequest="30"
@@ -608,6 +612,7 @@
                               RowSpacing="8">
 
                             <Button Command="{Binding LogoutCommand}"
+                                    StyleClass="FilledButton"
                                     Text="Logout" />
                         </Grid>
                     </Grid>

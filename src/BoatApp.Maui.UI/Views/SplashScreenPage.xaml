@@ -11,7 +11,7 @@
     <Grid RowDefinitions="0.3*,0.7*">
         <Image Grid.RowSpan="2"
                Aspect="AspectFill"
-               Source="bg_splashscreen" />
+               Source="bg_splashscreen.jpg" />
 
         <VerticalStackLayout Grid.Row="1"
                              Spacing="20"

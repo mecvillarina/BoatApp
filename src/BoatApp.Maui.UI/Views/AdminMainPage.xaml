@@ -275,11 +275,13 @@
                                                TextColor="{StaticResource White}"
                                                VerticalOptions="Center" />
 
-                                        <material:TextField Margin="0"
+                                        <material:TextField Title=" "
+                                                            Margin="0"
                                                             BorderColor="{StaticResource White}"
                                                             CornerRadius="10"
                                                             InputBackgroundColor="#CCFFFFFF"
                                                             Keyboard="Numeric"
+                                                            TitleColor="Transparent"
                                                             VerticalOptions="Center">
                                             <material:TextField.Attachments>
                                                 <Image Margin="8,0,16,0"
@@ -585,7 +587,7 @@
                                 </Border>
 
                                 <Grid Padding="20">
-                                    <Grid VerticalOptions="Start">
+                                    <Grid VerticalOptions="Center">
 
                                         <Image HeightRequest="18"
                                                HorizontalOptions="Start"
@@ -639,7 +641,7 @@
                                 </ScrollView>
 
                                 <Grid Grid.Row="1"
-                                      RowDefinitions="Auto,*"
+                                      RowDefinitions="Auto,*,Auto"
                                       RowSpacing="8">
 
                                     <Grid>
@@ -776,6 +778,7 @@
                                                                     BackgroundColor="{StaticResource GreenOpaque008}"
                                                                     BorderColor="{StaticResource Green}"
                                                                     BorderWidth="1"
+                                                                    CornerRadius="15"
                                                                     FontFamily="SFUIDisplayRegular"
                                                                     FontSize="12"
                                                                     HeightRequest="30"
@@ -798,6 +801,7 @@
                                                                     BackgroundColor="{StaticResource OrangeOpaque008}"
                                                                     BorderColor="{StaticResource Orange}"
                                                                     BorderWidth="1"
+                                                                    CornerRadius="15"
                                                                     FontFamily="SFUIDisplayRegular"
                                                                     FontSize="12"
                                                                     HeightRequest="30"
@@ -820,6 +824,7 @@
                                                                     BackgroundColor="{StaticResource BlueOpaque008}"
                                                                     BorderColor="{StaticResource Blue}"
                                                                     BorderWidth="1"
+                                                                    CornerRadius="15"
                                                                     FontFamily="SFUIDisplayRegular"
                                                                     FontSize="12"
                                                                     HeightRequest="30"
@@ -841,70 +846,70 @@
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
 
-                                            <CollectionView.Footer>
-                                                <VerticalStackLayout VerticalOptions="Start">
-                                                    <material:ButtonView BackgroundColor="{StaticResource Primary}"
-                                                                         IsVisible="{Binding IsBoatDropOffMarkAsTransitButtonVisible}"
-                                                                         StrokeShape="RoundRectangle 10"
-                                                                         TappedCommand="{Binding MarkAsTransitCommand}">
-                                                        <Grid>
-                                                            <Label FontFamily="SFUIDisplaySemibold"
-                                                                   FontSize="16"
-                                                                   HorizontalTextAlignment="Center"
-                                                                   Text="MARK AS IN TRANSIT"
-                                                                   TextColor="{StaticResource White}"
-                                                                   VerticalTextAlignment="Center">
-
-                                                                <Label.Triggers>
-                                                                    <DataTrigger Binding="{Binding IsSendingData}"
-                                                                                 TargetType="Label"
-                                                                                 Value="True">
-                                                                        <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                                                                    </DataTrigger>
-                                                                </Label.Triggers>
-                                                            </Label>
-
-                                                            <ActivityIndicator HeightRequest="24"
-                                                                               IsRunning="True"
-                                                                               IsVisible="{Binding IsSendingData}"
-                                                                               Color="{StaticResource White}" />
-                                                        </Grid>
-
-                                                    </material:ButtonView>
-
-                                                    <material:ButtonView BackgroundColor="{StaticResource Primary}"
-                                                                         IsVisible="{Binding IsBoatDropOffMarkAsCompleteButtonVisible}"
-                                                                         StrokeShape="RoundRectangle 10"
-                                                                         TappedCommand="{Binding MarkAsCompleteCommand}">
-                                                        <Grid>
-                                                            <Label FontFamily="SFUIDisplaySemibold"
-                                                                   FontSize="16"
-                                                                   HorizontalTextAlignment="Center"
-                                                                   Text="MARK AS COMPLETE"
-                                                                   TextColor="{StaticResource White}"
-                                                                   VerticalTextAlignment="Center">
-
-                                                                <Label.Triggers>
-                                                                    <DataTrigger Binding="{Binding IsSendingData}"
-                                                                                 TargetType="Label"
-                                                                                 Value="True">
-                                                                        <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                                                                    </DataTrigger>
-                                                                </Label.Triggers>
-                                                            </Label>
-
-                                                            <ActivityIndicator HeightRequest="24"
-                                                                               IsRunning="True"
-                                                                               IsVisible="{Binding IsSendingData}"
-                                                                               Color="{StaticResource White}" />
-                                                        </Grid>
-
-                                                    </material:ButtonView>
-                                                </VerticalStackLayout>
-
-                                            </CollectionView.Footer>
                                         </CollectionView>
                                     </RefreshView>
+
+                                    <VerticalStackLayout Grid.Row="2"
+                                                         VerticalOptions="Start">
+                                        <material:ButtonView BackgroundColor="{StaticResource Primary}"
+                                                             IsVisible="{Binding IsBoatDropOffMarkAsTransitButtonVisible}"
+                                                             StrokeShape="RoundRectangle 10"
+                                                             TappedCommand="{Binding MarkAsTransitCommand}">
+                                            <Grid>
+                                                <Label FontFamily="SFUIDisplaySemibold"
+                                                       FontSize="16"
+                                                       HorizontalTextAlignment="Center"
+                                                       Text="MARK AS IN TRANSIT"
+                                                       TextColor="{StaticResource White}"
+                                                       VerticalTextAlignment="Center">
+
+                                                    <Label.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSendingData}"
+                                                                     TargetType="Label"
+                                                                     Value="True">
+                                                            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+
+                                                <ActivityIndicator HeightRequest="24"
+                                                                   IsRunning="True"
+                                                                   IsVisible="{Binding IsSendingData}"
+                                                                   Color="{StaticResource White}" />
+                                            </Grid>
+
+                                        </material:ButtonView>
+
+                                        <material:ButtonView BackgroundColor="{StaticResource Primary}"
+                                                             IsVisible="{Binding IsBoatDropOffMarkAsCompleteButtonVisible}"
+                                                             StrokeShape="RoundRectangle 10"
+                                                             TappedCommand="{Binding MarkAsCompleteCommand}">
+                                            <Grid>
+                                                <Label FontFamily="SFUIDisplaySemibold"
+                                                       FontSize="16"
+                                                       HorizontalTextAlignment="Center"
+                                                       Text="MARK AS COMPLETE"
+                                                       TextColor="{StaticResource White}"
+                                                       VerticalTextAlignment="Center">
+
+                                                    <Label.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSendingData}"
+                                                                     TargetType="Label"
+                                                                     Value="True">
+                                                            <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+
+                                                <ActivityIndicator HeightRequest="24"
+                                                                   IsRunning="True"
+                                                                   IsVisible="{Binding IsSendingData}"
+                                                                   Color="{StaticResource White}" />
+                                            </Grid>
+
+                                        </material:ButtonView>
+                                    </VerticalStackLayout>
+
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -962,12 +967,14 @@
                               RowDefinitions="Auto,*"
                               RowSpacing="8">
 
-                            <material:TextField Margin="0"
+                            <material:TextField Title=" "
+                                                Margin="0"
                                                 BorderColor="{StaticResource White}"
                                                 CornerRadius="10"
                                                 Icon="ic_search"
                                                 InputBackgroundColor="#CCFFFFFF"
                                                 Keyboard="Numeric"
+                                                TitleColor="Transparent"
                                                 VerticalOptions="Center" />
 
                             <RefreshView Grid.Row="1"
@@ -1176,6 +1183,7 @@
                               RowSpacing="8">
 
                             <Button Command="{Binding LogoutCommand}"
+                                    StyleClass="FilledButton"
                                     Text="Logout" />
                         </Grid>
                     </Grid>

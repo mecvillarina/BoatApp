@@ -51,50 +51,60 @@
 
                 <VerticalStackLayout Spacing="40">
                     <FlexLayout>
-                        <material:TextField Margin="2,0"
+                        <material:TextField Title=" "
+                                            Margin="2,0"
                                             BorderColor="White"
                                             CornerRadius="10"
                                             FlexLayout.Grow="1"
                                             HorizontalOptions="Fill"
                                             InputBackgroundColor="White"
                                             Keyboard="Numeric"
-                                            MaxLength="1" />
+                                            MaxLength="1"
+                                            TitleColor="Transparent" />
 
-                        <material:TextField Margin="2,0"
+                        <material:TextField Title=" "
+                                            Margin="2,0"
                                             BorderColor="White"
                                             CornerRadius="10"
                                             FlexLayout.Grow="1"
                                             HorizontalOptions="Fill"
                                             InputBackgroundColor="White"
                                             Keyboard="Numeric"
-                                            MaxLength="1" />
+                                            MaxLength="1"
+                                            TitleColor="Transparent" />
 
-                        <material:TextField Margin="2,0"
+                        <material:TextField Title=" "
+                                            Margin="2,0"
                                             BorderColor="White"
                                             CornerRadius="10"
                                             FlexLayout.Grow="1"
                                             HorizontalOptions="Fill"
                                             InputBackgroundColor="White"
                                             Keyboard="Numeric"
-                                            MaxLength="1" />
+                                            MaxLength="1"
+                                            TitleColor="Transparent" />
 
-                        <material:TextField Margin="2,0"
+                        <material:TextField Title=" "
+                                            Margin="2,0"
                                             BorderColor="White"
                                             CornerRadius="10"
                                             FlexLayout.Grow="1"
                                             HorizontalOptions="Fill"
                                             InputBackgroundColor="White"
                                             Keyboard="Numeric"
-                                            MaxLength="1" />
+                                            MaxLength="1"
+                                            TitleColor="Transparent" />
 
-                        <material:TextField Margin="2,0"
+                        <material:TextField Title=" "
+                                            Margin="2,0"
                                             BorderColor="White"
                                             CornerRadius="10"
                                             FlexLayout.Grow="1"
                                             HorizontalOptions="Fill"
                                             InputBackgroundColor="White"
                                             Keyboard="Numeric"
-                                            MaxLength="1" />
+                                            MaxLength="1"
+                                            TitleColor="Transparent" />
                     </FlexLayout>
 
                     <VerticalStackLayout Spacing="28">
