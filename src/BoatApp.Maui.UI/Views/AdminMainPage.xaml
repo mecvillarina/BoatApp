@@ -413,7 +413,8 @@
                                     <RefreshView Grid.Row="1"
                                                  Command="{Binding RefreshHomeTabDataCommand}"
                                                  IsRefreshing="{Binding IsHomeTabRefreshing}">
-                                        <CollectionView ItemsSource="{Binding RecentRequests}">
+                                        <CollectionView ItemsSource="{Binding RecentRequests}"
+                                                        VerticalScrollBarVisibility="Never">
                                             <CollectionView.ItemsLayout>
                                                 <LinearItemsLayout ItemSpacing="8"
                                                                    Orientation="Vertical" />
@@ -733,7 +734,8 @@
                                     <RefreshView Grid.Row="1"
                                                  Command="{Binding RefreshBoatDropOffDataCommand}"
                                                  IsRefreshing="{Binding IsBoatDropOffRegionRefreshing}">
-                                        <CollectionView ItemsSource="{Binding BoatDropOffRequests}">
+                                        <CollectionView ItemsSource="{Binding BoatDropOffRequests}"
+                                                        VerticalScrollBarVisibility="Never">
                                             <CollectionView.ItemsLayout>
                                                 <LinearItemsLayout ItemSpacing="8"
                                                                    Orientation="Vertical" />
@@ -1053,7 +1055,8 @@
                                          Command="{Binding RefreshBoatTabDataCommand}"
                                          IsRefreshing="{Binding IsBoatTabRefreshing}">
 
-                                <CollectionView ItemsSource="{Binding BoatOwnerList}">
+                                <CollectionView ItemsSource="{Binding BoatOwnerList}"
+                                                VerticalScrollBarVisibility="Never">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout ItemSpacing="8"
                                                            Orientation="Vertical" />
