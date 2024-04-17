@@ -44,8 +44,8 @@
 
     <PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Release'">
         <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-        <CodesignKey>iPhone Distribution: Anil Kancharla (H5ANG973B5)</CodesignKey>
-        <CodesignProvision>BoatApp Store Provisioning</CodesignProvision>
+        <CodesignKey>iPhone Distribution: MVS360 LLC (GCT334PJ7N)</CodesignKey>
+        <CodesignProvision>Boat Shuttle Store Provisioning</CodesignProvision>
         <MtouchLink>SdkOnly</MtouchLink>
         <MtouchExtraArgs>--linkskip=mscorlib</MtouchExtraArgs>
         <CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>

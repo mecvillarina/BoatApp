@@ -297,7 +297,8 @@
                             <RefreshView Grid.Row="1"
                                          Command="{Binding RefreshMyBoatsDataCommand}"
                                          IsRefreshing="{Binding IsMyBoatsRefreshing}">
-                                <CollectionView ItemsSource="{Binding Boats}">
+                                <CollectionView ItemsSource="{Binding Boats}"
+                                                VerticalScrollBarVisibility="Never">
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout ItemSpacing="8"
                                                            Orientation="Vertical" />
