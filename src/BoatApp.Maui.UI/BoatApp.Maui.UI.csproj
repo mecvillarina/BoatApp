@@ -26,8 +26,8 @@
 
     <PropertyGroup Condition="$(TargetFramework.Contains('-android'))">
         <AndroidKeyStore>True</AndroidKeyStore>
-        <AndroidSigningKeyStore>haasystem.keystore</AndroidSigningKeyStore>
-        <AndroidSigningKeyAlias>haasystem</AndroidSigningKeyAlias>
+        <AndroidSigningKeyStore>mvs360.keystore</AndroidSigningKeyStore>
+        <AndroidSigningKeyAlias>mvs360</AndroidSigningKeyAlias>
         <AndroidSigningKeyPass>Summ3rTime20184</AndroidSigningKeyPass>
         <AndroidSigningStorePass>Summ3rTime20184</AndroidSigningStorePass>
     </PropertyGroup>
