@@ -199,8 +199,9 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                     ScheduleDropRequestCount = confirmDropOffRequests.Count;
                     SchedulePickupRequestCount = confirmPickupRequests.Count;
 
-                    var dropOffSubmittedRequests = await _adminBoatRequestService.GetAllRequestDropSubmittedRequestsAsync();
-                    RecentRequests = dropOffSubmittedRequests.Select(x => new BoatRequestItemModel(x)).ToList();
+                    var dropOffSubmittedRequests = await _adminBoatRequestService.GetRecentRequestsAsync();
+                    var recentRequests = dropOffSubmittedRequests.Select(x => new BoatRequestItemModel(x)).ToList();
+                    RecentRequests = recentRequests.OrderBy(x => (int)(x.RequestStatus)).ToList();
                 }
                 catch(Exception ex)
                 {

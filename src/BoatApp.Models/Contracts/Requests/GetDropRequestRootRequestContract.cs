@@ -14,5 +14,6 @@ public class GetDropRequestRootRequestContract
     public string Collection { get; set; }
     
     [JsonPropertyName("filter")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public GetDropRequestFilterRequestContract Filter { get; set; }
 }

@@ -55,7 +55,7 @@ public class AdminBoatRequestService : IAdminBoatRequestService
         return data.Documents;
     }
 
-    public async Task<List<BoatRequestContract>> GetAllRequestDropSubmittedRequestsAsync()
+    public async Task<List<BoatRequestContract>> GetRecentRequestsAsync()
     {
         var data = await _adminBoatRequestApi.GetAllDropRequestsAsync(new GetDropRequestRootRequestContract()
         {
@@ -64,11 +64,11 @@ public class AdminBoatRequestService : IAdminBoatRequestService
             Collection = "Requests",
             Filter = new GetDropRequestFilterRequestContract()
             {
-                And = new List<GetDropRequestAndOperatorRequestContract>()
-                {
-                    new GetDropRequestAndOperatorRequestContract() { Status = BoatRequestStatusConstants.DropRequestSubmitted },
-                    new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
-                }
+                // And = new List<GetDropRequestAndOperatorRequestContract>()
+                // {
+                //     new GetDropRequestAndOperatorRequestContract() { Status = BoatRequestStatusConstants.DropRequestSubmitted },
+                //     new GetDropRequestAndOperatorRequestContract() { RequestType = "drop_off"}
+                // }
             }
         });
         

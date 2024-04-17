@@ -7,7 +7,7 @@ public interface IAdminBoatRequestService
     Task<List<BoatRequestContract>> GetScheduleDropRequestsAsync();
     Task<List<BoatRequestContract>> GetSchedulePickupRequestsAsync();
 
-    Task<List<BoatRequestContract>> GetAllRequestDropSubmittedRequestsAsync();
+    Task<List<BoatRequestContract>> GetRecentRequestsAsync();
     
     Task<List<BoatRequestContract>> GetAllConfirmedDropRequestsAsync();
     Task<List<BoatRequestContract>> GetAllInTransitDropRequestsAsync();
