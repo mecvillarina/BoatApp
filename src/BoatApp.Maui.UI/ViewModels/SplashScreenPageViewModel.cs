@@ -17,7 +17,7 @@ public class SplashScreenPageViewModel : PageViewModelBase
     {
         base.OnNavigatedTo(parameters);
 
-        await Task.Delay(500);
+        await Task.Delay(3000);
 
         var userType = _userService.GetCurrentUserType();
 

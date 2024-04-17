@@ -5,10 +5,13 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 xmlns:uranium="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
                 x:DataType="viewmodels:SplashScreenPageViewModel">
-    <Grid RowDefinitions="0.3*,0.7*">
+
+    <Grid IgnoreSafeArea="True"
+          RowDefinitions="0.3*,0.7*">
         <Image Grid.RowSpan="2"
                Aspect="AspectFill"
                Source="bg_splashscreen.jpg" />

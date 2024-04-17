@@ -9,619 +9,639 @@
                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
                 x:DataType="viewmodels:UserMainPageViewModel"
+                BackgroundColor="{StaticResource White}"
                 HideSoftInputOnTapped="True">
 
+    <local:PageBase.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}"
+                                   StatusBarStyle="LightContent" />
+    </local:PageBase.Behaviors>
 
-    <material:TabView BackgroundColor="{StaticResource White}"
-                      TabPlacement="Bottom">
+    <Grid BackgroundColor="{StaticResource White}">
+        <material:TabView x:Name="MainTabView"
+                          BackgroundColor="{StaticResource White}"
+                          TabPlacement="Bottom">
 
-        <material:TabView.TabHeaderItemTemplate>
-            <DataTemplate x:DataType="material:TabItem">
+            <material:TabView.TabHeaderItemTemplate>
+                <DataTemplate x:DataType="material:TabItem">
 
-                <VerticalStackLayout Padding="0,8"
-                                     Spacing="4">
-                    <ImageButton Command="{Binding Command}"
-                                 HeightRequest="{OnIdiom Default=20,
-                                                         Tablet=32,
-                                                         Desktop=40}"
-                                 HorizontalOptions="Center"
-                                 WidthRequest="{OnIdiom Default=20,
-                                                        Tablet=32,
-                                                        Desktop=40}">
+                    <VerticalStackLayout Padding="0,8"
+                                         Spacing="4">
+                        <ImageButton Command="{Binding Command}"
+                                     HeightRequest="{OnIdiom Default=20,
+                                                             Tablet=32,
+                                                             Desktop=40}"
+                                     HorizontalOptions="Center"
+                                     WidthRequest="{OnIdiom Default=20,
+                                                            Tablet=32,
+                                                            Desktop=40}">
 
-                        <ImageButton.Triggers>
-                            <MultiTrigger TargetType="ImageButton">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Home" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="True" />
-                                </MultiTrigger.Conditions>
+                            <ImageButton.Triggers>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Home" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
 
-                                <Setter Property="Source" Value="ic_selected_home" />
-                            </MultiTrigger>
+                                    <Setter Property="Source" Value="ic_selected_home" />
+                                </MultiTrigger>
 
-                            <MultiTrigger TargetType="ImageButton">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Home" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="False" />
-                                </MultiTrigger.Conditions>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Home" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
 
-                                <Setter Property="Source" Value="ic_default_home" />
-                            </MultiTrigger>
+                                    <Setter Property="Source" Value="ic_default_home" />
+                                </MultiTrigger>
 
-                            <MultiTrigger TargetType="ImageButton">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Boats" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="True" />
-                                </MultiTrigger.Conditions>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Boats" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
 
-                                <Setter Property="Source" Value="ic_selected_boats" />
-                            </MultiTrigger>
+                                    <Setter Property="Source" Value="ic_selected_boats" />
+                                </MultiTrigger>
 
-                            <MultiTrigger TargetType="ImageButton">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Boats" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="False" />
-                                </MultiTrigger.Conditions>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Boats" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
 
-                                <Setter Property="Source" Value="ic_default_boats" />
-                            </MultiTrigger>
+                                    <Setter Property="Source" Value="ic_default_boats" />
+                                </MultiTrigger>
 
-                            <MultiTrigger TargetType="ImageButton">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Request" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="True" />
-                                </MultiTrigger.Conditions>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Request" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
 
-                                <Setter Property="Source" Value="ic_selected_request" />
-                            </MultiTrigger>
+                                    <Setter Property="Source" Value="ic_selected_request" />
+                                </MultiTrigger>
 
-                            <MultiTrigger TargetType="ImageButton">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Request" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="False" />
-                                </MultiTrigger.Conditions>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Request" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
 
-                                <Setter Property="Source" Value="ic_default_request" />
-                            </MultiTrigger>
-
-
-                            <MultiTrigger TargetType="ImageButton">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Account" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="True" />
-                                </MultiTrigger.Conditions>
-
-                                <Setter Property="Source" Value="ic_selected_account" />
-                            </MultiTrigger>
-
-                            <MultiTrigger TargetType="ImageButton">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Account" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="False" />
-                                </MultiTrigger.Conditions>
-
-                                <Setter Property="Source" Value="ic_default_account" />
-                            </MultiTrigger>
+                                    <Setter Property="Source" Value="ic_default_request" />
+                                </MultiTrigger>
 
 
-                        </ImageButton.Triggers>
-                    </ImageButton>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Account" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
 
-                    <Label FontFamily="SFUIDisplayRegular"
-                           FontSize="10"
-                           HorizontalOptions="Center"
-                           Text="{Binding Title}"
-                           TextColor="{StaticResource TabTextDefaultColor}">
+                                    <Setter Property="Source" Value="ic_selected_account" />
+                                </MultiTrigger>
 
-                        <Label.Triggers>
-                            <MultiTrigger TargetType="Label">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Home" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="True" />
-                                </MultiTrigger.Conditions>
+                                <MultiTrigger TargetType="ImageButton">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Account" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
 
-                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                            </MultiTrigger>
+                                    <Setter Property="Source" Value="ic_default_account" />
+                                </MultiTrigger>
 
-                            <MultiTrigger TargetType="Label">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Home" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="False" />
-                                </MultiTrigger.Conditions>
 
-                                <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
-                            </MultiTrigger>
+                            </ImageButton.Triggers>
+                        </ImageButton>
 
-                            <MultiTrigger TargetType="Label">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Boats" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="True" />
-                                </MultiTrigger.Conditions>
+                        <Label FontFamily="SFUIDisplayRegular"
+                               FontSize="10"
+                               HorizontalOptions="Center"
+                               Text="{Binding Title}"
+                               TextColor="{StaticResource TabTextDefaultColor}">
 
-                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                            </MultiTrigger>
+                            <Label.Triggers>
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Home" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
 
-                            <MultiTrigger TargetType="Label">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Boats" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="False" />
-                                </MultiTrigger.Conditions>
+                                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                </MultiTrigger>
 
-                                <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
-                            </MultiTrigger>
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Home" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
 
-                            <MultiTrigger TargetType="Label">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Request" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="True" />
-                                </MultiTrigger.Conditions>
+                                    <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
+                                </MultiTrigger>
 
-                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                            </MultiTrigger>
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Boats" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
 
-                            <MultiTrigger TargetType="Label">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Request" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="False" />
-                                </MultiTrigger.Conditions>
+                                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                </MultiTrigger>
 
-                                <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
-                            </MultiTrigger>
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Boats" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
 
-                            <MultiTrigger TargetType="Label">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Account" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="True" />
-                                </MultiTrigger.Conditions>
+                                    <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
+                                </MultiTrigger>
 
-                                <Setter Property="TextColor" Value="{StaticResource Primary}" />
-                            </MultiTrigger>
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Request" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
 
-                            <MultiTrigger TargetType="Label">
-                                <MultiTrigger.Conditions>
-                                    <BindingCondition Binding="{Binding Title}"
-                                                      Value="Account" />
-                                    <BindingCondition Binding="{Binding IsSelected}"
-                                                      Value="False" />
-                                </MultiTrigger.Conditions>
+                                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                </MultiTrigger>
 
-                                <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
-                            </MultiTrigger>
-                        </Label.Triggers>
-                    </Label>
-                </VerticalStackLayout>
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Request" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
 
-            </DataTemplate>
-        </material:TabView.TabHeaderItemTemplate>
+                                    <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
+                                </MultiTrigger>
 
-        <material:TabItem Title="Home">
-            <material:TabItem.ContentTemplate>
-                <DataTemplate>
-                    <Grid BackgroundColor="{StaticResource Background}"
-                          RowDefinitions="0.2*,0.8*">
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Account" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
 
-                        <!--  Header  -->
-                        <Grid>
-                            <Border Margin="0"
-                                    Padding="0"
-                                    StrokeShape="RoundRectangle 0,0,10,10"
-                                    StrokeThickness="0">
-                                <Image Aspect="AspectFill"
-                                       Source="bg_splashscreen.jpg" />
-                            </Border>
+                                    <Setter Property="TextColor" Value="{StaticResource Primary}" />
+                                </MultiTrigger>
 
-                            <Grid Padding="20">
-                                <Grid VerticalOptions="Start">
+                                <MultiTrigger TargetType="Label">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Title}"
+                                                          Value="Account" />
+                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                          Value="False" />
+                                    </MultiTrigger.Conditions>
 
-                                    <Image HeightRequest="34"
-                                           HorizontalOptions="Start"
-                                           Source="logo_splashscreen"
-                                           VerticalOptions="Start" />
+                                    <Setter Property="TextColor" Value="{StaticResource TabTextDefaultColor}" />
+                                </MultiTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </VerticalStackLayout>
 
-                                    <Image HeightRequest="26"
-                                           HorizontalOptions="End"
-                                           Source="ic_bell"
-                                           VerticalOptions="End" />
+                </DataTemplate>
+            </material:TabView.TabHeaderItemTemplate>
+
+            <material:TabItem Title="Home">
+                <material:TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <Grid Margin="{OnPlatform iOS='0,-5,0,0', Default='0'}">
+                            <Grid BackgroundColor="{StaticResource Background}"
+                                  RowDefinitions="0.2*,0.8*">
+
+                                <!--  Header  -->
+                                <Grid>
+                                    <Border Margin="0"
+                                            Padding="0"
+                                            StrokeShape="RoundRectangle 0,0,10,10"
+                                            StrokeThickness="0">
+                                        <Image Aspect="AspectFill"
+                                               Source="bg_splashscreen.jpg" />
+                                    </Border>
+
+                                    <Grid Padding="20">
+                                        <Grid VerticalOptions="Start">
+
+                                            <Image HeightRequest="34"
+                                                   HorizontalOptions="Start"
+                                                   Source="logo_splashscreen"
+                                                   VerticalOptions="Start" />
+
+                                            <Image HeightRequest="26"
+                                                   HorizontalOptions="End"
+                                                   Source="ic_bell"
+                                                   VerticalOptions="End" />
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="Auto,*"
+                                              ColumnSpacing="8"
+                                              VerticalOptions="End">
+
+                                            <toolkit:AvatarView Padding="0"
+                                                                BackgroundColor="{StaticResource Background}"
+                                                                BorderWidth="0"
+                                                                HeightRequest="50"
+                                                                ImageSource="{Binding ProfilePictureUrl}"
+                                                                WidthRequest="50" />
+
+                                            <VerticalStackLayout Grid.Column="1"
+                                                                 Spacing="0"
+                                                                 VerticalOptions="Center">
+                                                <Label FontFamily="SFUIDisplayBold"
+                                                       FontSize="20"
+                                                       LineBreakMode="TailTruncation"
+                                                       Text="{Binding WelcomeNameDisplay}"
+                                                       TextColor="{StaticResource White}" />
+
+                                                <Label FontFamily="SFUIDisplayRegular"
+                                                       FontSize="12"
+                                                       LineBreakMode="TailTruncation"
+                                                       Text="{Binding MemberSinceDisplay}"
+                                                       TextColor="{StaticResource White}" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+
+                                    </Grid>
                                 </Grid>
 
-                                <Grid ColumnDefinitions="Auto,*"
-                                      ColumnSpacing="8"
-                                      VerticalOptions="End">
+                                <Grid Grid.Row="1"
+                                      Padding="20"
+                                      RowDefinitions="Auto,*"
+                                      RowSpacing="8">
 
-                                    <toolkit:AvatarView Padding="0"
-                                                        BackgroundColor="{StaticResource Background}"
-                                                        BorderWidth="0"
-                                                        HeightRequest="50"
-                                                        ImageSource="{Binding ProfilePictureUrl}"
-                                                        WidthRequest="50" />
+                                    <Label FontFamily="SFUIDisplayMedium"
+                                           FontSize="16"
+                                           Text="My Boats"
+                                           TextColor="{StaticResource Dark}" />
 
-                                    <VerticalStackLayout Grid.Column="1"
-                                                         Spacing="0"
-                                                         VerticalOptions="Center">
-                                        <Label FontFamily="SFUIDisplayBold"
-                                               FontSize="20"
-                                               LineBreakMode="TailTruncation"
-                                               Text="{Binding WelcomeNameDisplay}"
-                                               TextColor="{StaticResource White}" />
+                                    <RefreshView Grid.Row="1"
+                                                 Command="{Binding RefreshMyBoatsDataCommand}"
+                                                 IsRefreshing="{Binding IsMyBoatsRefreshing}">
+                                        <CollectionView ItemsSource="{Binding Boats}"
+                                                        VerticalScrollBarVisibility="Never">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="8"
+                                                                   Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
 
-                                        <Label FontFamily="SFUIDisplayRegular"
-                                               FontSize="12"
-                                               LineBreakMode="TailTruncation"
-                                               Text="{Binding MemberSinceDisplay}"
-                                               TextColor="{StaticResource White}" />
-                                    </VerticalStackLayout>
-                                </Grid>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="models:BoatItemModel">
+                                                    <Border Padding="12"
+                                                            BackgroundColor="{StaticResource White}"
+                                                            HeightRequest="200"
+                                                            StrokeShape="RoundRectangle 10"
+                                                            StrokeThickness="0">
+                                                        <Grid RowDefinitions="*,Auto"
+                                                              RowSpacing="8">
+                                                            <Image Aspect="AspectFill"
+                                                                   Source="{Binding BoatImageUrl}" />
 
-                            </Grid>
-                        </Grid>
+                                                            <VerticalStackLayout Grid.Row="1">
+                                                                <Label FontFamily="SFUIDisplayMedium"
+                                                                       FontSize="14"
+                                                                       LineBreakMode="TailTruncation"
+                                                                       Text="{Binding BoatName}"
+                                                                       TextColor="{StaticResource Dark}" />
 
-                        <Grid Grid.Row="1"
-                              Padding="20"
-                              RowDefinitions="Auto,*"
-                              RowSpacing="8">
+                                                                <Grid ColumnDefinitions="*,*">
+                                                                    <VerticalStackLayout>
+                                                                        <Grid ColumnDefinitions="Auto,*"
+                                                                              ColumnSpacing="4">
+                                                                            <Image HeightRequest="10"
+                                                                                   Source="ic_card_pin"
+                                                                                   VerticalOptions="Center" />
+                                                                            <Label Grid.Column="1"
+                                                                                   FontFamily="SFUIDisplayRegular"
+                                                                                   FontSize="12"
+                                                                                   LineBreakMode="TailTruncation"
+                                                                                   Text="{Binding ParkingLocationAddress}"
+                                                                                   TextColor="{StaticResource Dark}" />
+                                                                        </Grid>
 
-                            <Label FontFamily="SFUIDisplayMedium"
-                                   FontSize="16"
-                                   Text="My Boats"
-                                   TextColor="{StaticResource Dark}" />
+                                                                        <Grid ColumnDefinitions="Auto,*"
+                                                                              ColumnSpacing="4">
+                                                                            <Image HeightRequest="10"
+                                                                                   Source="ic_card_boat"
+                                                                                   VerticalOptions="Center" />
+                                                                            <Label Grid.Column="1"
+                                                                                   FontFamily="SFUIDisplayRegular"
+                                                                                   FontSize="12"
+                                                                                   LineBreakMode="TailTruncation"
+                                                                                   Text="{Binding ParkingLocationDock}"
+                                                                                   TextColor="{StaticResource Dark}">
+                                                                                <Label.FormattedText>
+                                                                                    <FormattedString>
+                                                                                        <Span FontFamily="SFUIDisplayRegular"
+                                                                                              FontSize="12"
+                                                                                              Text="{Binding ParkingLocationDock}"
+                                                                                              TextColor="{StaticResource Dark}" />
 
-                            <RefreshView Grid.Row="1"
-                                         Command="{Binding RefreshMyBoatsDataCommand}"
-                                         IsRefreshing="{Binding IsMyBoatsRefreshing}">
-                                <CollectionView ItemsSource="{Binding Boats}"
-                                                VerticalScrollBarVisibility="Never">
-                                    <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout ItemSpacing="8"
-                                                           Orientation="Vertical" />
-                                    </CollectionView.ItemsLayout>
+                                                                                        <Span FontFamily="SFUIDisplayRegular"
+                                                                                              FontSize="12"
+                                                                                              Text=", "
+                                                                                              TextColor="{StaticResource Dark}" />
 
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:BoatItemModel">
-                                            <Border Padding="12"
-                                                    BackgroundColor="{StaticResource White}"
-                                                    HeightRequest="200"
-                                                    StrokeShape="RoundRectangle 10"
-                                                    StrokeThickness="0">
-                                                <Grid RowDefinitions="*,Auto"
-                                                      RowSpacing="8">
-                                                    <Image Aspect="AspectFill"
-                                                           Source="{Binding BoatImageUrl}" />
+                                                                                        <Span FontFamily="SFUIDisplayRegular"
+                                                                                              FontSize="12"
+                                                                                              Text="{Binding ParkingLocationZone}"
+                                                                                              TextColor="{StaticResource Dark}" />
+                                                                                    </FormattedString>
+                                                                                </Label.FormattedText>
+                                                                            </Label>
+                                                                        </Grid>
+                                                                    </VerticalStackLayout>
 
-                                                    <VerticalStackLayout Grid.Row="1">
-                                                        <Label FontFamily="SFUIDisplayMedium"
-                                                               FontSize="14"
-                                                               LineBreakMode="TailTruncation"
-                                                               Text="{Binding BoatName}"
-                                                               TextColor="{StaticResource Dark}" />
+                                                                    <Grid Grid.Column="1">
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource Primary}"
+                                                                                Command="{Binding RequestDropCommand, Source={RelativeSource AncestorType={x:Type viewmodels:UserMainPageViewModel}}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                CornerRadius="10"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="Request Drop"
+                                                                                TextColor="{StaticResource White}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.RequestDrop}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
 
-                                                        <Grid ColumnDefinitions="*,*">
-                                                            <VerticalStackLayout>
-                                                                <Grid ColumnDefinitions="Auto,*"
-                                                                      ColumnSpacing="4">
-                                                                    <Image HeightRequest="10"
-                                                                           Source="ic_card_pin"
-                                                                           VerticalOptions="Center" />
-                                                                    <Label Grid.Column="1"
-                                                                           FontFamily="SFUIDisplayRegular"
-                                                                           FontSize="12"
-                                                                           LineBreakMode="TailTruncation"
-                                                                           Text="{Binding ParkingLocationAddress}"
-                                                                           TextColor="{StaticResource Dark}" />
-                                                                </Grid>
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource BlueOpaque008}"
+                                                                                BorderColor="{StaticResource Blue}"
+                                                                                BorderWidth="1"
+                                                                                CornerRadius="15"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="Drop Request Submitted"
+                                                                                TextColor="{StaticResource Blue}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.DropRequestSubmitted}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
 
-                                                                <Grid ColumnDefinitions="Auto,*"
-                                                                      ColumnSpacing="4">
-                                                                    <Image HeightRequest="10"
-                                                                           Source="ic_card_boat"
-                                                                           VerticalOptions="Center" />
-                                                                    <Label Grid.Column="1"
-                                                                           FontFamily="SFUIDisplayRegular"
-                                                                           FontSize="12"
-                                                                           LineBreakMode="TailTruncation"
-                                                                           Text="{Binding ParkingLocationDock}"
-                                                                           TextColor="{StaticResource Dark}">
-                                                                        <Label.FormattedText>
-                                                                            <FormattedString>
-                                                                                <Span FontFamily="SFUIDisplayRegular"
-                                                                                      FontSize="12"
-                                                                                      Text="{Binding ParkingLocationDock}"
-                                                                                      TextColor="{StaticResource Dark}" />
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource GreenOpaque008}"
+                                                                                BorderColor="{StaticResource Green}"
+                                                                                BorderWidth="1"
+                                                                                CornerRadius="15"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="Drop Confirmed"
+                                                                                TextColor="{StaticResource Green}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.DropConfirmed}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
 
-                                                                                <Span FontFamily="SFUIDisplayRegular"
-                                                                                      FontSize="12"
-                                                                                      Text=", "
-                                                                                      TextColor="{StaticResource Dark}" />
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource OrangeOpaque008}"
+                                                                                BorderColor="{StaticResource Orange}"
+                                                                                BorderWidth="1"
+                                                                                CornerRadius="15"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="In Transit (Drop)"
+                                                                                TextColor="{StaticResource Orange}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.InTransitDrop}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
 
-                                                                                <Span FontFamily="SFUIDisplayRegular"
-                                                                                      FontSize="12"
-                                                                                      Text="{Binding ParkingLocationZone}"
-                                                                                      TextColor="{StaticResource Dark}" />
-                                                                            </FormattedString>
-                                                                        </Label.FormattedText>
-                                                                    </Label>
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource PrimaryOpaque008}"
+                                                                                BorderColor="{StaticResource Primary}"
+                                                                                BorderWidth="1"
+                                                                                CornerRadius="15"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="Drop-off Completed"
+                                                                                TextColor="{StaticResource Primary}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.DropOffCompleted}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
+
+                                                                    </Grid>
                                                                 </Grid>
                                                             </VerticalStackLayout>
-
-                                                            <Grid Grid.Column="1">
-                                                                <Button Padding="0"
-                                                                        BackgroundColor="{StaticResource Primary}"
-                                                                        Command="{Binding RequestDropCommand, Source={RelativeSource AncestorType={x:Type viewmodels:UserMainPageViewModel}}}"
-                                                                        CommandParameter="{Binding .}"
-                                                                        CornerRadius="10"
-                                                                        FontFamily="SFUIDisplayRegular"
-                                                                        FontSize="12"
-                                                                        HeightRequest="30"
-                                                                        IsVisible="False"
-                                                                        Text="Request Drop"
-                                                                        TextColor="{StaticResource White}"
-                                                                        VerticalOptions="Center">
-                                                                    <Button.Triggers>
-                                                                        <DataTrigger Binding="{Binding RequestStatus}"
-                                                                                     TargetType="Button"
-                                                                                     Value="{x:Static enums:BoatRequestStatus.RequestDrop}">
-                                                                            <Setter Property="IsVisible" Value="True" />
-                                                                        </DataTrigger>
-                                                                    </Button.Triggers>
-                                                                </Button>
-
-                                                                <Button Padding="0"
-                                                                        BackgroundColor="{StaticResource BlueOpaque008}"
-                                                                        BorderColor="{StaticResource Blue}"
-                                                                        BorderWidth="1"
-                                                                        CornerRadius="15"
-                                                                        FontFamily="SFUIDisplayRegular"
-                                                                        FontSize="12"
-                                                                        HeightRequest="30"
-                                                                        IsVisible="False"
-                                                                        Text="Drop Request Submitted"
-                                                                        TextColor="{StaticResource Blue}"
-                                                                        VerticalOptions="Center">
-                                                                    <Button.Triggers>
-                                                                        <DataTrigger Binding="{Binding RequestStatus}"
-                                                                                     TargetType="Button"
-                                                                                     Value="{x:Static enums:BoatRequestStatus.DropRequestSubmitted}">
-                                                                            <Setter Property="IsVisible" Value="True" />
-                                                                        </DataTrigger>
-                                                                    </Button.Triggers>
-                                                                </Button>
-
-                                                                <Button Padding="0"
-                                                                        BackgroundColor="{StaticResource GreenOpaque008}"
-                                                                        BorderColor="{StaticResource Green}"
-                                                                        BorderWidth="1"
-                                                                        CornerRadius="15"
-                                                                        FontFamily="SFUIDisplayRegular"
-                                                                        FontSize="12"
-                                                                        HeightRequest="30"
-                                                                        IsVisible="False"
-                                                                        Text="Drop Confirmed"
-                                                                        TextColor="{StaticResource Green}"
-                                                                        VerticalOptions="Center">
-                                                                    <Button.Triggers>
-                                                                        <DataTrigger Binding="{Binding RequestStatus}"
-                                                                                     TargetType="Button"
-                                                                                     Value="{x:Static enums:BoatRequestStatus.DropConfirmed}">
-                                                                            <Setter Property="IsVisible" Value="True" />
-                                                                        </DataTrigger>
-                                                                    </Button.Triggers>
-                                                                </Button>
-
-                                                                <Button Padding="0"
-                                                                        BackgroundColor="{StaticResource OrangeOpaque008}"
-                                                                        BorderColor="{StaticResource Orange}"
-                                                                        BorderWidth="1"
-                                                                        CornerRadius="15"
-                                                                        FontFamily="SFUIDisplayRegular"
-                                                                        FontSize="12"
-                                                                        HeightRequest="30"
-                                                                        IsVisible="False"
-                                                                        Text="In Transit (Drop)"
-                                                                        TextColor="{StaticResource Orange}"
-                                                                        VerticalOptions="Center">
-                                                                    <Button.Triggers>
-                                                                        <DataTrigger Binding="{Binding RequestStatus}"
-                                                                                     TargetType="Button"
-                                                                                     Value="{x:Static enums:BoatRequestStatus.InTransitDrop}">
-                                                                            <Setter Property="IsVisible" Value="True" />
-                                                                        </DataTrigger>
-                                                                    </Button.Triggers>
-                                                                </Button>
-
-                                                                <Button Padding="0"
-                                                                        BackgroundColor="{StaticResource PrimaryOpaque008}"
-                                                                        BorderColor="{StaticResource Primary}"
-                                                                        BorderWidth="1"
-                                                                        CornerRadius="15"
-                                                                        FontFamily="SFUIDisplayRegular"
-                                                                        FontSize="12"
-                                                                        HeightRequest="30"
-                                                                        IsVisible="False"
-                                                                        Text="Drop-off Completed"
-                                                                        TextColor="{StaticResource Primary}"
-                                                                        VerticalOptions="Center">
-                                                                    <Button.Triggers>
-                                                                        <DataTrigger Binding="{Binding RequestStatus}"
-                                                                                     TargetType="Button"
-                                                                                     Value="{x:Static enums:BoatRequestStatus.DropOffCompleted}">
-                                                                            <Setter Property="IsVisible" Value="True" />
-                                                                        </DataTrigger>
-                                                                    </Button.Triggers>
-                                                                </Button>
-
-                                                            </Grid>
                                                         </Grid>
-                                                    </VerticalStackLayout>
-                                                </Grid>
-                                            </Border>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </RefreshView>
-                        </Grid>
-
-                    </Grid>
-                </DataTemplate>
-            </material:TabItem.ContentTemplate>
-        </material:TabItem>
-
-        <material:TabItem Title="Boats">
-            <material:TabItem.ContentTemplate>
-                <DataTemplate>
-                    <Grid BackgroundColor="{StaticResource Background}"
-                          RowDefinitions="0.15*,0.85*">
-
-                        <!--  Header  -->
-                        <Grid>
-                            <Border Margin="0"
-                                    Padding="0"
-                                    StrokeShape="RoundRectangle 0,0,10,10"
-                                    StrokeThickness="0">
-                                <Image Aspect="AspectFill"
-                                       Source="bg_splashscreen.jpg" />
-                            </Border>
-
-                            <Grid Padding="20">
-                                <Grid VerticalOptions="Center">
-
-                                    <!--  <Image HeightRequest="18"  -->
-                                    <!--  HorizontalOptions="Start"  -->
-                                    <!--  Source="ic_back"  -->
-                                    <!--  VerticalOptions="Center" />  -->
-
-                                    <Label FontFamily="SFUIDisplayBold"
-                                           FontSize="20"
-                                           HorizontalOptions="Center"
-                                           Text="My Boats"
-                                           TextColor="{StaticResource White}"
-                                           VerticalOptions="Center" />
+                                                    </Border>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </RefreshView>
                                 </Grid>
 
                             </Grid>
+
                         </Grid>
-                    </Grid>
-                </DataTemplate>
-            </material:TabItem.ContentTemplate>
-        </material:TabItem>
+                    </DataTemplate>
+                </material:TabItem.ContentTemplate>
+            </material:TabItem>
 
-        <material:TabItem Title="Request">
-            <material:TabItem.ContentTemplate>
-                <DataTemplate>
-                    <Grid BackgroundColor="{StaticResource Background}"
-                          RowDefinitions="0.15*,0.85*">
+            <material:TabItem Title="Boats">
+                <material:TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <Grid Margin="{OnPlatform iOS='0,-5,0,0', Default='0'}">
+                            <Grid BackgroundColor="{StaticResource Background}"
+                                  RowDefinitions="0.15*,0.85*">
 
-                        <!--  Header  -->
-                        <Grid>
-                            <Border Margin="0"
-                                    Padding="0"
-                                    StrokeShape="RoundRectangle 0,0,10,10"
-                                    StrokeThickness="0">
-                                <Image Aspect="AspectFill"
-                                       Source="bg_splashscreen.jpg" />
-                            </Border>
+                                <!--  Header  -->
+                                <Grid>
+                                    <Border Margin="0"
+                                            Padding="0"
+                                            StrokeShape="RoundRectangle 0,0,10,10"
+                                            StrokeThickness="0">
+                                        <Image Aspect="AspectFill"
+                                               Source="bg_splashscreen.jpg" />
+                                    </Border>
 
-                            <Grid Padding="20">
-                                <Grid VerticalOptions="Center">
+                                    <Grid Padding="20">
+                                        <Grid VerticalOptions="Center">
 
-                                    <!--  <Image HeightRequest="18"  -->
-                                    <!--  HorizontalOptions="Start"  -->
-                                    <!--  Source="ic_back"  -->
-                                    <!--  VerticalOptions="Center" />  -->
+                                            <!--  <Image HeightRequest="18"  -->
+                                            <!--  HorizontalOptions="Start"  -->
+                                            <!--  Source="ic_back"  -->
+                                            <!--  VerticalOptions="Center" />  -->
 
-                                    <Label FontFamily="SFUIDisplayBold"
-                                           FontSize="20"
-                                           HorizontalOptions="Center"
-                                           Text="Requests"
-                                           TextColor="{StaticResource White}"
-                                           VerticalOptions="Center" />
+                                            <Label FontFamily="SFUIDisplayBold"
+                                                   FontSize="20"
+                                                   HorizontalOptions="Center"
+                                                   Text="My Boats"
+                                                   TextColor="{StaticResource White}"
+                                                   VerticalOptions="Center" />
+                                        </Grid>
+
+                                    </Grid>
                                 </Grid>
+                            </Grid>
 
+                        </Grid>
+                    </DataTemplate>
+                </material:TabItem.ContentTemplate>
+            </material:TabItem>
+
+            <material:TabItem Title="Request">
+                <material:TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <Grid Margin="{OnPlatform iOS='0,-5,0,0', Default='0'}">
+                            <Grid BackgroundColor="{StaticResource Background}"
+                                  RowDefinitions="0.15*,0.85*">
+
+                                <!--  Header  -->
+                                <Grid>
+                                    <Border Margin="0"
+                                            Padding="0"
+                                            StrokeShape="RoundRectangle 0,0,10,10"
+                                            StrokeThickness="0">
+                                        <Image Aspect="AspectFill"
+                                               Source="bg_splashscreen.jpg" />
+                                    </Border>
+
+                                    <Grid Padding="20">
+                                        <Grid VerticalOptions="Center">
+
+                                            <!--  <Image HeightRequest="18"  -->
+                                            <!--  HorizontalOptions="Start"  -->
+                                            <!--  Source="ic_back"  -->
+                                            <!--  VerticalOptions="Center" />  -->
+
+                                            <Label FontFamily="SFUIDisplayBold"
+                                                   FontSize="20"
+                                                   HorizontalOptions="Center"
+                                                   Text="Requests"
+                                                   TextColor="{StaticResource White}"
+                                                   VerticalOptions="Center" />
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </DataTemplate>
-            </material:TabItem.ContentTemplate>
-        </material:TabItem>
+                    </DataTemplate>
+                </material:TabItem.ContentTemplate>
+            </material:TabItem>
 
-        <material:TabItem Title="Account">
-            <material:TabItem.ContentTemplate>
-                <DataTemplate>
-                    <Grid BackgroundColor="{StaticResource Background}"
-                          RowDefinitions="0.15*,0.85*">
+            <material:TabItem Title="Account">
+                <material:TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <Grid Margin="{OnPlatform iOS='0,-5,0,0', Default='0'}">
+                            <Grid BackgroundColor="{StaticResource Background}"
+                                  RowDefinitions="0.15*,0.85*">
 
-                        <!--  Header  -->
-                        <Grid>
-                            <Border Margin="0"
-                                    Padding="0"
-                                    StrokeShape="RoundRectangle 0,0,10,10"
-                                    StrokeThickness="0">
-                                <Image Aspect="AspectFill"
-                                       Source="bg_splashscreen.jpg" />
-                            </Border>
+                                <!--  Header  -->
+                                <Grid>
+                                    <Border Margin="0"
+                                            Padding="0"
+                                            StrokeShape="RoundRectangle 0,0,10,10"
+                                            StrokeThickness="0">
+                                        <Image Aspect="AspectFill"
+                                               Source="bg_splashscreen.jpg" />
+                                    </Border>
 
-                            <Grid Padding="20">
-                                <Grid VerticalOptions="Center">
+                                    <Grid Padding="20">
+                                        <Grid VerticalOptions="Center">
 
-                                    <!--  <Image HeightRequest="18"  -->
-                                    <!--  HorizontalOptions="Start"  -->
-                                    <!--  Source="ic_back"  -->
-                                    <!--  VerticalOptions="Center" />  -->
+                                            <!--  <Image HeightRequest="18"  -->
+                                            <!--  HorizontalOptions="Start"  -->
+                                            <!--  Source="ic_back"  -->
+                                            <!--  VerticalOptions="Center" />  -->
 
-                                    <Label FontFamily="SFUIDisplayBold"
-                                           FontSize="20"
-                                           HorizontalOptions="Center"
-                                           Text="Account"
-                                           TextColor="{StaticResource White}"
-                                           VerticalOptions="Center" />
+                                            <Label FontFamily="SFUIDisplayBold"
+                                                   FontSize="20"
+                                                   HorizontalOptions="Center"
+                                                   Text="Account"
+                                                   TextColor="{StaticResource White}"
+                                                   VerticalOptions="Center" />
+                                        </Grid>
+
+                                    </Grid>
                                 </Grid>
 
+                                <Grid Grid.Row="1"
+                                      Padding="20"
+                                      RowDefinitions="Auto,*"
+                                      RowSpacing="8">
+
+                                    <Grid Margin="{OnPlatform iOS='0,-5,0,0', Default='0'}">
+                                        <Button Command="{Binding LogoutCommand}"
+                                                StyleClass="FilledButton"
+                                                Text="Logout" />
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
+                    </DataTemplate>
+                </material:TabItem.ContentTemplate>
+            </material:TabItem>
+        </material:TabView>
 
-
-                        <Grid Grid.Row="1"
-                              Padding="20"
-                              RowDefinitions="Auto,*"
-                              RowSpacing="8">
-
-                            <Button Command="{Binding LogoutCommand}"
-                                    StyleClass="FilledButton"
-                                    Text="Logout" />
-                        </Grid>
-                    </Grid>
-                </DataTemplate>
-            </material:TabItem.ContentTemplate>
-        </material:TabItem>
-    </material:TabView>
+    </Grid>
 
 
 </local:PageBase>

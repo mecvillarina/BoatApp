@@ -40,6 +40,13 @@ public static class MauiProgram
 
         builder.Services.AddMopupsDialogs();
         
+        // Microsoft.Maui.Handlers.LayoutHandler.Mapper.AppendToMapping("Custom", (h, v) =>
+        // {
+        //     if (v is Layout layout)
+        //     {
+        //         layout.IgnoreSafeArea = true;
+        //     }
+        // });
         return builder.Build();
     }
 }
