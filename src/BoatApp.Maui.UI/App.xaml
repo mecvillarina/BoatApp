@@ -2,7 +2,6 @@
 <Application x:Class="BoatApp.Maui.UI.App"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:BoatApp.Maui.UI"
              xmlns:material="clr-namespace:UraniumUI.Material.Resources;assembly=UraniumUI.Material"
              UserAppTheme="Light">
     <Application.Resources>

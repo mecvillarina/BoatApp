@@ -4,9 +4,16 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
                 x:DataType="viewmodels:LoginOtpPageViewModel"
                 HideSoftInputOnTapped="True">
+
+    <local:PageBase.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Primary}"
+                                   StatusBarStyle="LightContent" />
+    </local:PageBase.Behaviors>
+
     <Grid Padding="20"
           RowDefinitions="0.2*,0.8*">
         <Image HorizontalOptions="Start"
