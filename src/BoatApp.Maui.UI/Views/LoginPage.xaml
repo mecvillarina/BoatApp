@@ -5,7 +5,8 @@
                 xmlns:local="clr-namespace:BoatApp.Maui.UI.Views"
                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
-                x:DataType="viewmodels:LoginPageViewModel">
+                x:DataType="viewmodels:LoginPageViewModel"
+                HideSoftInputOnTapped="True">
 
     <Grid Padding="20"
           RowDefinitions="0.2*, 0.8*">

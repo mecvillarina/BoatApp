@@ -8,7 +8,8 @@
                 xmlns:models="clr-namespace:BoatApp.Maui.UI.Models"
                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 xmlns:viewmodels="clr-namespace:BoatApp.Maui.UI.ViewModels"
-                x:DataType="viewmodels:UserMainPageViewModel">
+                x:DataType="viewmodels:UserMainPageViewModel"
+                HideSoftInputOnTapped="True">
 
 
     <material:TabView BackgroundColor="{StaticResource White}"
