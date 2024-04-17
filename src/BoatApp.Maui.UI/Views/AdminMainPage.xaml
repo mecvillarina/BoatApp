@@ -441,6 +441,30 @@
                                                                         <Image Aspect="AspectFill"
                                                                                Source="{Binding BoatImageUrl}" />
                                                                     </Border>
+
+                                                                    <Border Margin="4"
+                                                                            Padding="8,4"
+                                                                            BackgroundColor="#CC000000"
+                                                                            HorizontalOptions="Start"
+                                                                            IsVisible="False"
+                                                                            StrokeShape="RoundRectangle 20"
+                                                                            StrokeThickness="0"
+                                                                            VerticalOptions="Start">
+
+                                                                        <Border.Triggers>
+                                                                            <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                         TargetType="Border"
+                                                                                         Value="{x:Static enums:BoatRequestStatus.DropOffCompleted}">
+                                                                                <Setter Property="IsVisible" Value="True" />
+                                                                            </DataTrigger>
+                                                                        </Border.Triggers>
+
+                                                                        <Label FontFamily="SFUIDisplayMedium"
+                                                                               FontSize="10"
+                                                                               Text="Active Ride"
+                                                                               TextColor="{StaticResource Yellow}" />
+
+                                                                    </Border>
                                                                 </Grid>
                                                                 <Grid Grid.Column="1">
 
@@ -693,25 +717,52 @@
                                             HorizontalScrollBarVisibility="Never"
                                             Orientation="Horizontal">
 
-                                    <HorizontalStackLayout BindableLayout.ItemsSource="{Binding BoatDropOffZones}">
-                                        <BindableLayout.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border Margin="0,0,8,0"
-                                                        Padding="12,0"
-                                                        HeightRequest="28"
-                                                        Stroke="{StaticResource Gray}"
-                                                        StrokeShape="RoundRectangle 10">
-                                                    <Label FontFamily="SFUIDisplayMedium"
-                                                           FontSize="10"
-                                                           HorizontalTextAlignment="Center"
-                                                           LineBreakMode="TailTruncation"
-                                                           Text="{Binding .}"
-                                                           TextColor="{StaticResource Gray}"
-                                                           VerticalTextAlignment="Center" />
-                                                </Border>
-                                            </DataTemplate>
-                                        </BindableLayout.ItemTemplate>
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Border Padding="12,0"
+                                                HeightRequest="28"
+                                                Stroke="{StaticResource Gray}"
+                                                StrokeShape="RoundRectangle 10">
+                                            <Label FontFamily="SFUIDisplayMedium"
+                                                   FontSize="10"
+                                                   HorizontalTextAlignment="Center"
+                                                   LineBreakMode="TailTruncation"
+                                                   Text="Zone Area 1"
+                                                   TextColor="{StaticResource Gray}"
+                                                   VerticalTextAlignment="Center" />
+                                        </Border>
+
+                                        <Border Padding="12,0"
+                                                HeightRequest="28"
+                                                Stroke="{StaticResource Gray}"
+                                                StrokeShape="RoundRectangle 10">
+                                            <Label FontFamily="SFUIDisplayMedium"
+                                                   FontSize="10"
+                                                   HorizontalTextAlignment="Center"
+                                                   LineBreakMode="TailTruncation"
+                                                   Text="Zone Area 2"
+                                                   TextColor="{StaticResource Gray}"
+                                                   VerticalTextAlignment="Center" />
+                                        </Border>
                                     </HorizontalStackLayout>
+                                    <!-- <HorizontalStackLayout BindableLayout.ItemsSource="{Binding BoatDropOffZones}"> -->
+                                    <!--     <BindableLayout.ItemTemplate> -->
+                                    <!--         <DataTemplate> -->
+                                    <!--  <Border Margin="0,0,8,0"  -->
+                                    <!--  Padding="12,0"  -->
+                                    <!--  HeightRequest="28"  -->
+                                    <!--  Stroke="{StaticResource Gray}"  -->
+                                    <!--  StrokeShape="RoundRectangle 10">  -->
+                                    <!--  <Label FontFamily="SFUIDisplayMedium"  -->
+                                    <!--  FontSize="10"  -->
+                                    <!--  HorizontalTextAlignment="Center"  -->
+                                    <!--  LineBreakMode="TailTruncation"  -->
+                                    <!--  Text="{Binding .}"  -->
+                                    <!--  TextColor="{StaticResource Gray}"  -->
+                                    <!--  VerticalTextAlignment="Center" />  -->
+                                    <!--             </Border> -->
+                                    <!--         </DataTemplate> -->
+                                    <!--     </BindableLayout.ItemTemplate> -->
+                                    <!-- </HorizontalStackLayout> -->
                                 </ScrollView>
 
                                 <Grid Grid.Row="1"
