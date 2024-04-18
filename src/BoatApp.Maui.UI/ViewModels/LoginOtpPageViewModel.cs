@@ -20,17 +20,30 @@ public partial class LoginOtpPageViewModel : PageViewModelBase
     [ObservableProperty] private string _phoneNumber;
     [ObservableProperty] private bool _isLoggingIn;
 
+    [ObservableProperty] private string _txtValue1;
+    [ObservableProperty] private string _txtValue2;
+    [ObservableProperty] private string _txtValue3;
+    [ObservableProperty] private string _txtValue4;
+    [ObservableProperty] private string _txtValue5;
+
     private OwnerContract _user;
     
     [RelayCommand]
     private async Task Login()
-    { 
-        IsLoggingIn = true;
+    {
+        if (!string.IsNullOrEmpty(TxtValue1) &&
+            !string.IsNullOrEmpty(TxtValue2) &&
+            !string.IsNullOrEmpty(TxtValue3) &&
+            !string.IsNullOrEmpty(TxtValue4) &&
+            !string.IsNullOrEmpty(TxtValue5))
+        {
+            IsLoggingIn = true;
 
-        _userService.SaveUserProfile(_user);
-        await NavigationService.NavigateAsync($"../{nameof(UserMainPage)}");
+            _userService.SaveUserProfile(_user);
+            await NavigationService.NavigateAsync($"../{nameof(UserMainPage)}");
         
-        IsLoggingIn = false;
+            IsLoggingIn = false;
+        }
     }
     
     [RelayCommand]

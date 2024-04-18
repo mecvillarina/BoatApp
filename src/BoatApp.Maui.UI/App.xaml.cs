@@ -1,6 +1,4 @@
-﻿using UraniumUI.Material.Resources;
-
-namespace BoatApp.Maui.UI;
+﻿namespace BoatApp.Maui.UI;
 
 public partial class App : Application
 {
