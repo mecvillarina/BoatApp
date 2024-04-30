@@ -27,9 +27,9 @@ public partial class BoatItemModel : ObservableObject
         BoatName = contract.BoatName;
         BoatImageUrl = contract.ImageUrl;
         RequestStatus = EnumExtensions.GetBoatRequestStatus(contract.RequestStatus);
-        ParkingLocationAddress = contract.BoatLocationContract.Address;
-        ParkingLocationDock = contract.BoatLocationContract.Dock;
-        ParkingLocationZone = contract.BoatLocationContract.Zone;
+        ParkingLocationAddress = contract.ParkingLocation.Address;
+        ParkingLocationDock = contract.ParkingLocation.Dock;
+        ParkingLocationZone = contract.ParkingLocation.Zone;
 
     }
 }

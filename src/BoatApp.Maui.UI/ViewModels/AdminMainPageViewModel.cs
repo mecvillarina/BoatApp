@@ -3,7 +3,7 @@ using BoatApp.Maui.Domain.Services;
 using BoatApp.Maui.UI.Models;
 using BoatApp.Maui.UI.Services;
 using BoatApp.Maui.UI.Views;
-using BoatApp.Models.Contracts;
+using BoatApp.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -37,6 +37,12 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     [ObservableProperty] private bool _isBoatDropOffMarkAsTransitButtonVisible;
     [ObservableProperty] private bool _isBoatDropOffMarkAsCompleteButtonVisible;
 
+    [ObservableProperty] private bool _isBoatListRegionVisible = false;
+    [ObservableProperty] private bool _isBoatListRegionRefreshing = false;
+    [ObservableProperty] private List<CustomBoatOwnerItemModel> _boatList = new();
+    [ObservableProperty] private List<CustomBoatOwnerItemModel> _filteredBoatList = new();
+    [ObservableProperty] private string _boatListSearchQuery;
+    
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(BoatDropOffListDisplay))]
     private List<BoatRequestItemModel> _boatDropOffRequests = new ();
@@ -44,7 +50,11 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     [ObservableProperty] private bool _isSendingData;
 
     public string BoatDropOffListDisplay => $"{BoatDropOffRequests.Count} Drop Off";
-    
+
+    partial void OnBoatListSearchQueryChanged(string? oldValue, string? newValue)
+    {
+        SearchOnBoatListCommand?.Execute(null);
+    }
     #endregion
     
     #region Boat Tab Data
@@ -74,6 +84,13 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     {
         FetchBoatDropOffData();
     }
+    
+    [RelayCommand]
+    private void RefreshBoatListData()
+    {
+        FetchBoatListRegionData();
+    }
+
 
     [RelayCommand]
     private void AcceptDropOff(BoatRequestItemModel model)
@@ -101,11 +118,20 @@ public partial class AdminMainPageViewModel : PageViewModelBase
             });
         });
     }
+   
     [RelayCommand]
     private void HomeTabManageDropOff()
     {
         IsBoatDropOffRegionVisible = true;
         IsBoatDropOffRegionRefreshing = true;
+    }
+    
+    [RelayCommand]
+    private void HomeTabManageBoatList()
+    {
+        BoatListSearchQuery = string.Empty;
+        IsBoatListRegionVisible = true;
+        IsBoatListRegionRefreshing = true;
     }
     
     [RelayCommand]
@@ -116,6 +142,11 @@ public partial class AdminMainPageViewModel : PageViewModelBase
         if (IsBoatDropOffRegionVisible)
         {
             IsBoatDropOffRegionVisible = false;
+            IsHomeTabRefreshing = true;
+        }
+        else if (IsBoatListRegionVisible)
+        {
+            IsBoatListRegionVisible = false;
             IsHomeTabRefreshing = true;
         }
         else
@@ -185,6 +216,34 @@ public partial class AdminMainPageViewModel : PageViewModelBase
         });
     }
 
+    [RelayCommand]
+    private async Task RequestDrop(CustomBoatOwnerItemModel model)
+    {
+        try
+        {
+            var date = DateTime.Now.ToString("MM/dd/yyyy");
+            await _boatService.SubmitDropRequestAsync(new SubmitDropRequestParameter()
+            {
+                BoatName = model.BoatContract.BoatName,
+                BoatNumber = model.BoatContract.BoatNumber,
+                BoatImageUrl = model.BoatContract.ImageUrl,
+                
+                OwnerId = model.BoatContract.OwnerId,
+                OwnerName = model.OwnerContract.Name,
+                
+                PickupPoint = "Shuttle Club Point 1",
+                PickupDate = date
+            });
+            await _boatService.UpdateBoatStatusAsync(model.BoatContract.BoatNumber, BoatRequestStatusConstants.DropRequestSubmitted);
+            await _popupService.ShowAsync(new DropRequestSubmittedPopup());
+            IsBoatListRegionRefreshing = true;
+        }
+        catch(Exception ex)
+        {
+            await PageDialogService.DisplayAlertAsync("Error", ex.Message, "Ok");
+        }
+    }
+    
     private void FetchHomeTabData()
     {
         Task.Run(() =>
@@ -263,6 +322,49 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                 }
             });
         });
+    }
+    
+    private void FetchBoatListRegionData()
+    {
+        Task.Run(() =>
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                BoatList = new();
+                FilteredBoatList = new List<CustomBoatOwnerItemModel>();
+                try
+                {
+                   var boats = await _boatService.FetchBoatsAsync();
+                   BoatList = boats.Select(x => new CustomBoatOwnerItemModel(x.Owner, x.Boat)).ToList();
+                   
+                   SearchOnBoatListCommand?.Execute(null);
+                }
+                catch
+                {
+                    //ignored
+                }
+                finally
+                {
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        IsBoatListRegionRefreshing = false;
+                    });
+                }
+            });
+        });
+    }
+
+    [RelayCommand]
+    private async Task SearchOnBoatList()
+    {
+        var query = BoatListSearchQuery.Trim();
+        FilteredBoatList = BoatList.Where(x =>
+        {
+            return string.IsNullOrEmpty(query) ||
+                   x.BoatName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                   x.OwnerName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                   x.BoatNumber.Contains(query, StringComparison.OrdinalIgnoreCase);
+        }).ToList();
     }
     #endregion
     

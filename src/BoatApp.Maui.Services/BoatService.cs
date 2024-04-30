@@ -5,16 +5,18 @@ using BoatApp.Maui.Services.Web.Api;
 using BoatApp.Models;
 using BoatApp.Models.Contracts;
 using BoatApp.Models.Contracts.Requests;
+using DryIoc.ImTools;
 
 namespace BoatApp.Maui.Services;
 
 public class BoatService : IBoatService
 {
     private readonly IOwnerBoatApi _boatApi;
-    
-    public BoatService(IOwnerBoatApi boatApi)
+    private readonly IOwnerApi _ownerApi;
+    public BoatService(IOwnerBoatApi boatApi, IOwnerApi ownerApi)
     {
         _boatApi = boatApi;
+        _ownerApi = ownerApi;
     }
 
     public async Task<List<BoatContract>> FetchBoatsByPhoneNumberAsync(string phoneNumber)
@@ -28,6 +30,42 @@ public class BoatService : IBoatService
         });
 
         return response.Documents;
+    }
+    
+    public async Task<List<CustomOwnerBoat>> FetchBoatsAsync()
+    {
+        var ownerListResponse = await _ownerApi.GetOwnersAsync(new GetOwnersRootRequestContract()
+        {
+            DataSource = "BoatCluster",
+            Database = "BoatDB",
+            Collection = "Owners",
+        });
+
+        var boatListResponse = await _boatApi.GetBoatsAsync(new GetBoatsRootRequestContract()
+        {
+            DataSource = "BoatCluster",
+            Database = "BoatDB",
+            Collection = "Boats",
+        });
+
+        var ownerList = ownerListResponse.Documents;
+        var boatList = boatListResponse.Documents;
+        var boats = new List<CustomOwnerBoat>();
+        
+        foreach (var boat in boatList)
+        {
+            var owner = ownerList.FirstOrDefault(x => x.Id == boat.OwnerId);
+            if (owner != null)
+            {
+                boats.Add(new CustomOwnerBoat()
+                {
+                    Boat = boat,
+                    Owner = owner
+                });
+            }
+        }
+
+        return boats;
     }
     
     public async Task SubmitDropRequestAsync(SubmitDropRequestParameter parameter)
@@ -70,4 +108,6 @@ public class BoatService : IBoatService
             Update = new UpdateBoatStatusUpdateRequestContract() { Set = new UpdateBoatStatusUpdateSetRequestContract() { RequestStatus = status}}
         });
     }
+
+   
 }

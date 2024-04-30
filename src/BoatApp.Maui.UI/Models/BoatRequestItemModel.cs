@@ -10,7 +10,7 @@ namespace BoatApp.Maui.UI.Models;
 
 public partial class BoatRequestItemModel : ObservableObject
 {
-    public BoatRequestContract Contract { get; set; }
+    public BoatRequestContract Contract { get; private set; }
     
     [ObservableProperty] private string _boatName;
     [ObservableProperty] private string _boatOwner;

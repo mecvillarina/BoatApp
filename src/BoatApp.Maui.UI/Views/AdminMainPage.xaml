@@ -238,10 +238,23 @@
                 <material:TabItem.ContentTemplate>
                     <DataTemplate>
                         <Grid Margin="{OnPlatform iOS='0,-5,0,0', Default='0'}">
+                            <!--  Home  -->
                             <Grid BackgroundColor="{StaticResource Background}"
-                                  IsVisible="{Binding IsBoatDropOffRegionVisible, Converter={StaticResource InvertedBoolConverter}}"
                                   RowDefinitions="0.25*,0.75*">
 
+                                <Grid.Triggers>
+                                    <DataTrigger Binding="{Binding IsBoatDropOffRegionVisible}"
+                                                 TargetType="Grid"
+                                                 Value="True">
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding IsBoatListRegionVisible}"
+                                                 TargetType="Grid"
+                                                 Value="True">
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </DataTrigger>
+                                </Grid.Triggers>
                                 <!--  Header  -->
                                 <Grid>
                                     <Border Margin="0"
@@ -283,23 +296,33 @@
                                                    TextColor="{StaticResource White}"
                                                    VerticalOptions="Center" />
 
-                                            <material:TextField Title=" "
-                                                                Margin="0"
-                                                                BorderColor="{StaticResource White}"
-                                                                CornerRadius="10"
-                                                                InputBackgroundColor="#CCFFFFFF"
-                                                                Keyboard="Numeric"
-                                                                TitleColor="Transparent"
-                                                                VerticalOptions="Center">
-                                                <material:TextField.Attachments>
-                                                    <Image Margin="8,0,16,0"
-                                                           HeightRequest="20"
-                                                           HorizontalOptions="Center"
-                                                           Source="ic_search"
-                                                           VerticalOptions="Center"
-                                                           WidthRequest="20" />
-                                                </material:TextField.Attachments>
-                                            </material:TextField>
+                                            <Grid>
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding HomeTabManageBoatListCommand}" />
+                                                </Grid.GestureRecognizers>
+
+                                                <material:TextField Title=" "
+                                                                    Margin="0"
+                                                                    BorderColor="{StaticResource White}"
+                                                                    CornerRadius="10"
+                                                                    InputBackgroundColor="#CCFFFFFF"
+                                                                    InputTransparent="True"
+                                                                    TitleColor="Transparent"
+                                                                    VerticalOptions="Center">
+
+
+
+                                                    <material:TextField.Attachments>
+                                                        <Image Margin="8,0,16,0"
+                                                               HeightRequest="20"
+                                                               HorizontalOptions="Center"
+                                                               Source="ic_search"
+                                                               VerticalOptions="Center"
+                                                               WidthRequest="20" />
+                                                    </material:TextField.Attachments>
+                                                </material:TextField>
+
+                                            </Grid>
                                         </VerticalStackLayout>
                                     </Grid>
                                 </Grid>
@@ -677,6 +700,7 @@
                                 </Grid>
                             </Grid>
 
+                            <!--  Boat Drop Off  -->
                             <Grid BackgroundColor="{StaticResource Background}"
                                   IsVisible="{Binding IsBoatDropOffRegionVisible}"
                                   RowDefinitions="0.15*,0.85*">
@@ -1046,6 +1070,287 @@
                                     </Grid>
                                 </Grid>
                             </Grid>
+
+                            <!--  Boat List  -->
+                            <Grid BackgroundColor="{StaticResource Background}"
+                                  IsVisible="{Binding IsBoatListRegionVisible}"
+                                  RowDefinitions="0.15*,0.85*">
+
+                                <!--  Header  -->
+                                <Grid>
+                                    <Border Margin="0"
+                                            Padding="0"
+                                            StrokeShape="RoundRectangle 0,0,10,10"
+                                            StrokeThickness="0">
+                                        <Image Aspect="AspectFill"
+                                               Source="bg_splashscreen.jpg" />
+                                    </Border>
+
+                                    <Grid Padding="20">
+                                        <Grid VerticalOptions="Center">
+
+                                            <Image HeightRequest="18"
+                                                   HorizontalOptions="Start"
+                                                   Source="ic_back"
+                                                   VerticalOptions="Center">
+
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding HomeTabNavigateBackCommand}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+
+                                            <Label FontFamily="SFUIDisplayBold"
+                                                   FontSize="20"
+                                                   HorizontalOptions="Center"
+                                                   Text="Boats"
+                                                   TextColor="{StaticResource White}"
+                                                   VerticalOptions="Center" />
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="1"
+                                      Padding="20"
+                                      RowDefinitions="Auto,*"
+                                      RowSpacing="12">
+
+                                    <material:TextField Title=" "
+                                                        Margin="0"
+                                                        BorderColor="{StaticResource White}"
+                                                        CornerRadius="10"
+                                                        Icon="ic_search"
+                                                        InputBackgroundColor="#CCFFFFFF"
+                                                        IsReadOnly="{Binding IsBoatListRegionRefreshing}"
+                                                        ReturnType="Done"
+                                                        Text="{Binding BoatListSearchQuery}"
+                                                        TitleColor="Transparent"
+                                                        VerticalOptions="Center" />
+
+                                    <RefreshView Grid.Row="1"
+                                                 Command="{Binding RefreshBoatListDataCommand}"
+                                                 IsRefreshing="{Binding IsBoatListRegionRefreshing}">
+                                        <CollectionView ItemsSource="{Binding FilteredBoatList}"
+                                                        VerticalScrollBarVisibility="Never">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout ItemSpacing="8"
+                                                                   Orientation="Vertical" />
+                                            </CollectionView.ItemsLayout>
+
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="models:CustomBoatOwnerItemModel">
+                                                    <Border Padding="12"
+                                                            BackgroundColor="{StaticResource White}"
+                                                            HeightRequest="200"
+                                                            StrokeShape="RoundRectangle 10"
+                                                            StrokeThickness="0">
+                                                        <Grid RowDefinitions="Auto,*,Auto"
+                                                              RowSpacing="8">
+
+                                                            <Grid ColumnDefinitions="40,*"
+                                                                  ColumnSpacing="4">
+
+                                                                <toolkit:AvatarView Padding="0"
+                                                                                    BackgroundColor="{StaticResource Background}"
+                                                                                    BorderWidth="0"
+                                                                                    HeightRequest="40"
+                                                                                    ImageSource="{Binding OwnerProfilePic}"
+                                                                                    WidthRequest="40" />
+
+                                                                <VerticalStackLayout Grid.Column="1"
+                                                                                     VerticalOptions="Center">
+                                                                    <Label FontFamily="SFUIDisplaySemibold"
+                                                                           FontSize="12"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           Text="{Binding OwnerName}"
+                                                                           TextColor="{StaticResource Dark}" />
+
+                                                                    <Label FontFamily="SFUIDisplayRegular"
+                                                                           FontSize="10"
+                                                                           LineBreakMode="TailTruncation"
+                                                                           Text="{Binding OwnerPhoneNumber}"
+                                                                           TextColor="{StaticResource Dark}" />
+
+
+                                                                </VerticalStackLayout>
+                                                            </Grid>
+
+                                                            <Image Grid.Row="1"
+                                                                   Aspect="AspectFill"
+                                                                   Source="{Binding BoatImageUrl}" />
+
+                                                            <VerticalStackLayout Grid.Row="2">
+                                                                <Label FontFamily="SFUIDisplayMedium"
+                                                                       FontSize="14"
+                                                                       LineBreakMode="TailTruncation"
+                                                                       Text="{Binding BoatDisplay}"
+                                                                       TextColor="{StaticResource Dark}" />
+
+                                                                <Grid ColumnDefinitions="*,*">
+                                                                    <VerticalStackLayout>
+                                                                        <Grid ColumnDefinitions="Auto,*"
+                                                                              ColumnSpacing="4">
+                                                                            <Image HeightRequest="10"
+                                                                                   Source="ic_card_pin"
+                                                                                   VerticalOptions="Center" />
+                                                                            <Label Grid.Column="1"
+                                                                                   FontFamily="SFUIDisplayRegular"
+                                                                                   FontSize="12"
+                                                                                   LineBreakMode="TailTruncation"
+                                                                                   Text="{Binding ParkingLocationAddress}"
+                                                                                   TextColor="{StaticResource Dark}" />
+                                                                        </Grid>
+
+                                                                        <Grid ColumnDefinitions="Auto,*"
+                                                                              ColumnSpacing="4">
+                                                                            <Image HeightRequest="10"
+                                                                                   Source="ic_card_boat"
+                                                                                   VerticalOptions="Center" />
+                                                                            <Label Grid.Column="1"
+                                                                                   FontFamily="SFUIDisplayRegular"
+                                                                                   FontSize="12"
+                                                                                   LineBreakMode="TailTruncation"
+                                                                                   Text="{Binding ParkingLocationDock}"
+                                                                                   TextColor="{StaticResource Dark}">
+                                                                                <Label.FormattedText>
+                                                                                    <FormattedString>
+                                                                                        <Span FontFamily="SFUIDisplayRegular"
+                                                                                              FontSize="12"
+                                                                                              Text="{Binding ParkingLocationDock}"
+                                                                                              TextColor="{StaticResource Dark}" />
+
+                                                                                        <Span FontFamily="SFUIDisplayRegular"
+                                                                                              FontSize="12"
+                                                                                              Text=", "
+                                                                                              TextColor="{StaticResource Dark}" />
+
+                                                                                        <Span FontFamily="SFUIDisplayRegular"
+                                                                                              FontSize="12"
+                                                                                              Text="{Binding ParkingLocationZone}"
+                                                                                              TextColor="{StaticResource Dark}" />
+                                                                                    </FormattedString>
+                                                                                </Label.FormattedText>
+                                                                            </Label>
+                                                                        </Grid>
+                                                                    </VerticalStackLayout>
+
+                                                                    <Grid Grid.Column="1">
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource Primary}"
+                                                                                Command="{Binding RequestDropCommand, Source={RelativeSource AncestorType={x:Type viewmodels:AdminMainPageViewModel}}}"
+                                                                                CommandParameter="{Binding .}"
+                                                                                CornerRadius="10"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="Submit Request Drop"
+                                                                                TextColor="{StaticResource White}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.RequestDrop}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
+
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource BlueOpaque008}"
+                                                                                BorderColor="{StaticResource Blue}"
+                                                                                BorderWidth="1"
+                                                                                CornerRadius="15"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="Drop Request Submitted"
+                                                                                TextColor="{StaticResource Blue}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.DropRequestSubmitted}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
+
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource GreenOpaque008}"
+                                                                                BorderColor="{StaticResource Green}"
+                                                                                BorderWidth="1"
+                                                                                CornerRadius="15"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="Drop Confirmed"
+                                                                                TextColor="{StaticResource Green}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.DropConfirmed}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
+
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource OrangeOpaque008}"
+                                                                                BorderColor="{StaticResource Orange}"
+                                                                                BorderWidth="1"
+                                                                                CornerRadius="15"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="In Transit (Drop)"
+                                                                                TextColor="{StaticResource Orange}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.InTransitDrop}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
+
+                                                                        <Button Padding="0"
+                                                                                BackgroundColor="{StaticResource PrimaryOpaque008}"
+                                                                                BorderColor="{StaticResource Primary}"
+                                                                                BorderWidth="1"
+                                                                                CornerRadius="15"
+                                                                                FontFamily="SFUIDisplayRegular"
+                                                                                FontSize="12"
+                                                                                HeightRequest="30"
+                                                                                IsVisible="False"
+                                                                                Text="Drop-off Completed"
+                                                                                TextColor="{StaticResource Primary}"
+                                                                                VerticalOptions="Center">
+                                                                            <Button.Triggers>
+                                                                                <DataTrigger Binding="{Binding RequestStatus}"
+                                                                                             TargetType="Button"
+                                                                                             Value="{x:Static enums:BoatRequestStatus.DropOffCompleted}">
+                                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                                </DataTrigger>
+                                                                            </Button.Triggers>
+                                                                        </Button>
+
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </VerticalStackLayout>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </RefreshView>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </material:TabItem.ContentTemplate>
@@ -1106,7 +1411,6 @@
                                                         CornerRadius="10"
                                                         Icon="ic_search"
                                                         InputBackgroundColor="#CCFFFFFF"
-                                                        Keyboard="Numeric"
                                                         TitleColor="Transparent"
                                                         VerticalOptions="Center" />
 
