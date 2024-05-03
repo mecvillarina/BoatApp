@@ -1237,14 +1237,14 @@
                                                                     <Grid Grid.Column="1">
                                                                         <Button Padding="0"
                                                                                 BackgroundColor="{StaticResource Primary}"
-                                                                                Command="{Binding RequestDropCommand, Source={RelativeSource AncestorType={x:Type viewmodels:AdminMainPageViewModel}}}"
+                                                                                Command="{Binding AcceptDropFromBoatListCommand, Source={RelativeSource AncestorType={x:Type viewmodels:AdminMainPageViewModel}}}"
                                                                                 CommandParameter="{Binding .}"
                                                                                 CornerRadius="10"
                                                                                 FontFamily="SFUIDisplayRegular"
                                                                                 FontSize="12"
                                                                                 HeightRequest="30"
                                                                                 IsVisible="False"
-                                                                                Text="Submit Request Drop"
+                                                                                Text="ACCEPT DROP OFF"
                                                                                 TextColor="{StaticResource White}"
                                                                                 VerticalOptions="Center">
                                                                             <Button.Triggers>

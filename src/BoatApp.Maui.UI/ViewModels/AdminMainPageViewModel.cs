@@ -217,7 +217,7 @@ public partial class AdminMainPageViewModel : PageViewModelBase
     }
 
     [RelayCommand]
-    private async Task RequestDrop(CustomBoatOwnerItemModel model)
+    private async Task AcceptDropFromBoatList(CustomBoatOwnerItemModel model)
     {
         try
         {
@@ -235,7 +235,9 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                 PickupDate = date
             });
             await _boatService.UpdateBoatStatusAsync(model.BoatContract.BoatNumber, BoatRequestStatusConstants.DropRequestSubmitted);
-            await _popupService.ShowAsync(new DropRequestSubmittedPopup());
+            await _adminBoatRequestService.ConfirmDropRequestAsync(model.BoatContract.BoatNumber);
+            await _boatService.UpdateBoatStatusAsync(model.BoatContract.BoatNumber, BoatRequestStatusConstants.DropConfirmed);
+            await _popupService.ShowAsync(new DropRequestConfirmedPopup());
             IsBoatListRegionRefreshing = true;
         }
         catch(Exception ex)
