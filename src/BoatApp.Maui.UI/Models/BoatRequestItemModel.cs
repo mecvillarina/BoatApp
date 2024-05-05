@@ -30,7 +30,7 @@ public partial class BoatRequestItemModel : ObservableObject
     public BoatRequestItemModel(BoatRequestContract contract)
     {
         Contract = contract;
-        BoatName = contract.BoatName;
+        BoatName = contract.BoatName ?? "Not Available";
         BoatOwner = $"Owner : {contract.OwnerName}";
         BoatImageUrl = contract.BoatImageUrl;
         

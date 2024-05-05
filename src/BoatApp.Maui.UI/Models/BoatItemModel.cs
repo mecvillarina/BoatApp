@@ -24,7 +24,7 @@ public partial class BoatItemModel : ObservableObject
     public BoatItemModel(BoatContract contract)
     {
         Contract = contract;
-        BoatName = contract.BoatName;
+        BoatName = contract.BoatName ?? "Not Available";
         BoatImageUrl = contract.ImageUrl;
         RequestStatus = EnumExtensions.GetBoatRequestStatus(contract.RequestStatus);
         ParkingLocationAddress = contract.ParkingLocation.Address;

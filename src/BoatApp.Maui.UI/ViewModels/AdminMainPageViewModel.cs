@@ -341,7 +341,7 @@ public partial class AdminMainPageViewModel : PageViewModelBase
                    
                    SearchOnBoatListCommand?.Execute(null);
                 }
-                catch
+                catch(Exception ex)
                 {
                     //ignored
                 }
@@ -363,9 +363,9 @@ public partial class AdminMainPageViewModel : PageViewModelBase
         FilteredBoatList = BoatList.Where(x =>
         {
             return string.IsNullOrEmpty(query) ||
-                   x.BoatName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                   x.OwnerName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                   x.BoatNumber.Contains(query, StringComparison.OrdinalIgnoreCase);
+                   (!string.IsNullOrEmpty(x.BoatName) && x.BoatName.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
+                   (!string.IsNullOrEmpty(x.OwnerName) && x.OwnerName.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
+                   (!string.IsNullOrEmpty(x.BoatNumber) && x.BoatNumber.Contains(query, StringComparison.OrdinalIgnoreCase)) ;
         }).ToList();
     }
     #endregion

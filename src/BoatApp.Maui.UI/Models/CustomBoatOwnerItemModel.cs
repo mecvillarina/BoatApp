@@ -45,7 +45,7 @@ public partial class CustomBoatOwnerItemModel : ObservableObject
         OwnerPhoneNumber = boat.OwnerPhoneNumber;
         OwnerProfilePic = owner.ProfilePic;
         
-        BoatName = boat.BoatName;
+        BoatName = boat.BoatName ?? "Not Available";
         BoatNumber = boat.BoatNumber;
         BoatImageUrl = boat.ImageUrl;
         ParkingLocationAddress = boat.ParkingLocation.Address;
