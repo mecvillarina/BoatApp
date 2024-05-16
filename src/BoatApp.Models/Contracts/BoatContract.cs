@@ -23,10 +23,10 @@ public  class BoatContract
     public string RequestStatus { get; set; }
 
     [JsonPropertyName("boat_details")]
-    public BoatDetailsContract BoatDetailsContract { get; set; }
+    public BoatDetailsContract Details { get; set; }
 
     [JsonPropertyName("parking_location")]
-    public BoatLocationContract BoatLocationContract { get; set; }
+    public BoatLocationContract ParkingLocation { get; set; }
 
     [JsonPropertyName("owner_phone_number")]
     public string OwnerPhoneNumber { get; set; }

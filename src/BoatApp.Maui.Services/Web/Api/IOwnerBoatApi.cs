@@ -12,6 +12,9 @@ public interface IOwnerBoatApi
     [Post("/action/find")]
     Task<BoatRootContract> GetBoatsByPhoneNumberAsync([Body(true)] GetBoatsByPhoneRootRequestContract contract);
     
+    [Post("/action/find")]
+    Task<BoatRootContract> GetBoatsAsync([Body(true)] GetBoatsRootRequestContract contract);
+
     [Post("/action/insertOne")]
     Task<BoatRootContract> SubmitDropRequestAsync([Body(true)] SubmitDropRequestRootRequestContract contract);
     

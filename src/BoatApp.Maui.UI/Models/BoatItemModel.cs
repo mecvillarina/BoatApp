@@ -7,7 +7,7 @@ namespace BoatApp.Maui.UI.Models;
 
 public partial class BoatItemModel : ObservableObject
 {
-    public BoatContract Contract { get; set; }
+    public BoatContract Contract { get; private set; }
 
     [ObservableProperty] private string _boatName;
     [ObservableProperty] private string _parkingLocationAddress;
@@ -24,12 +24,12 @@ public partial class BoatItemModel : ObservableObject
     public BoatItemModel(BoatContract contract)
     {
         Contract = contract;
-        BoatName = contract.BoatName;
+        BoatName = contract.BoatName ?? "Not Available";
         BoatImageUrl = contract.ImageUrl;
         RequestStatus = EnumExtensions.GetBoatRequestStatus(contract.RequestStatus);
-        ParkingLocationAddress = contract.BoatLocationContract.Address;
-        ParkingLocationDock = contract.BoatLocationContract.Dock;
-        ParkingLocationZone = contract.BoatLocationContract.Zone;
+        ParkingLocationAddress = contract.ParkingLocation.Address;
+        ParkingLocationDock = contract.ParkingLocation.Dock;
+        ParkingLocationZone = contract.ParkingLocation.Zone;
 
     }
 }

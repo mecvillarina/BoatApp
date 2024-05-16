@@ -11,4 +11,7 @@ public interface IOwnerApi
 
     [Post("/action/find")]
     Task<OwnerRootContract> GetOwnerByPhoneAsync([Body(true)] GetOwnerByPhoneRootRequestContract contract);
+    
+    [Post("/action/find")]
+    Task<OwnerRootContract> GetOwnersAsync([Body(true)] GetOwnersRootRequestContract contract);
 }

@@ -43,7 +43,6 @@ public partial class UserMainPageViewModel : PageViewModelBase
         try
         {
             var date = DateTime.Now.ToString("MM/dd/yyyy");
-            // await _boatService.SubmitDropRequestAsync(model.Contract.BoatNumber, model.Contract.OwnerId, model.Contract.BoatName, model.Contract.ImageUrl, "Shuttle Club Point 1", date);
             await _boatService.SubmitDropRequestAsync(new SubmitDropRequestParameter()
             {
                 BoatName = model.Contract.BoatName,
